@@ -55,4 +55,5 @@ After finishing implementing your task, you can issue a pull request for it to b
 6.  Select the assignee and labels accordingly
 7.  Click create pull request
 
-> [!NOTE] Now someone will have to look at your code, see if it's ok and if so accept the new changes on the main branch. If something isn't right then you will have to fix the problems and comeback with another pull request
+> [!NOTE] 
+> Now someone will have to look at your code, see if it's ok and if so accept the new changes on the main branch. If something isn't right then you will have to fix the problems and comeback with another pull request
