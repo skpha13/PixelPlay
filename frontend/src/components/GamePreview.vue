@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import router from "@/router";
-
 const props = defineProps<{
   title: string,
   imgSrc: string,
-  routeName: string
-}>()
+  linkPvp: string
+  linkAi: string,
+}>();
 
-const redirectToGame = () => {
-  router.push({name: props.routeName});
-}
+const emits = defineEmits<{
+  (e: 'showChoice', payload: {
+    gameTitle: string,
+    linkToPVP: string,
+    linkToAI: string
+  }) : void
+}>()
 </script>
 
 <template>
-  <div @click="redirectToGame"
+  <div @click="emits('showChoice', {gameTitle: title, linkToPVP: linkPvp, linkToAI: linkAi})"
        id="container" class="w-[300px] h-[200px] rounded-lg bg-purple-600 relative hover:cursor-pointer">
     <img :src="props.imgSrc" :alt="props.title"
          class="w-full h-full object-cover rounded-lg"  />

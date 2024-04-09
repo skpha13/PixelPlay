@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from "@/views/LandingPageView.vue";
 import NotFound from "@/views/NotFoundView.vue"
-import TicTacToe from "@/views/TicTacToeView.vue";
+import TicTacToePVP from "@/views/TicTacToePVPView.vue";
+import TicTacToeAI from "@/views/TicTacToeAIView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,9 +13,14 @@ const router = createRouter({
       component: LandingPage
     },
     {
-      path: '/tic-tac-toe',
-      name: 'ticTacToe',
-      component: TicTacToe
+      path: '/tic-tac-toe-pvp',
+      name: 'ticTacToePVP',
+      component: TicTacToePVP
+    },
+    {
+      path: '/tic-tac-toe-ai',
+      name: 'ticTacToeAI',
+      component: TicTacToeAI
     },
     {
       path: '/:pathMatch(.*)*',
