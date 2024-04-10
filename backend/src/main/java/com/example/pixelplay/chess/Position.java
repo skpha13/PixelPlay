@@ -15,6 +15,10 @@ public class Position {
         return board[square / 8][square % 8];
     }
 
+    public boolean isFree(byte square) {
+        return board[square / 8][square % 8] == Piece.None;
+    }
+
     public void setBoard(Piece[][] board) {
         this.board = board;
     }
