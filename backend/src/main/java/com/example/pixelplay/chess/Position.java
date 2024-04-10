@@ -11,6 +11,10 @@ public class Position {
     private boolean blackCanShortCastle;
     private boolean blackCanLongCastle;
 
+    public Piece getPiece(byte square) {
+        return board[square / 8][square % 8];
+    }
+
     public void setBoard(Piece[][] board) {
         this.board = board;
     }
