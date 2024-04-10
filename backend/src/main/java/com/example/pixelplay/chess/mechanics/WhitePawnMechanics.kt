@@ -1,29 +1,18 @@
-package com.example.pixelplay.chess.mechanics;
+package com.example.pixelplay.chess.mechanics
 
-import com.example.pixelplay.chess.Position;
+import com.example.pixelplay.chess.Position
 
-import java.util.ArrayList;
-import java.util.List;
+class WhitePawnMechanics(position: Position?, square: Byte) : PawnMechanics(position!!, square) {
+    override fun attackingSquares(): List<Byte?>? {
+        val squares: MutableList<Byte?> = ArrayList()
 
-public class WhitePawnMechanics extends PawnMechanics {
-
-    public WhitePawnMechanics(Position position, byte square) {
-        super(position, square);
-    }
-
-    @Override
-    public List<Byte> attackingSquares() {
-        List<Byte> squares = new ArrayList<>();
-
-        if(!isOnLeftEdge()) {
-            squares.add((byte) (square + 7));
+        if (!isOnLeftEdge) {
+            squares.add((square + 7).toByte())
         }
-        if(!isOnRightEdge()) {
-            squares.add((byte) (square + 9));
+        if (!isOnRightEdge) {
+            squares.add((square + 9).toByte())
         }
 
-        return squares;
+        return squares
     }
-
-
 }

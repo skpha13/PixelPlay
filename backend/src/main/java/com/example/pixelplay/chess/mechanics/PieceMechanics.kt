@@ -1,8 +1,5 @@
-package com.example.pixelplay.chess.mechanics;
+package com.example.pixelplay.chess.mechanics
 
-import java.util.ArrayList;
-import java.util.List;
-
-interface PieceMechanics {
-    List<Byte> attackingSquares();
+internal interface PieceMechanics {
+    fun attackingSquares(): List<Byte?>?
 }

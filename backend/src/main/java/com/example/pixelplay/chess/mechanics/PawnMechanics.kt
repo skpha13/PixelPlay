@@ -1,21 +1,11 @@
-package com.example.pixelplay.chess.mechanics;
+package com.example.pixelplay.chess.mechanics
 
-import com.example.pixelplay.chess.Position;
+import com.example.pixelplay.chess.Position
 
-abstract class PawnMechanics implements PieceMechanics {
-    protected final Position position;
-    protected final byte square;
+abstract class PawnMechanics(protected val position: Position, @JvmField protected val square: Byte) : PieceMechanics {
+    protected val isOnLeftEdge: Boolean
+        get() = square % 8 == 0
 
-    PawnMechanics(Position position, byte square) {
-        this.position = position;
-        this.square = square;
-    }
-
-    protected boolean isOnLeftEdge() {
-        return square % 8 == 0;
-    }
-
-    protected boolean isOnRightEdge() {
-        return (square - 7) % 8 == 0;
-    }
+    protected val isOnRightEdge: Boolean
+        get() = (square - 7) % 8 == 0
 }
