@@ -1,7 +1,46 @@
 <script setup lang="ts">
+import Logo from "@/components/Logo.vue";
+import GamePreview from "@/components/GamePreview.vue";
+import ChoiceMenu from "@/components/ChoiceMenu.vue";
+import {reactive, ref} from "vue";
 
+// ========== ARGUMENT PASSING FOR CHOICE MENU ==========
+const choiceParameters = reactive<{
+  gameTitle: string,
+  linkToAI: string,
+  linkToPVP: string
+}>({
+  gameTitle: '',
+  linkToAI: '',
+  linkToPVP: ''
+});
+// ======================================================
+
+// ========== CHOICE MENU ==========
+const showChoice = ref(false);
+const hideChoiceForGame = () => {
+  showChoice.value = false;
+}
+const showChoiceForGame = (payload: any) => {
+  showChoice.value = !showChoice.value;
+  choiceParameters.gameTitle = payload.gameTitle;
+  choiceParameters.linkToAI = payload.linkToAI;
+  choiceParameters.linkToPVP = payload.linkToPVP;
+}
+// =================================
 </script>
 
 <template>
+  <Logo class="mb-10"/>
+  <GamePreview @showChoice="payload => showChoiceForGame(payload)"
+               title="Tic Tac Toe"
+               img-src="src/assets/tic-tac-toe.jpeg"
+               link-ai="/tic-tac-toe-ai"
+               link-pvp="/tic-tac-toe-pvp"/>
 
+  <ChoiceMenu v-if="showChoice"
+              @clicked-close-button="hideChoiceForGame"
+              :link-to-ai="choiceParameters.linkToAI"
+              :link-to-pvp="choiceParameters.linkToPVP"
+              :game-title="choiceParameters.gameTitle" />
 </template>
