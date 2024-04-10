@@ -19,6 +19,6 @@ class MoveDirection(@JvmField var rank: Int, @JvmField var file: Int) {
         )
 
         @JvmField
-        val completeMoves: List<MoveDirection> = axialMoves + diagonalMoves;
+        val completeMoves: List<MoveDirection> = axialMoves + diagonalMoves
     }
 }

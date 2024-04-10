@@ -1,7 +1,7 @@
 package com.example.pixelplay.chess;
 
 public class Game {
-    private Position position;
+    private final Position position;
 
     public Game() {
         position = PositionGenerator.initialPosition();

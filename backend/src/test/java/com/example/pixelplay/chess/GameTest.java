@@ -11,7 +11,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
-    private static Game game = new Game();
+    private static final Game game = new Game();
 
     @Test
     void checkPositionAfterInitialize() {
