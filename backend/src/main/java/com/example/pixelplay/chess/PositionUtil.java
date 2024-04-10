@@ -42,4 +42,20 @@ public class PositionUtil {
             }
         }
     }
+
+    public static int getRank(byte square) {
+        return square / 8;
+    }
+
+    public static int getFile(byte square) {
+        return square % 8;
+    }
+
+    public static byte getSquare(int rank, int file) {
+        return (byte) (8*rank + file);
+    }
+
+    public static boolean isOnBoard(int rank, int file) {
+        return rank >= 0 && rank < 8 && file >= 0 && file < 8;
+    }
 }

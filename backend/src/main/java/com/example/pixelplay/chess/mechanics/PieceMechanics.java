@@ -4,4 +4,5 @@ import java.util.List;
 
 interface PieceMechanics {
     List<Byte> attackingSquares();
+
 }
