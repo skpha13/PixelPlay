@@ -5,13 +5,10 @@ import com.example.pixelplay.chess.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WhitePawnMechanics implements PieceMechanics {
-    private final Position position;
-    private final byte square;
+public class WhitePawnMechanics extends PawnMechanics {
 
     public WhitePawnMechanics(Position position, byte square) {
-        this.position = position;
-        this.square = square;
+        super(position, square);
     }
 
     @Override
@@ -28,11 +25,5 @@ public class WhitePawnMechanics implements PieceMechanics {
         return squares;
     }
 
-    private boolean isOnLeftEdge() {
-        return square % 8 == 0;
-    }
 
-    private boolean isOnRightEdge() {
-        return (square - 7) % 8 == 0;
-    }
 }
