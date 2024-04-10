@@ -16,7 +16,7 @@ class GameTest {
     @Test
     void checkPositionAfterInitialize() {
         Position position = game.getPosition();
-        Position initialPosition = new Position();
+        Position initialPosition = PositionGenerator.initialPosition();
         assert(position.equals(initialPosition));
     }
 }

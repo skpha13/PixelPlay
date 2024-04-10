@@ -4,7 +4,7 @@ public class Game {
     private Position position;
 
     public Game() {
-        position = new Position();
+        position = PositionGenerator.initialPosition();
     }
 
     public Position getPosition() {
