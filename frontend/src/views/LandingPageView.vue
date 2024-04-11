@@ -31,7 +31,7 @@ const showChoiceForGame = (payload: any) => {
 </script>
 
 <template>
-  <Logo class="mb-10"/>
+  <Logo title="PixelPlay" class="mb-10"/>
   <GamePreview @showChoice="payload => showChoiceForGame(payload)"
                title="Tic Tac Toe"
                img-src="src/assets/tic-tac-toe.jpeg"
