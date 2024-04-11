@@ -46,9 +46,11 @@ const reset = () => {
     ['', '', ''],
     ['', '', '']
   ];
+
   currentPlayer.value = 'X';
   gameover.value = false;
   winner.value = null;
+  isTie.value = false;
 }
 
 const playMove = (row: number, col: number) => {
@@ -72,18 +74,19 @@ const playMove = (row: number, col: number) => {
   <div class="flex flex-col items-center justify-center">
     <p class=""> Current Player: <span class=""> {{ currentPlayer }} </span> </p>
     <div class="clear-both" v-for="(row, rowIndex) of board" :key="rowIndex">
-      <div class="w-40 h-40 float-left mr-[-1px] mb-[-1px] leading-[10rem]
+      <div class="w-28 h-28 leading-[7rem] sm:w-40 sm:h-40 sm:leading-[10rem]
+                  float-left mr-[-1px] mb-[-1px]
                   text-center border border-black hover:cursor-pointer text-8xl"
            v-for="(cell, cellIndex) of row" :key="cellIndex"
-           :class="{ 'cell-x': cell === 'X', 'cell-o': cell === 'O' }" :disabled="cell !== null"
+           :class="{ 'text-pink-500': cell === 'X', 'text-indigo-500': cell === 'O' }" :disabled="cell !== null"
            @click="playMove(rowIndex, cellIndex)">
         {{ cell }}
       </div>
     </div>
 
-    <div class="">
-      <p v-if="winner">{{ winner }} wins!</p>
-      <p v-else-if="isTie">It's a tie!</p>
+    <div>
+      <p v-if="winner" class="text-center">{{ winner }} wins!</p>
+      <p v-else-if="isTie" class="text-center">It's a tie!</p>
       <GlassButon @clicked="reset"
                   title="Reset Game"
                   link=""
@@ -91,24 +94,3 @@ const playMove = (row: number, col: number) => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.cell-x {
-  color: #ff004d;
-}
-
-.cell-o {
-  color: #6e6cff;
-}
-
-button {
-  margin-top: 20px;
-  font-size: 16px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #ccc;
-  border: none;
-  cursor: pointer;
-}
-
-</style>
