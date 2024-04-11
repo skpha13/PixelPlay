@@ -38,6 +38,12 @@ const showChoiceForGame = (payload: any) => {
                link-ai="/tic-tac-toe-ai"
                link-pvp="/tic-tac-toe-pvp"/>
 
+  <GamePreview @showChoice="payload => showChoiceForGame(payload)"
+               title="Connect Four"
+               img-src="src/assets/connect-four.jpeg"
+               link-ai="/connect-four-ai"
+               link-pvp="/connect-four-pvp"/>
+
   <ChoiceMenu v-if="showChoice"
               @clicked-close-button="hideChoiceForGame"
               :link-to-ai="choiceParameters.linkToAI"
