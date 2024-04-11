@@ -7,6 +7,7 @@ const winner = ref<string | null>(null);
 const isTie = ref(false);
 const gameover = ref(false);
 const currentPlayer = ref('X');
+const uiRefresh = ref(true);
 
 var board = reactive([
   ['', '', ''],
@@ -51,6 +52,8 @@ const reset = () => {
   gameover.value = false;
   winner.value = null;
   isTie.value = false;
+  uiRefresh.value = false;
+  uiRefresh.value = true;
 }
 
 const playMove = (row: number, col: number) => {
@@ -71,7 +74,7 @@ const playMove = (row: number, col: number) => {
 <template>
   <Logo title="Tic Tac Toe" class="mb-10" />
 
-  <div class="flex flex-col items-center justify-center">
+  <div v-if="uiRefresh" class="flex flex-col items-center justify-center">
     <p class=""> Current Player: <span class=""> {{ currentPlayer }} </span> </p>
     <div class="clear-both" v-for="(row, rowIndex) of board" :key="rowIndex">
       <div class="w-28 h-28 leading-[7rem] sm:w-40 sm:h-40 sm:leading-[10rem]
