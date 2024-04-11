@@ -1,7 +1,5 @@
 <script setup lang="ts">
 
-import ConnectFourGameBoard from "@/views/ConnectFourGameBoardView.vue";
-
 import {ref} from "vue";
 
 const table = ref([ [0,0,0,0,0,0,0],
@@ -13,142 +11,103 @@ const table = ref([ [0,0,0,0,0,0,0],
 
 const playerTurn = ref(1);
 
+const winner = ref(0);
+
 const switchPlayerTurn = () => {
-  if (playerTurn.value == 1) {
-    playerTurn.value = 2;
-    return;
-  }
-  playerTurn.value = 1;
-  return;
-}
-
-const putPieceInColumn = (j : number) => {
-  if (j < 0 || j >= table.value[0].length)
-    return;
-  for (let i = 0; i < table.value.length - 1; i++) {
-    if (table.value[i][j] != 0)
-      return;
-    if (table.value[i+1][j] != 0) {
-      table.value[i][j] = playerTurn.value;
-      switchPlayerTurn();
-      return;
-    }
-  }
-  table.value[5][j] = playerTurn.value;
-  switchPlayerTurn();
-}
-
-const checkWin = (column : number) => {
-  let line : number = -1;
-  for (let i = 0; i < table.value.length; i++) {
-    if (table.value[i][column] != 0) {
-      line = i;
-      break;
-    }
-  }
-
-  if (line == -1)
-    return false;
-
-  return checkWinLine(line, column, 1, 0) || checkWinLine(line, column, 0, 1)
-      || checkWinLine(line, column, 1, 1) || checkWinLine(line, column, -1, 1);
-}
-
-const validatePosition = (line: number, column: number) => {
-  return line >= 0 && line < table.value.length && column >= 0 && column < table.value[0].length;
+  playerTurn.value = playerTurn.value === 1 ? 2 : 1;
 };
 
-function checkWinLine(line:number, column:number, x:number, y:number) {
-  // i -> how many left positions should we look for
-  // j -> how many right positions should we look for
-  let leftPositions = 0, rightPositions = 3;
-  let isWin;
-  while (leftPositions < 4) {
-    isWin = true;
-    for (let i = 1; i < leftPositions + 1; i++) {
-      if (validatePosition(line - x * i, column - y * i) && table.value[line][column] != table.value[line - x * i][column - y * i]) {
-        isWin = false;
+const dropPiece = (colIndex : number) => {
+  if (colIndex < 0 || colIndex >= table.value[0].length) return;
+  if (winner.value !== 0) return;
+  for (let i = table.value.length - 1; i >= 0 ; i--) {
+    if (table.value[i][colIndex] === 0) {
+      table.value[i][colIndex] = playerTurn.value;
+      if (checkWin(i, colIndex)) {
+        winner.value = playerTurn.value;
+      } else {
+        switchPlayerTurn();
       }
+      return;
     }
-    for (let j = 1; j < rightPositions + 1; j++) {
-      if (validatePosition(line + x * j, column + y * j) && table.value[line][column] != table.value[line + x * j][column + y * j]) {
-        isWin = false;
-      }
-    }
-    leftPositions += 1;
-    rightPositions -= 1;
-    if (isWin)
-      return true;
+  }
+}
+
+const checkWin = (line : number, column : number) => {
+  const dir = [
+      [1, 0], // vertical
+      [0, 1], // horizontal
+      [1, 1], // diagonal \
+      [-1, 1] // diagonal /
+  ]
+
+  for (const [dx, dy] of dir) {
+    let count = 1;
+    count += countDirection(line, column, dx, dy);
+    count += countDirection(line, column, -dx, -dy);
+    if (count >= 4) return true;
   }
   return false;
 }
 
-//  ----------- Diagonally up
-// putPieceInColumn(0);
-// putPieceInColumn(1);
-// putPieceInColumn(1);
-// putPieceInColumn(2);
-// putPieceInColumn(3);
-// putPieceInColumn(2);
-// putPieceInColumn(2);
-// putPieceInColumn(3);
-// putPieceInColumn(3);
-// putPieceInColumn(4);
-// putPieceInColumn(4);
-// putPieceInColumn(4);
-// putPieceInColumn(3);
-//
-// console.log(table.value);
-// console.log(checkWin(3));
-
-// ------------- Vertically
-// putPieceInColumn(1);
-// putPieceInColumn(2);
-// putPieceInColumn(1);
-// putPieceInColumn(2);
-// putPieceInColumn(1);
-// putPieceInColumn(2);
-// putPieceInColumn(1);
-//
-// console.log(table.value);
-// console.log(checkWin(1));
-
-// ------------ Horizontally
-// putPieceInColumn(1);
-// putPieceInColumn(1);
-// putPieceInColumn(2);
-// putPieceInColumn(2);
-// putPieceInColumn(3);
-// putPieceInColumn(3);
-// putPieceInColumn(4);
-
-// console.log(table.value);
-// console.log(checkWin(4));
-
-// -------------- Diagonally down
-// putPieceInColumn(1);
-// putPieceInColumn(1);
-// putPieceInColumn(1);
-// putPieceInColumn(1);
-// putPieceInColumn(2);
-// putPieceInColumn(2);
-// putPieceInColumn(3);
-// putPieceInColumn(2);
-// putPieceInColumn(5);
-// putPieceInColumn(3);
-// putPieceInColumn(6);
-// putPieceInColumn(4);
-//
-// console.log(table.value);
-// console.log(checkWin(4));
+function countDirection(line: number, column: number, dx: number, dy: number) {
+  const player = table.value[line][column];
+  let count = 0;
+  let x = line + dx;
+  let y = column + dy;
+  while (x >= 0 && x < 6 && y >= 0 && y < 7 && table.value[x][y] === player) {
+    count += 1;
+    x += dx;
+    y += dy;
+  }
+  return count;
+}
 
 </script>
 
 <template>
-  <h1>Connect Four PVP</h1>
-  <ConnectFourGameBoard />
+  <div class="connect-four">
+    <h1 class="text-3xl font-bold mb-4">Connect Four</h1>
+    <div class="game-board border border-black inline-block">
+      <div
+          v-for="(row, rowIndex) in table"
+          :key="rowIndex"
+          class="flex"
+      >
+        <div
+            v-for="(cell, colIndex) in row"
+            :key="colIndex"
+            class="cell border border-black w-12 h-12 flex justify-center items-center cursor-pointer"
+            @click="dropPiece(colIndex)"
+            :class="{
+            'bg-red-500': cell === 1,
+            'bg-blue-500': cell === 2
+          }"
+        ></div>
+      </div>
+    </div>
+    <div v-if="winner !== 0" class="winner mt-4">
+      <p class="text-lg font-bold">Congratulations Player {{ winner }}! You win!</p>
+    </div>
+  </div>
 </template>
 
 <style scoped>
+.connect-four {
+  text-align: center;
+}
 
+.game-board {
+  display: inline-block;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+}
+
+.winner {
+  margin-top: 20px;
+  font-size: 24px;
+}
 </style>
