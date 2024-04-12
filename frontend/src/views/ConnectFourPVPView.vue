@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import {ref} from "vue";
+import GlassButon from "@/components/GlassButon.vue";
 
 const table = ref([ [0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0],
@@ -63,10 +64,24 @@ function countDirection(line: number, column: number, dx: number, dy: number) {
   return count;
 }
 
+const reset = () => {
+  table.value = [
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0]
+  ];
+
+  playerTurn.value = 1;
+  winner.value = 0;
+}
+
 </script>
 
 <template>
-  <div class="connect-four">
+  <div class="connect-four flex flex-col items-center justify-center">
     <h1 class="text-3xl font-bold mb-4">Connect Four</h1>
     <div class="game-board border border-black inline-block">
       <div
@@ -80,14 +95,22 @@ function countDirection(line: number, column: number, dx: number, dy: number) {
             class="cell border border-black w-12 h-12 flex justify-center items-center cursor-pointer"
             @click="dropPiece(colIndex)"
             :class="{
-            'bg-red-500': cell === 1,
-            'bg-blue-500': cell === 2
+            'bg-pink-500': cell === 1,
+            'bg-indigo-500': cell === 2
           }"
         ></div>
       </div>
     </div>
     <div v-if="winner !== 0" class="winner mt-4">
       <p class="text-lg font-bold">Congratulations Player {{ winner }}! You win!</p>
+
+    </div>
+
+    <div class="flex flex-row items-center justify-center" >
+      <GlassButon @clicked="reset"
+                  title="Reset Game"
+                  link=""
+                  class="mt-6" />
     </div>
   </div>
 </template>
