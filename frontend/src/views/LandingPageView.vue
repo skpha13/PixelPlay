@@ -32,12 +32,22 @@ const showChoiceForGame = (payload: any) => {
 
 <template>
   <Logo title="PixelPlay" class="mb-10"/>
+  <div class="flex flex-row gap-12">
+
+
   <GamePreview @showChoice="payload => showChoiceForGame(payload)"
                title="Tic Tac Toe"
                img-src="src/assets/tic-tac-toe.jpeg"
                link-ai="/tic-tac-toe-ai"
                link-pvp="/tic-tac-toe-pvp"/>
 
+    <GamePreview @showChoice="payload => showChoiceForGame(payload)"
+                 title="Connect Four"
+                 img-src="src/assets/connect-four.jpeg"
+                 link-ai="/connect-four-ai"
+                 link-pvp="/connect-four-pvp"/>
+
+  </div>
   <ChoiceMenu v-if="showChoice"
               @clicked-close-button="hideChoiceForGame"
               :link-to-ai="choiceParameters.linkToAI"
