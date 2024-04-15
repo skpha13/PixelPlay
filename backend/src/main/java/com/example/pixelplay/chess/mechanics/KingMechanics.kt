@@ -8,13 +8,11 @@ class KingMechanics(private val position: Position, private val square: Byte) : 
 
     override fun attackingSquares(): List<Byte> {
         val attackingSquares: MutableList<Byte> = ArrayList<Byte>().toMutableList()
-        val rank = PositionUtil.getRank(square)
-        val file = PositionUtil.getFile(square)
-        for (moveDirection in MoveDirection.completeMoves){
-            val newRank = rank + moveDirection.rank
-            val newFile = file + moveDirection.file
-            if(PositionUtil.isOnBoard(newRank, newFile)) {
-                attackingSquares += PositionUtil.getSquare(newRank, newFile)
+        val currentCell = PositionUtil.getCell(square)
+        for (moveDirection in Cell.completeMoves){
+            val nextCell = currentCell.move(moveDirection)
+            if(PositionUtil.isOnBoard(nextCell)) {
+                attackingSquares += PositionUtil.getSquare(nextCell)
             }
         }
         return attackingSquares

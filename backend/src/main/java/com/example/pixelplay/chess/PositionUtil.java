@@ -1,5 +1,7 @@
 package com.example.pixelplay.chess;
 
+import com.example.pixelplay.chess.mechanics.Cell;
+
 public class PositionUtil {
 
     // Converts a list of Strings representing pieces on a board to an 2d array of pieces
@@ -51,11 +53,23 @@ public class PositionUtil {
         return square % 8;
     }
 
+    public static Cell getCell(byte square) {
+        return new Cell(getRank(square), getFile(square));
+    }
+
     public static byte getSquare(int rank, int file) {
         return (byte) (8*rank + file);
     }
 
+    public static byte getSquare(Cell cell) {
+        return (byte) (8*cell.getRank() + cell.getFile());
+    }
+
     public static boolean isOnBoard(int rank, int file) {
         return rank >= 0 && rank < 8 && file >= 0 && file < 8;
+    }
+
+    public static boolean isOnBoard(Cell cell) {
+        return cell.getRank() >= 0 && cell.getRank() < 8 && cell.getFile() >= 0 && cell.getFile() < 8;
     }
 }
