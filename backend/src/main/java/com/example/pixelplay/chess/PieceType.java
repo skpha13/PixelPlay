@@ -30,7 +30,7 @@ public enum PieceType {
                 || this == PieceType.WhiteBishop
                 || this == PieceType.WhiteRook
                 || this == PieceType.WhitePawn) {
-            return Color.BLACK;
+            return Color.WHITE;
         }
 
         if(this == PieceType.BlackKing
