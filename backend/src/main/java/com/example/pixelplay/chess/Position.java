@@ -11,12 +11,12 @@ public class Position {
     private boolean blackCanShortCastle;
     private boolean blackCanLongCastle;
 
-    public Piece getPiece(byte square) {
-        return board[square / 8][square % 8];
+    public Piece getPiece(byte index) {
+        return board[index/ 8][index% 8];
     }
 
-    public boolean isFree(byte square) {
-        return board[square / 8][square % 8] == Piece.None;
+    public boolean isFree(byte index) {
+        return board[index/ 8][index% 8] == Piece.None;
     }
 
     public void setBoard(Piece[][] board) {

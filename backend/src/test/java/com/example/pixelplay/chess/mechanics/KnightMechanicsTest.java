@@ -15,17 +15,17 @@ class KnightMechanicsTest {
     }
 
     @Test
-    void attackingSquaresEdge() {
+    void attackingIndexesEdge() {
         PieceMechanics mechanics = new KnightMechanics(PositionGenerator.initialPosition(), (byte) 1);
-        List<Byte> squares = mechanics.attackingSquares();
+        List<Byte> squares = mechanics.attackingCells();
         squares.sort(null);
         assertEquals(squares, List.of((byte) 11, (byte) 16, (byte) 18));
     }
 
     @Test
-    void attackingSquaresCenter() {
+    void attackingIndexesCenter() {
         PieceMechanics mechanics = new KnightMechanics(PositionGenerator.initialPosition(), (byte) 27);
-        List<Byte> squares = mechanics.attackingSquares();
+        List<Byte> squares = mechanics.attackingCells();
         squares.sort(null);
         assertEquals(squares, List.of((byte) 10, (byte) 12, (byte) 17, (byte) 21, (byte) 33, (byte) 37, (byte) 42, (byte) 44));
     }

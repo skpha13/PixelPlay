@@ -15,27 +15,27 @@ class WhitePawnMechanicsTest {
     }
 
     @Test
-    void attackingSquaresLeftEdge() {
+    void attackingIndexesLeftEdge() {
         PieceMechanics pieceMechanics = new WhitePawnMechanics(PositionGenerator.initialPosition(), (byte) 8);
-        List<Byte> squares = pieceMechanics.attackingSquares();
+        List<Byte> squares = pieceMechanics.attackingCells();
         List<Byte> reference = new ArrayList<>(List.of((byte) 17));
 
         assertEquals(reference, squares);
     }
 
     @Test
-    void attackingSquaresRightEdge() {
+    void attackingIndexesRightEdge() {
         PieceMechanics pieceMechanics = new WhitePawnMechanics(PositionGenerator.initialPosition(), (byte) 15);
-        List<Byte> squares = pieceMechanics.attackingSquares();
+        List<Byte> squares = pieceMechanics.attackingCells();
         List<Byte> reference = new ArrayList<>(List.of((byte) 22));
 
         assertEquals(reference, squares);
     }
 
     @Test
-    void attackingSquaresCenter() {
+    void attackingIndexesCenter() {
         PieceMechanics pieceMechanics = new WhitePawnMechanics(PositionGenerator.initialPosition(), (byte) 10);
-        List<Byte> squares = pieceMechanics.attackingSquares();
+        List<Byte> squares = pieceMechanics.attackingCells();
         List<Byte> reference = new ArrayList<>(List.of((byte) 17, (byte) 19));
 
         assertEquals(reference, squares);

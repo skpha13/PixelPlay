@@ -45,23 +45,23 @@ public class PositionUtil {
         }
     }
 
-    public static int getRank(byte square) {
-        return square / 8;
+    public static int getRank(byte index) {
+        return index/ 8;
     }
 
-    public static int getFile(byte square) {
-        return square % 8;
+    public static int getFile(byte index) {
+        return index% 8;
     }
 
-    public static Cell getCell(byte square) {
-        return new Cell(getRank(square), getFile(square));
+    public static Cell getCell(byte index) {
+        return new Cell(getRank(index), getFile(index));
     }
 
-    public static byte getSquare(int rank, int file) {
+    public static byte getindex(int rank, int file) {
         return (byte) (8*rank + file);
     }
 
-    public static byte getSquare(Cell cell) {
+    public static byte getindex(Cell cell) {
         return (byte) (8*cell.getRank() + cell.getFile());
     }
 

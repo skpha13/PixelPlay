@@ -11,27 +11,27 @@ import static org.junit.jupiter.api.Assertions.*;
 class BlackPawnMechanicsTest {
 
     @Test
-    void attackingSquaresLeftEdge() {
+    void attackingIndexesLeftEdge() {
         PieceMechanics pieceMechanics = new BlackPawnMechanics(PositionGenerator.initialPosition(), (byte) 48);
-        List<Byte> squares = pieceMechanics.attackingSquares();
+        List<Byte> squares = pieceMechanics.attackingCells();
         List<Byte> reference = new ArrayList<>(List.of((byte) 41));
 
         assertEquals(reference, squares);
     }
 
     @Test
-    void attackingSquaresRightEdge() {
+    void attackingIndexesRightEdge() {
         PieceMechanics pieceMechanics = new BlackPawnMechanics(PositionGenerator.initialPosition(), (byte) 55);
-        List<Byte> squares = pieceMechanics.attackingSquares();
+        List<Byte> squares = pieceMechanics.attackingCells();
         List<Byte> reference = new ArrayList<>(List.of((byte) 46));
 
         assertEquals(reference, squares);
     }
 
     @Test
-    void attackingSquaresCenter() {
+    void attackingIndexesCenter() {
         PieceMechanics pieceMechanics = new BlackPawnMechanics(PositionGenerator.initialPosition(), (byte) 50);
-        List<Byte> squares = pieceMechanics.attackingSquares();
+        List<Byte> squares = pieceMechanics.attackingCells();
         List<Byte> reference = new ArrayList<>(List.of((byte) 41, (byte) 43));
 
         assertEquals(reference, squares);

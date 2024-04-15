@@ -4,17 +4,17 @@ import com.example.pixelplay.chess.Position
 import com.example.pixelplay.chess.PositionUtil
 import java.util.ArrayList
 
-class KingMechanics(private val position: Position, private val square: Byte) : PieceMechanics {
+class KingMechanics(private val position: Position, private val index: Byte) : PieceMechanics {
 
-    override fun attackingSquares(): List<Byte> {
-        val attackingSquares: MutableList<Byte> = ArrayList<Byte>().toMutableList()
-        val currentCell = PositionUtil.getCell(square)
+    override fun attackingCells(): List<Byte> {
+        val attackingIndexes: MutableList<Byte> = ArrayList<Byte>().toMutableList()
+        val currentCell = PositionUtil.getCell(index)
         for (moveDirection in Cell.completeMoves){
             val nextCell = currentCell.move(moveDirection)
             if(PositionUtil.isOnBoard(nextCell)) {
-                attackingSquares += PositionUtil.getSquare(nextCell)
+                attackingIndexes += PositionUtil.getindex(nextCell)
             }
         }
-        return attackingSquares
+        return attackingIndexes
     }
 }

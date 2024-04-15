@@ -12,9 +12,9 @@ class KingMechanicsTest {
     }
 
     @Test
-    fun attackingSquares() {
+    fun attackingIndexes() {
         val mechanics: PieceMechanics = KingMechanics(PositionGenerator.initialPosition(), 16.toByte())
-        val squares: MutableList<Int> = mechanics.attackingSquares()!!.map {
+        val squares: MutableList<Int> = mechanics.attackingCells()!!.map {
             it!!.toInt()
         }.toMutableList()
         squares.sort()
