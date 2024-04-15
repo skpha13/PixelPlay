@@ -5,9 +5,9 @@ import com.example.pixelplay.chess.mechanics.Cell;
 public class PositionUtil {
 
     // Converts a list of Strings representing pieces on a board to an 2d array of pieces
-    static Piece[][] translateBoard(String[] boardStrings) {
+    static PieceType[][] translateBoard(String[] boardStrings) {
         checkSize(boardStrings);
-        Piece[][] board = new Piece[8][8];
+        PieceType[][] board = new PieceType[8][8];
         for(int i = 0; i < 8; i ++) {
             for(int j = 0; j < 8; j ++) {
                 board[i][j] = translatePiece(boardStrings[i].charAt(j));
@@ -16,21 +16,21 @@ public class PositionUtil {
         return board;
     }
 
-    private static Piece translatePiece(char chr) {
+    private static PieceType translatePiece(char chr) {
         return switch(chr) {
-            case 'r' -> Piece.BlackRook;
-            case 'h' -> Piece.BlackKnight;
-            case 'b' -> Piece.BlackBishop;
-            case 'q' -> Piece.BlackQueen;
-            case 'k' -> Piece.BlackKing;
-            case 'p' -> Piece.BlackPawn;
-            case 'R' -> Piece.WhiteRook;
-            case 'H' -> Piece.WhiteKnight;
-            case 'B' -> Piece.WhiteBishop;
-            case 'Q' -> Piece.WhiteQueen;
-            case 'K' -> Piece.WhiteKing;
-            case 'P' -> Piece.WhitePawn;
-            default -> Piece.None;
+            case 'r' -> PieceType.BlackRook;
+            case 'h' -> PieceType.BlackKnight;
+            case 'b' -> PieceType.BlackBishop;
+            case 'q' -> PieceType.BlackQueen;
+            case 'k' -> PieceType.BlackKing;
+            case 'p' -> PieceType.BlackPawn;
+            case 'R' -> PieceType.WhiteRook;
+            case 'H' -> PieceType.WhiteKnight;
+            case 'B' -> PieceType.WhiteBishop;
+            case 'Q' -> PieceType.WhiteQueen;
+            case 'K' -> PieceType.WhiteKing;
+            case 'P' -> PieceType.WhitePawn;
+            default -> PieceType.None;
         };
     }
 

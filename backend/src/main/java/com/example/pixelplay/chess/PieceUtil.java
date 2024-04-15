@@ -1,22 +1,22 @@
 package com.example.pixelplay.chess;
 
 public class PieceUtil {
-    public static Color pieceColor(Piece piece) {
-        if(piece == Piece.WhiteKing
-                || piece == Piece.WhiteQueen
-                || piece == Piece.WhiteKnight
-                || piece == Piece.WhiteBishop
-                || piece == Piece.WhiteRook
-                || piece == Piece.WhitePawn) {
+    public static Color pieceColor(PieceType piece) {
+        if(piece == PieceType.WhiteKing
+                || piece == PieceType.WhiteQueen
+                || piece == PieceType.WhiteKnight
+                || piece == PieceType.WhiteBishop
+                || piece == PieceType.WhiteRook
+                || piece == PieceType.WhitePawn) {
             return Color.BLACK;
         }
 
-        if(piece == Piece.BlackKing
-                || piece == Piece.BlackQueen
-                || piece == Piece.BlackBishop
-                || piece == Piece.BlackRook
-                || piece == Piece.BlackKnight
-                || piece == Piece.BlackPawn) {
+        if(piece == PieceType.BlackKing
+                || piece == PieceType.BlackQueen
+                || piece == PieceType.BlackBishop
+                || piece == PieceType.BlackRook
+                || piece == PieceType.BlackKnight
+                || piece == PieceType.BlackPawn) {
             return Color.BLACK;
         }
         return null;
