@@ -3,10 +3,10 @@ package com.example.pixelplay.chess.mechanics
 import com.example.pixelplay.chess.Position
 import com.example.pixelplay.chess.PositionUtil
 
-abstract class StraightMechanics(protected var position: Position, protected var index: Byte) {
+abstract class StraightMechanics() {
     abstract val movingDirection: List<Cell>
 
-    fun attackingCells(): List<Byte> {
+    fun attackingCells(position: Position, index: Byte): List<Byte> {
         val attackingIndexes: MutableList<Byte> = ArrayList()
         val cell = PositionUtil.getCell(index)
         for (moveDirection in movingDirection) {

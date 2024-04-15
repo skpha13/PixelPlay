@@ -8,13 +8,13 @@ public class PieceMechanicsFactory {
 
     public static PieceMechanics getPieceMechanics(PieceType piece, Position position, Byte index) {
         return switch (piece) {
-            case PieceType.BlackKing, PieceType.WhiteKing -> new KingMechanics(position, index);
-            case PieceType.BlackBishop, PieceType.WhiteBishop -> new BishopMechanics(position, index);
-            case PieceType.BlackKnight, PieceType.WhiteKnight -> new KnightMechanics(position, index);
-            case PieceType.BlackPawn -> new BlackPawnMechanics(position, index);
-            case PieceType.BlackQueen, PieceType.WhiteQueen -> new QueenMechanics(position, index);
-            case PieceType.BlackRook, PieceType.WhiteRook -> new RookMechanics(position, index);
-            case PieceType.WhitePawn -> new WhitePawnMechanics(position, index);
+            case PieceType.BlackKing, PieceType.WhiteKing -> new KingMechanics();
+            case PieceType.BlackBishop, PieceType.WhiteBishop -> new BishopMechanics();
+            case PieceType.BlackKnight, PieceType.WhiteKnight -> new KnightMechanics();
+            case PieceType.BlackPawn -> new BlackPawnMechanics();
+            case PieceType.BlackQueen, PieceType.WhiteQueen -> new QueenMechanics();
+            case PieceType.BlackRook, PieceType.WhiteRook -> new RookMechanics();
+            case PieceType.WhitePawn -> new WhitePawnMechanics();
             default -> null;
         };
     }

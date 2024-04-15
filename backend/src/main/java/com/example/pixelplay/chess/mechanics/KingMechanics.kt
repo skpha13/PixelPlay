@@ -4,9 +4,9 @@ import com.example.pixelplay.chess.Position
 import com.example.pixelplay.chess.PositionUtil
 import java.util.ArrayList
 
-class KingMechanics(private val position: Position, private val index: Byte) : PieceMechanics {
+class KingMechanics() : PieceMechanics {
 
-    override fun attackingCells(): List<Byte> {
+    override fun attackingCells(position: Position, index: Byte): List<Byte> {
         val attackingIndexes: MutableList<Byte> = ArrayList<Byte>().toMutableList()
         val currentCell = PositionUtil.getCell(index)
         for (moveDirection in Cell.completeMoves){

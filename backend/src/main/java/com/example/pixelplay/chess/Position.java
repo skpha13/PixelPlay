@@ -96,8 +96,9 @@ public class Position {
         for(int i = 0; i < 8; i ++) {
             for (int j = 0; j < 8; j ++) {
                 Piece piece = board[i][j];
+                byte index = PositionUtil.getindex(i, j);
                 if(piece.type.color() == color) {
-                    attackedIndexes.addAll(Objects.requireNonNull(piece.mechanics.attackingCells()));
+                    attackedIndexes.addAll(Objects.requireNonNull(piece.mechanics.attackingCells(this, index)));
                 }
             }
         }

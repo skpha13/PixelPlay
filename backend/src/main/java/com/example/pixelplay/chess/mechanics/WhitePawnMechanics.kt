@@ -2,14 +2,14 @@ package com.example.pixelplay.chess.mechanics
 
 import com.example.pixelplay.chess.Position
 
-class WhitePawnMechanics(position: Position?, index: Byte) : PawnMechanics(position!!, index) {
-    override fun attackingCells(): List<Byte> {
+class WhitePawnMechanics() : PawnMechanics() {
+    override fun attackingCells(position: Position, index: Byte): List<Byte> {
         val attackingIndexes: MutableList<Byte> = ArrayList()
 
-        if (!isOnLeftEdge) {
+        if (!isOnLeftEdge(index)) {
             attackingIndexes.add((index+ 7).toByte())
         }
-        if (!isOnRightEdge) {
+        if (!isOnRightEdge(index)) {
             attackingIndexes.add((index+ 9).toByte())
         }
 

@@ -17,8 +17,8 @@ class QueenMechanicsTest {
 
     @Test
     void attackingIndexes() {
-        PieceMechanics mechanics = new QueenMechanics(PositionGenerator.initialPosition(), (byte) 25);
-        List<Integer> squares = new ArrayList<>(mechanics.attackingCells().stream().map(Byte::intValue).toList());
+        PieceMechanics mechanics = new QueenMechanics();
+        List<Integer> squares = new ArrayList<>(mechanics.attackingCells(PositionGenerator.initialPosition(), (byte) 25).stream().map(Byte::intValue).toList());
         squares.sort(null);
 
         List<Integer> expected = new ArrayList<>(List.of(9,11,16,17,18,24,26,27,28,29,30,31,32,33,34,41,43,49,52));

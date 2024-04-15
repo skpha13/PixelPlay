@@ -16,8 +16,8 @@ class WhitePawnMechanicsTest {
 
     @Test
     void attackingIndexesLeftEdge() {
-        PieceMechanics pieceMechanics = new WhitePawnMechanics(PositionGenerator.initialPosition(), (byte) 8);
-        List<Byte> squares = pieceMechanics.attackingCells();
+        PieceMechanics pieceMechanics = new WhitePawnMechanics();
+        List<Byte> squares = pieceMechanics.attackingCells(PositionGenerator.initialPosition(), (byte) 8);
         List<Byte> reference = new ArrayList<>(List.of((byte) 17));
 
         assertEquals(reference, squares);
@@ -25,8 +25,8 @@ class WhitePawnMechanicsTest {
 
     @Test
     void attackingIndexesRightEdge() {
-        PieceMechanics pieceMechanics = new WhitePawnMechanics(PositionGenerator.initialPosition(), (byte) 15);
-        List<Byte> squares = pieceMechanics.attackingCells();
+        PieceMechanics pieceMechanics = new WhitePawnMechanics();
+        List<Byte> squares = pieceMechanics.attackingCells(PositionGenerator.initialPosition(), (byte) 15);
         List<Byte> reference = new ArrayList<>(List.of((byte) 22));
 
         assertEquals(reference, squares);
@@ -34,8 +34,8 @@ class WhitePawnMechanicsTest {
 
     @Test
     void attackingIndexesCenter() {
-        PieceMechanics pieceMechanics = new WhitePawnMechanics(PositionGenerator.initialPosition(), (byte) 10);
-        List<Byte> squares = pieceMechanics.attackingCells();
+        PieceMechanics pieceMechanics = new WhitePawnMechanics();
+        List<Byte> squares = pieceMechanics.attackingCells(PositionGenerator.initialPosition(), (byte) 10);
         List<Byte> reference = new ArrayList<>(List.of((byte) 17, (byte) 19));
 
         assertEquals(reference, squares);
