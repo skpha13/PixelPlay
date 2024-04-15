@@ -19,6 +19,9 @@ public class Position {
     public PieceType getPieceType(byte index) {
         return board[index/ 8][index% 8].type;
     }
+    public Piece getPiece(byte index) {
+        return board[index/ 8][index% 8];
+    }
 
     public boolean isFree(byte index) {
         return board[index/ 8][index% 8].type == PieceType.None;
@@ -51,8 +54,7 @@ public class Position {
 
     private Piece createPiece(PieceType type, int rank, int file) {
         byte index = PositionUtil.getindex(rank, file);
-        PieceMechanics mechanics = PieceMechanicsFactory.getPieceMechanics(type, this, index);
-        return new Piece(type, mechanics);
+        return new Piece(type, this, index);
     }
 
     public void setFlags(
@@ -84,17 +86,11 @@ public class Position {
 
     public boolean isChecked(Color color) {
         Byte kingIndex = findKing(color);
-        List<Byte> attackedIndexes = computeAttackedIndexes(color.reverse());
-
-        for(Byte attackedIndex : attackedIndexes) {
-            if(kingIndex.equals(attackedIndex)) {
-                return true;
-            }
-        }
-        return false;
+        Piece king = getPiece(kingIndex);
+        return king.isAttacked();
     }
 
-    private List<Byte> computeAttackedIndexes(Color color) {
+    public List<Byte> computeAttackedIndexes(Color color) {
         List<Byte> attackedIndexes = new ArrayList<>();
 
         for(int i = 0; i < 8; i ++) {
