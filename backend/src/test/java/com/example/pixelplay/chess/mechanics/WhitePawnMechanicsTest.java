@@ -10,14 +10,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WhitePawnMechanicsTest {
+    private final PieceMechanics mechanics = new WhitePawnMechanics();
+
     @BeforeEach
     void setUp() {
     }
 
     @Test
     void attackingIndexesLeftEdge() {
-        PieceMechanics pieceMechanics = new WhitePawnMechanics();
-        List<Square> squares = pieceMechanics.attacks(PositionGenerator.initialPosition(), new Square(1, 0));
+        List<Square> squares = mechanics.attacks(PositionGenerator.initialPosition(), new Square(1, 0));
         List<Square> reference = new ArrayList<>(List.of(new Square(2, 1)));
 
         assertEquals(reference, squares);
@@ -25,8 +26,7 @@ class WhitePawnMechanicsTest {
 
     @Test
     void attackingIndexesRightEdge() {
-        PieceMechanics pieceMechanics = new WhitePawnMechanics();
-        List<Square> squares = pieceMechanics.attacks(PositionGenerator.initialPosition(), new Square(1, 7));
+        List<Square> squares = mechanics.attacks(PositionGenerator.initialPosition(), new Square(1, 7));
         List<Square> reference = new ArrayList<>(List.of(new Square(2, 6)));
 
         assertEquals(reference, squares);
@@ -34,8 +34,7 @@ class WhitePawnMechanicsTest {
 
     @Test
     void attackingIndexesCenter() {
-        PieceMechanics pieceMechanics = new WhitePawnMechanics();
-        List<Square> squares = pieceMechanics.attacks(PositionGenerator.initialPosition(), new Square(1, 2));
+        List<Square> squares = mechanics.attacks(PositionGenerator.initialPosition(), new Square(1, 2));
         List<Square> reference = new ArrayList<>(List.of(
                 new Square(2, 1),
                 new Square(2, 3)
@@ -46,7 +45,6 @@ class WhitePawnMechanicsTest {
 
     @Test
     void moveFromStartingCell() {
-        PieceMechanics mechanics = new WhitePawnMechanics();
         List<Square> cells = mechanics.moves(PositionGenerator.initialPosition(), new Square(1, 2));
         List<Square> reference = new ArrayList<>(List.of(new Square(2, 2), new Square(3, 2)));
 
@@ -55,10 +53,34 @@ class WhitePawnMechanicsTest {
 
     @Test
     void moveFromNonStartingCell() {
-        PieceMechanics mechanics = new WhitePawnMechanics();
         List<Square> cells = mechanics.moves(PositionGenerator.initialPosition(), new Square(2, 2));
         List<Square> reference = new ArrayList<>(List.of(new Square(3, 2)));
 
         assertEquals(reference, cells);
     }
+
+    @Test
+    void capture() {
+        List<Square> moves = mechanics.moves(PositionGenerator.customPosition(pawnCapture), new Square(1, 3));
+        moves.sort(null);
+        List<Square> reference = new ArrayList<>(List.of(
+                new Square(2, 2),
+                new Square(2, 3),
+                new Square(3, 3)
+        ));
+
+        assertEquals(reference, moves);
+    }
+
+
+    private static final String[] pawnCapture = new String[]{
+            "........",
+            "...P....",
+            "..r.....",
+            "........",
+            "........",
+            "........",
+            "........",
+            "........"
+    };
 }
