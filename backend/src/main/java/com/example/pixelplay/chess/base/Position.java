@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Position {
-    private Piece[][] board = new Piece[8][8];
+    private final Piece[][] board = new Piece[8][8];
 
     private boolean whiteCanShortCastle;
     private boolean whiteCanLongCastle;

@@ -4,11 +4,11 @@ import com.example.pixelplay.chess.base.Position
 import com.example.pixelplay.chess.mechanics.PieceMechanics
 import com.example.pixelplay.chess.base.Square
 
-abstract class PawnMechanics() : PieceMechanics() {
-    abstract val forwardMove: Square;
+abstract class PawnMechanics : PieceMechanics() {
+    abstract val forwardMove: Square
     abstract val leftDiagonalMove: Square
     abstract val rightDiagonalMove: Square
-    abstract val startingRank: Int;
+    abstract val startingRank: Int
 
     protected fun isOnLeftEdge(square: Square): Boolean = square.getFile() == 0
 
