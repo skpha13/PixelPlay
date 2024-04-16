@@ -18,10 +18,11 @@ class RookMechanicsTest {
     @Test
     void attackingIndexes() {
         PieceMechanics mechanics = new RookMechanics();
-        List<Integer> squares = new ArrayList<>(mechanics.attackingCells(PositionGenerator.initialPosition(), (byte) 25).stream().map(Byte::intValue).toList());
+        List<Square> squares = new ArrayList<>(mechanics.attacks(PositionGenerator.initialPosition(),   new Square(3, 1)));
         squares.sort(null);
+        List<Integer> indexes = squares.stream().map(Square::getIndex).toList();
 
         List<Integer> expected = new ArrayList<>(List.of(9, 17, 24, 26, 27, 28, 29, 30, 31, 33, 41, 49));
-        assertEquals(expected, squares);
+        assertEquals(expected, indexes);
     }
 }

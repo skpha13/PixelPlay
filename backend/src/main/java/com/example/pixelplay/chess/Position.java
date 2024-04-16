@@ -1,7 +1,6 @@
 package com.example.pixelplay.chess;
 
-import com.example.pixelplay.chess.mechanics.PieceMechanics;
-import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
+import com.example.pixelplay.chess.mechanics.Square;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,15 +15,15 @@ public class Position {
     private boolean blackCanShortCastle;
     private boolean blackCanLongCastle;
 
-    public PieceType getPieceType(byte index) {
-        return board[index/ 8][index% 8].type;
+    public PieceType getPieceType(Square square) {
+        return board[square.getRank()][square.getFile()].type;
     }
-    public Piece getPiece(byte index) {
-        return board[index/ 8][index% 8];
+    public Piece getPiece(Square square) {
+        return board[square.getRank()][square.getFile()];
     }
 
-    public boolean isFree(byte index) {
-        return board[index/ 8][index% 8].type == PieceType.None;
+    public boolean isFree(Square square) {
+        return board[square.getRank()][square.getFile()].type == PieceType.None;
     }
 
     private boolean checkBoardSize(PieceType[][] board) {
@@ -53,8 +52,7 @@ public class Position {
     }
 
     private Piece createPiece(PieceType type, int rank, int file) {
-        byte index = PositionUtil.getindex(rank, file);
-        return new Piece(type, this, index);
+        return new Piece(type, this, new Square(rank, file));
     }
 
     public void setFlags(
@@ -85,27 +83,27 @@ public class Position {
 
 
     public boolean isChecked(Color color) {
-        Byte kingIndex = findKing(color);
-        Piece king = getPiece(kingIndex);
+        Square kingSquare = findKing(color);
+        Piece king = getPiece(kingSquare);
         return king.isAttacked();
     }
 
-    public List<Byte> computeAttackedIndexes(Color color) {
-        List<Byte> attackedIndexes = new ArrayList<>();
+    public List<Square> attackByColor(Color color) {
+        List<Square> attacks = new ArrayList<>();
 
         for(int i = 0; i < 8; i ++) {
             for (int j = 0; j < 8; j ++) {
                 Piece piece = board[i][j];
-                byte index = PositionUtil.getindex(i, j);
+                Square square = new Square(i, j);
                 if(piece.type.color() == color) {
-                    attackedIndexes.addAll(Objects.requireNonNull(piece.mechanics.attackingCells(this, index)));
+                    attacks.addAll(Objects.requireNonNull(piece.mechanics.attacks(this, square)));
                 }
             }
         }
-        return attackedIndexes;
+        return attacks;
     }
 
-    private Byte findKing(Color color) {
+    private Square findKing(Color color) {
         PieceType king;
         if(color == Color.WHITE) {
             king = PieceType.WhiteKing;
@@ -117,7 +115,7 @@ public class Position {
         for(int i = 0; i < 8; i++) {
             for(int j = 0; j < 8; j++) {
                 if(board[i][j].type == king) {
-                    return (byte) (8*i+j);
+                    return new Square(i, j);
                 }
             }
         }

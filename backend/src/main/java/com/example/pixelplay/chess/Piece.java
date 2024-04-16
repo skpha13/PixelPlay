@@ -2,6 +2,7 @@ package com.example.pixelplay.chess;
 
 import com.example.pixelplay.chess.mechanics.PieceMechanics;
 import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
+import com.example.pixelplay.chess.mechanics.Square;
 
 import java.util.List;
 
@@ -9,20 +10,20 @@ public final class Piece {
     public final PieceType type;
     public final PieceMechanics mechanics;
     private final Position position;
-    private final byte index;
+    private final Square square;
 
-    public Piece(PieceType type, Position position, byte index) {
+    public Piece(PieceType type, Position position, Square square) {
         this.type = type;
-        this.mechanics = PieceMechanicsFactory.getPieceMechanics(type, position, index);
+        this.mechanics = PieceMechanicsFactory.getPieceMechanics(type, position, square);
         this.position = position;
-        this.index = index;
+        this.square = square;
     }
 
     public boolean isAttacked() {
         assert type.color() != null;
-        List<Byte> attackedIndexes = position.computeAttackedIndexes(type.color().reverse());
-        for(byte attackedIndex : attackedIndexes) {
-            if(index == attackedIndex) {
+        List<Square> attacked = position.attackByColor(type.color().reverse());
+        for(Square attackedSquare : attacked) {
+            if(this.square.equals(attackedSquare)) {
                 return true;
             }
         }

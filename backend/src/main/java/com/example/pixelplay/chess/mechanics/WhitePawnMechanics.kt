@@ -4,12 +4,12 @@ import com.example.pixelplay.chess.Position
 import com.example.pixelplay.chess.PositionUtil
 
 class WhitePawnMechanics() : PawnMechanics() {
-    override val forwardIndex: Byte
-        get() = 8
-    override val leftDiagonalIndex: Byte
-        get() = 7
-    override val rightDiagonalIndex: Byte
-        get() = 9
-    override val startingRank: Byte
+    override val forwardMove: Square
+        get() = Square(1, 0)
+    override val leftDiagonalMove: Square
+        get() = Square(1, -1)
+    override val rightDiagonalMove: Square
+        get() = Square(1, 1)
+    override val startingRank: Int
         get() = 1
 }

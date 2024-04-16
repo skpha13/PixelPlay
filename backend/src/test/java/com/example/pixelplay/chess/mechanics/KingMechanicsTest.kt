@@ -14,12 +14,12 @@ class KingMechanicsTest {
     @Test
     fun attackingIndexes() {
         val mechanics: PieceMechanics = KingMechanics()
-        val squares: MutableList<Int> = mechanics.attackingCells(PositionGenerator.initialPosition(), 16.toByte()).map {
-            it.toInt()
+        val squares: MutableList<Square> = mechanics.attacks(PositionGenerator.initialPosition(), Square(2, 0)).map {
+            it
         }.toMutableList()
-        squares.sort()
+        squares.sortWith(compareBy({it.getRank()}, {it.getFile()}))
 
-        val expected: List<Int> = ArrayList(listOf(8, 9, 17, 24, 25))
+        val expected: List<Square> = mutableListOf(Square(1, 0), Square(1, 1), Square(2, 1), Square(3, 0), Square(3, 1))
         assertEquals(expected, squares)
     }
 }

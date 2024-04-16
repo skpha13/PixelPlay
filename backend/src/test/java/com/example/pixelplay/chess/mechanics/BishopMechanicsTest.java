@@ -18,10 +18,18 @@ class BishopMechanicsTest {
     @Test
     void attackingIndexes() {
         PieceMechanics mechanics = new BishopMechanics();
-        List<Integer> squares = new ArrayList<>(mechanics.attackingCells(PositionGenerator.initialPosition(), (byte) 25).stream().map(Byte::intValue).toList());
+        List<Square> squares = new ArrayList<>(mechanics.attacks(PositionGenerator.initialPosition(),   new Square(3, 1)));
         squares.sort(null);
 
-        List<Integer> expected = new ArrayList<>(List.of(11, 16, 18, 32, 34, 43, 52));
+        List<Square> expected = new ArrayList<>(List.of(
+                new Square(1, 3),
+                new Square(2, 0),
+                new Square(2, 2),
+                new Square(4, 0),
+                new Square(4, 2),
+                new Square(5, 3),
+                new Square(6, 4)
+        ));
         assertEquals(expected, squares);
     }
 }

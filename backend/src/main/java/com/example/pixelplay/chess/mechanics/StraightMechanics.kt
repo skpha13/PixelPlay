@@ -4,21 +4,20 @@ import com.example.pixelplay.chess.Position
 import com.example.pixelplay.chess.PositionUtil
 
 abstract class StraightMechanics() {
-    abstract val movingDirection: List<Cell>
+    abstract val movingDirection: List<Square>
 
-    fun attackingCells(position: Position, index: Byte): List<Byte> {
-        val attackingIndexes: MutableList<Byte> = ArrayList()
-        val cell = PositionUtil.getCell(index)
+    fun attacks(position: Position, square: Square): List<Square> {
+        val attackingSquares: MutableList<Square> = ArrayList()
         for (moveDirection in movingDirection) {
-            var nextCell = cell.move(moveDirection);
-            while (PositionUtil.isOnBoard(nextCell)) {
-                attackingIndexes.add(PositionUtil.getindex(nextCell))
-                if (!position.isFree(PositionUtil.getindex(nextCell))) {
+            var nextSquare = square.move(moveDirection);
+            while (PositionUtil.isOnBoard(nextSquare)) {
+                attackingSquares.add(nextSquare)
+                if (!position.isFree(nextSquare)) {
                     break
                 }
-                nextCell = nextCell.move(moveDirection)
+                nextSquare = nextSquare.move(moveDirection)
             }
         }
-        return attackingIndexes
+        return attackingSquares
     }
 }

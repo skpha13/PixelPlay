@@ -1,50 +1,47 @@
 package com.example.pixelplay.chess.mechanics
 
 import com.example.pixelplay.chess.Position
-import com.example.pixelplay.chess.PositionUtil
 
 abstract class PawnMechanics() : PieceMechanics {
-    abstract val forwardIndex: Byte;
-    abstract val leftDiagonalIndex: Byte
-    abstract val rightDiagonalIndex: Byte
-    abstract val startingRank: Byte;
+    abstract val forwardMove: Square;
+    abstract val leftDiagonalMove: Square
+    abstract val rightDiagonalMove: Square
+    abstract val startingRank: Int;
 
-    protected fun isOnLeftEdge(index: Byte): Boolean = index% 8 == 0
+    protected fun isOnLeftEdge(square: Square): Boolean = square.getFile() == 0
 
-    protected fun isOnRightEdge(index: Byte): Boolean = (index- 7) % 8 == 0
+    protected fun isOnRightEdge(square: Square): Boolean = square.getFile() == 7
 
-    override fun attackingCells(position: Position, index: Byte): List<Byte> {
-        val attackingIndexes: MutableList<Byte> = ArrayList()
+    override fun attacks(position: Position, square: Square): List<Square> {
+        val attackingIndexes: MutableList<Square> = ArrayList()
 
-        if (!isOnLeftEdge(index)) {
-            attackingIndexes.add((index+ leftDiagonalIndex).toByte())
+        if (!isOnLeftEdge(square)) {
+            attackingIndexes.add((square.move(leftDiagonalMove)))
         }
-        if (!isOnRightEdge(index)) {
-            attackingIndexes.add((index+ rightDiagonalIndex).toByte())
+        if (!isOnRightEdge(square)) {
+            attackingIndexes.add((square.move(rightDiagonalMove)))
         }
 
         return attackingIndexes
     }
 
-    override fun moves(position: Position, index: Byte): List<Byte> {
-        var moveIndexes: MutableList<Byte> = mutableListOf()
+    override fun moves(position: Position, square: Square): List<Square> {
+        var moves: MutableList<Square> = mutableListOf()
 
-        val moveForwardIndex: Byte = (index + forwardIndex).toByte()
-        if(position.isFree(moveForwardIndex)) {
-            moveIndexes.add(moveForwardIndex)
+        val moveForward = square.move(forwardMove)
+        if(position.isFree(moveForward)) {
+            moves.add(moveForward)
         }
 
-        if(isOnStartingCell(index)) {
-            val moveForward2Index: Byte = (index + 2 * forwardIndex).toByte()
-            if(position.isFree(moveForward2Index)) {
-                moveIndexes.add(moveForward2Index)
-            }
+        val moveForward2Squares = square.move(forwardMove).move(forwardMove)
+        if(isOnStartingCell(square) and position.isFree(moveForward2Squares)) {
+            moves.add(moveForward2Squares)
         }
-        return moveIndexes
+        return moves
 
     }
 
-    fun isOnStartingCell(index: Byte): Boolean {
-        return PositionUtil.getRank(index).toByte() == startingRank;
+    fun isOnStartingCell(square: Square): Boolean {
+        return square.getRank() == startingRank
     }
 }

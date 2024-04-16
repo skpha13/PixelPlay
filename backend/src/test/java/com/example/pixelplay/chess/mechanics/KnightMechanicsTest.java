@@ -17,16 +17,18 @@ class KnightMechanicsTest {
     @Test
     void attackingIndexesEdge() {
         PieceMechanics mechanics = new KnightMechanics();
-        List<Byte> squares = mechanics.attackingCells(PositionGenerator.initialPosition(), (byte) 1);
+        List< Square> squares = mechanics.attacks(PositionGenerator.initialPosition(),   new Square(0,1));
         squares.sort(null);
-        assertEquals(squares, List.of((byte) 11, (byte) 16, (byte) 18));
+        List<Integer> indexes = squares.stream().map(Square::getIndex).toList();
+        assertEquals(indexes, List.of(  11,   16,   18));
     }
 
     @Test
     void attackingIndexesCenter() {
         PieceMechanics mechanics = new KnightMechanics();
-        List<Byte> squares = mechanics.attackingCells(PositionGenerator.initialPosition(), (byte) 27);
+        List< Square> squares = mechanics.attacks(PositionGenerator.initialPosition(),   new Square(3, 3));
         squares.sort(null);
-        assertEquals(squares, List.of((byte) 10, (byte) 12, (byte) 17, (byte) 21, (byte) 33, (byte) 37, (byte) 42, (byte) 44));
+        List<Integer> indexes = squares.stream().map(Square::getIndex).toList();
+        assertEquals(squares, List.of(  10,   12,   17,   21,   33,   37,   42,   44));
     }
 }

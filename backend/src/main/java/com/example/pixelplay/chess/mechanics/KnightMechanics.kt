@@ -4,19 +4,18 @@ import com.example.pixelplay.chess.Position
 import com.example.pixelplay.chess.PositionUtil
 
 class KnightMechanics() : PieceMechanics {
-    override fun attackingCells(position: Position, index: Byte): List<Byte> {
-        val attackingIndexes: MutableList<Byte> = ArrayList()
-        val cell = PositionUtil.getCell(index);
-        for (moveDirection in Cell.knightMoves) {
-            val nextCell = cell.move(moveDirection)
-            if (PositionUtil.isOnBoard(nextCell)) {
-                attackingIndexes.add(PositionUtil.getindex(nextCell))
+    override fun attacks(position: Position, square: Square): List<Square> {
+        val attackingSquares: MutableList<Square> = ArrayList()
+        for (moveDirection in Square.knightMoves) {
+            val nextSquare = square.move(moveDirection)
+            if (PositionUtil.isOnBoard(nextSquare)) {
+                attackingSquares.add(nextSquare)
             }
         }
-        return attackingIndexes
+        return attackingSquares
     }
 
-    override fun moves(position: Position, index: Byte): List<Byte> {
+    override fun moves(position: Position, square: Square): List<Square> {
         TODO("Not yet implemented")
     }
 }

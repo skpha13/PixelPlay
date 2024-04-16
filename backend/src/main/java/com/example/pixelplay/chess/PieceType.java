@@ -4,22 +4,22 @@ import com.example.pixelplay.chess.mechanics.PieceMechanics;
 import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
 
 public enum PieceType {
-    None((byte) 0),
-    WhiteKing((byte) 1),
-    WhiteQueen((byte) 2),
-    WhiteRook((byte) 3),
-    WhiteBishop((byte) 4),
-    WhiteKnight((byte) 5),
-    WhitePawn((byte) 6),
-    BlackKing((byte) 7),
-    BlackQueen((byte) 8),
-    BlackRook((byte) 9),
-    BlackBishop((byte) 10),
-    BlackKnight((byte) 11),
-    BlackPawn((byte) 12);
+    None( 0),
+    WhiteKing(1),
+    WhiteQueen( 2),
+    WhiteRook(3),
+    WhiteBishop(4),
+    WhiteKnight(5),
+    WhitePawn(6),
+    BlackKing(7),
+    BlackQueen(8),
+    BlackRook(9),
+    BlackBishop(10),
+    BlackKnight(11),
+    BlackPawn(12);
 
-    public final byte value;
-    PieceType(byte value) {
+    public final int value;
+    PieceType(int value) {
         this.value = value;
     }
 

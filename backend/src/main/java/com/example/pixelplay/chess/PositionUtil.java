@@ -1,6 +1,6 @@
 package com.example.pixelplay.chess;
 
-import com.example.pixelplay.chess.mechanics.Cell;
+import com.example.pixelplay.chess.mechanics.Square;
 
 public class PositionUtil {
 
@@ -53,23 +53,15 @@ public class PositionUtil {
         return index% 8;
     }
 
-    public static Cell getCell(byte index) {
-        return new Cell(getRank(index), getFile(index));
-    }
-
-    public static byte getindex(int rank, int file) {
-        return (byte) (8*rank + file);
-    }
-
-    public static byte getindex(Cell cell) {
-        return (byte) (8*cell.getRank() + cell.getFile());
+    public static Square getSquare(byte index) {
+        return new Square(getRank(index), getFile(index));
     }
 
     public static boolean isOnBoard(int rank, int file) {
         return rank >= 0 && rank < 8 && file >= 0 && file < 8;
     }
 
-    public static boolean isOnBoard(Cell cell) {
-        return cell.getRank() >= 0 && cell.getRank() < 8 && cell.getFile() >= 0 && cell.getFile() < 8;
+    public static boolean isOnBoard(Square square) {
+        return square.getRank() >= 0 && square.getRank() < 8 && square.getFile() >= 0 && square.getFile() < 8;
     }
 }

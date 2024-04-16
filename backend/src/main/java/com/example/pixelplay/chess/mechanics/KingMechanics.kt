@@ -2,23 +2,21 @@ package com.example.pixelplay.chess.mechanics
 
 import com.example.pixelplay.chess.Position
 import com.example.pixelplay.chess.PositionUtil
-import java.util.ArrayList
 
 class KingMechanics() : PieceMechanics {
 
-    override fun attackingCells(position: Position, index: Byte): List<Byte> {
-        val attackingIndexes: MutableList<Byte> = ArrayList<Byte>().toMutableList()
-        val currentCell = PositionUtil.getCell(index)
-        for (moveDirection in Cell.completeMoves){
-            val nextCell = currentCell.move(moveDirection)
-            if(PositionUtil.isOnBoard(nextCell)) {
-                attackingIndexes += PositionUtil.getindex(nextCell)
+    override fun attacks(position: Position, square: Square): List<Square> {
+        val attacks: MutableList<Square> = mutableListOf()
+        for (moveDirection in Square.completeMoves){
+            val nextSquare = square.move(moveDirection)
+            if(PositionUtil.isOnBoard(nextSquare)) {
+                attacks += nextSquare
             }
         }
-        return attackingIndexes
+        return attacks
     }
 
-    override fun moves(position: Position, index: Byte): List<Byte> {
+    override fun moves(position: Position, square: Square): List<Square> {
         TODO("Not yet implemented")
     }
 }
