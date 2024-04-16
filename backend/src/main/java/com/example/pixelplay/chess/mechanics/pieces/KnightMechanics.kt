@@ -4,16 +4,9 @@ import com.example.pixelplay.chess.base.Position
 import com.example.pixelplay.chess.utils.PositionUtil
 import com.example.pixelplay.chess.mechanics.PieceMechanics
 import com.example.pixelplay.chess.base.Square
+import com.example.pixelplay.chess.mechanics.ShortRangeMechanics
 
-class KnightMechanics() : PieceMechanics() {
-    override fun attacks(position: Position, square: Square): List<Square> {
-        val attackingSquares: MutableList<Square> = ArrayList()
-        for (moveDirection in Square.knightMoves) {
-            val nextSquare = square.move(moveDirection)
-            if (PositionUtil.isOnBoard(nextSquare)) {
-                attackingSquares.add(nextSquare)
-            }
-        }
-        return attackingSquares
-    }
+class KnightMechanics() : ShortRangeMechanics() {
+    override val movingDirection: List<Square>
+        get() = Square.knightMoves
 }

@@ -4,21 +4,9 @@ import com.example.pixelplay.chess.base.Position
 import com.example.pixelplay.chess.utils.PositionUtil
 import com.example.pixelplay.chess.mechanics.PieceMechanics
 import com.example.pixelplay.chess.base.Square
+import com.example.pixelplay.chess.mechanics.ShortRangeMechanics
 
-class KingMechanics() : PieceMechanics() {
-
-    override fun attacks(position: Position, square: Square): List<Square> {
-        val attacks: MutableList<Square> = mutableListOf()
-        for (moveDirection in Square.completeMoves){
-            val nextSquare = square.move(moveDirection)
-            if(PositionUtil.isOnBoard(nextSquare)) {
-                attacks += nextSquare
-            }
-        }
-        return attacks
-    }
-
-    override fun moves(position: Position, square: Square): List<Square> {
-        TODO("Not yet implemented")
-    }
+class KingMechanics() : ShortRangeMechanics() {
+    override val movingDirection: List<Square>
+        get() = Square.completeMoves
 }
