@@ -4,4 +4,6 @@ import com.example.pixelplay.chess.Position
 
 internal interface PieceMechanics {
     fun attackingCells(position: Position, index: Byte): List<Byte>
+
+    fun moves(position: Position, index: Byte): List<Byte>
 }

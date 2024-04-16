@@ -17,4 +17,8 @@ class KingMechanics() : PieceMechanics {
         }
         return attackingIndexes
     }
+
+    override fun moves(position: Position, index: Byte): List<Byte> {
+        TODO("Not yet implemented")
+    }
 }

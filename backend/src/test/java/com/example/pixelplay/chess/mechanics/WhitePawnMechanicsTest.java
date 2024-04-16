@@ -1,5 +1,6 @@
 package com.example.pixelplay.chess.mechanics;
 
+import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.PositionGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,5 +40,23 @@ class WhitePawnMechanicsTest {
         List<Byte> reference = new ArrayList<>(List.of((byte) 17, (byte) 19));
 
         assertEquals(reference, squares);
+    }
+
+    @Test
+    void moveFromStartingCell() {
+        PieceMechanics mechanics = new WhitePawnMechanics();
+        List<Byte> cells = mechanics.moves(PositionGenerator.initialPosition(), (byte) 10);
+        List<Byte> reference = new ArrayList<>(List.of((byte) 18, (byte)26));
+
+        assertEquals(reference, cells);
+    }
+
+    @Test
+    void moveFromNonStartingCell() {
+        PieceMechanics mechanics = new WhitePawnMechanics();
+        List<Byte> cells = mechanics.moves(PositionGenerator.initialPosition(), (byte) 18);
+        List<Byte> reference = new ArrayList<>(List.of((byte)26));
+
+        assertEquals(reference, cells);
     }
 }
