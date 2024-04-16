@@ -1,7 +1,7 @@
 package com.example.pixelplay.chess.mechanics.pieces
 
 import com.example.pixelplay.chess.base.Position
-import com.example.pixelplay.chess.PositionUtil
+import com.example.pixelplay.chess.utils.PositionUtil
 import com.example.pixelplay.chess.mechanics.PieceMechanics
 import com.example.pixelplay.chess.base.Square
 
