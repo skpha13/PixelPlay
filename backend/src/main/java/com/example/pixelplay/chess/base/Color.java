@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess;
+package com.example.pixelplay.chess.base;
 
 public enum Color {
     WHITE, BLACK;

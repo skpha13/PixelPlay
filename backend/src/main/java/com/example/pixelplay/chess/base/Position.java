@@ -1,6 +1,4 @@
-package com.example.pixelplay.chess;
-
-import com.example.pixelplay.chess.mechanics.Square;
+package com.example.pixelplay.chess.base;
 
 import java.util.ArrayList;
 import java.util.Arrays;

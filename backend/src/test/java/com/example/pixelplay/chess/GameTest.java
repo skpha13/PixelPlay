@@ -1,14 +1,6 @@
 package com.example.pixelplay.chess;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import javax.swing.plaf.metal.MetalIconFactory;
-
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
+import com.example.pixelplay.chess.base.Game;
 
 class GameTest {
     private static final Game game = new Game();

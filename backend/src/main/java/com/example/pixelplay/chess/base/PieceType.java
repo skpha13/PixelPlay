@@ -1,7 +1,4 @@
-package com.example.pixelplay.chess;
-
-import com.example.pixelplay.chess.mechanics.PieceMechanics;
-import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
+package com.example.pixelplay.chess.base;
 
 public enum PieceType {
     None( 0),

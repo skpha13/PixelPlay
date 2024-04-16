@@ -1,5 +1,7 @@
 package com.example.pixelplay.chess;
 
+import com.example.pixelplay.chess.base.Position;
+
 public class PositionGenerator {
     private static final String[] initialBoardStrings = new String[] {
             "RHBQKBHR",

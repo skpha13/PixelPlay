@@ -1,5 +1,8 @@
 package com.example.pixelplay.chess;
 
+import com.example.pixelplay.chess.base.Color;
+import com.example.pixelplay.chess.base.PieceType;
+
 public class PieceUtil {
     public static Color pieceColor(PieceType piece) {
         if(piece == PieceType.WhiteKing

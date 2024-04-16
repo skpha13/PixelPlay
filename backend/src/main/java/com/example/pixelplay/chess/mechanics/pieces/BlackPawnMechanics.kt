@@ -1,6 +1,6 @@
 package com.example.pixelplay.chess.mechanics.pieces
 
-import com.example.pixelplay.chess.mechanics.Square
+import com.example.pixelplay.chess.base.Square
 
 class BlackPawnMechanics internal constructor() : PawnMechanics() {
     override val forwardMove: Square

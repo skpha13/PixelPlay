@@ -1,8 +1,7 @@
-package com.example.pixelplay.chess;
+package com.example.pixelplay.chess.base;
 
 import com.example.pixelplay.chess.mechanics.PieceMechanics;
 import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
-import com.example.pixelplay.chess.mechanics.Square;
 
 import java.util.List;
 

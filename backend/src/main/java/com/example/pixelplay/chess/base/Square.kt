@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.mechanics
+package com.example.pixelplay.chess.base
 
 class Square(private var rank: Int, private var file: Int): Comparable<Square> {
     fun move(direction: Square): Square {

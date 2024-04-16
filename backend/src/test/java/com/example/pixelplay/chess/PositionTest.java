@@ -1,5 +1,7 @@
 package com.example.pixelplay.chess;
 
+import com.example.pixelplay.chess.base.Color;
+import com.example.pixelplay.chess.base.Position;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

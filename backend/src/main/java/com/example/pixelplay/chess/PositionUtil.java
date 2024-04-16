@@ -1,6 +1,7 @@
 package com.example.pixelplay.chess;
 
-import com.example.pixelplay.chess.mechanics.Square;
+import com.example.pixelplay.chess.base.PieceType;
+import com.example.pixelplay.chess.base.Square;
 
 public class PositionUtil {
 

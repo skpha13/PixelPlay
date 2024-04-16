@@ -1,7 +1,8 @@
 package com.example.pixelplay.chess.mechanics
 
-import com.example.pixelplay.chess.Position
+import com.example.pixelplay.chess.base.Position
 import com.example.pixelplay.chess.PositionUtil
+import com.example.pixelplay.chess.base.Square
 
 abstract class StraightMechanics(): PieceMechanics() {
     abstract val movingDirection: List<Square>
