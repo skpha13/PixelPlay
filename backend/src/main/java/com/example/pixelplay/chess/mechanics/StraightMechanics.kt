@@ -3,10 +3,10 @@ package com.example.pixelplay.chess.mechanics
 import com.example.pixelplay.chess.Position
 import com.example.pixelplay.chess.PositionUtil
 
-abstract class StraightMechanics() {
+abstract class StraightMechanics(): PieceMechanics() {
     abstract val movingDirection: List<Square>
 
-    fun attacks(position: Position, square: Square): List<Square> {
+    override fun attacks(position: Position, square: Square): List<Square> {
         val attackingSquares: MutableList<Square> = ArrayList()
         for (moveDirection in movingDirection) {
             var nextSquare = square.move(moveDirection);
@@ -19,19 +19,5 @@ abstract class StraightMechanics() {
             }
         }
         return attackingSquares
-    }
-
-    fun moves(position: Position, square: Square): List<Square> {
-        val attackingSquares: MutableList<Square> = attacks(position, square).toMutableList()
-        val moveSquares: MutableList<Square> = mutableListOf()
-        for(attackingSquare in attackingSquares) {
-            if(position.isFree(attackingSquare)) {
-                moveSquares.add(attackingSquare)
-            }
-            else if(position.canCapture(attackingSquare, square)) {
-                moveSquares.add(attackingSquare)
-            }
-        }
-        return moveSquares
     }
 }

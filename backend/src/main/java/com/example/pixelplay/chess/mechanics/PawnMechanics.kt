@@ -2,7 +2,7 @@ package com.example.pixelplay.chess.mechanics
 
 import com.example.pixelplay.chess.Position
 
-abstract class PawnMechanics() : PieceMechanics {
+abstract class PawnMechanics() : PieceMechanics() {
     abstract val forwardMove: Square;
     abstract val leftDiagonalMove: Square
     abstract val rightDiagonalMove: Square
