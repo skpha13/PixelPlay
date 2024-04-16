@@ -121,4 +121,13 @@ public class Position {
         }
         return null;
     }
+
+    public boolean canCapture(Square square, Color attackerColor) {
+        try {
+            return getPiece(square).type.color() == attackerColor.reverse();
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
 }

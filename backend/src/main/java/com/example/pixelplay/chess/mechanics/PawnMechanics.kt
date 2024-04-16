@@ -28,20 +28,43 @@ abstract class PawnMechanics() : PieceMechanics {
     override fun moves(position: Position, square: Square): List<Square> {
         var moves: MutableList<Square> = mutableListOf()
 
-        val moveForward = square.move(forwardMove)
-        if(position.isFree(moveForward)) {
-            moves.add(moveForward)
-        }
+        moves.tryMovingForward(position, square)
+        moves.tryMovingForward2Squares(position, square)
+        moves.tryCapture(position, square)
 
-        val moveForward2Squares = square.move(forwardMove).move(forwardMove)
-        if(isOnStartingCell(square) and position.isFree(moveForward2Squares)) {
-            moves.add(moveForward2Squares)
-        }
         return moves
 
     }
 
-    fun isOnStartingCell(square: Square): Boolean {
+    private fun isOnStartingCell(square: Square): Boolean {
         return square.getRank() == startingRank
+    }
+
+    private fun MutableList<Square>.tryMovingForward(position: Position, square: Square) {
+        val move = square.move(forwardMove)
+        if(position.isFree(move)) {
+            this@tryMovingForward.add(move)
+        }
+    }
+    private fun MutableList<Square>.tryMovingForward2Squares(position: Position, square: Square) {
+        if(isOnStartingCell(square)) {
+            val move = square.move(forwardMove).move(forwardMove)
+            if(position.isFree(move)) {
+                this@tryMovingForward2Squares.add(move)
+            }
+        }
+
+    }
+    private fun MutableList<Square>.tryCapture(position: Position, square: Square) {
+        var capture = square.move(leftDiagonalMove)
+        val currentColor = position.getPieceType(square).color()
+        if(position.canCapture(capture, currentColor)) {
+            this@tryCapture.add(capture)
+        }
+
+        capture = square.move(rightDiagonalMove)
+        if(position.canCapture(capture, currentColor)) {
+            this@tryCapture.add(capture)
+        }
     }
 }

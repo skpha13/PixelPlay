@@ -2,14 +2,14 @@ package com.example.pixelplay.chess;
 
 public class PositionGenerator {
     private static final String[] initialBoardStrings = new String[] {
-            "rhbqkbhr",
-            "pppppppp",
-            "........",
-            "........",
-            "........",
-            "........",
+            "RHBQKBHR",
             "PPPPPPPP",
-            "RHBQKBHR"
+            "........",
+            "........",
+            "........",
+            "........",
+            "pppppppp",
+            "rhbqkbhr"
     };
 
     public static Position initialPosition() {

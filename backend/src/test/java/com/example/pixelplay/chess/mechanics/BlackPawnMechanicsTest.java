@@ -1,5 +1,6 @@
 package com.example.pixelplay.chess.mechanics;
 
+import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.PositionGenerator;
 import org.junit.jupiter.api.Test;
 
@@ -9,11 +10,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BlackPawnMechanicsTest {
+    private final PieceMechanics mechanics = new BlackPawnMechanics();
 
     @Test
     void attackingIndexesLeftEdge() {
-        PieceMechanics pieceMechanics = new BlackPawnMechanics();
-        List<Square> squares = pieceMechanics.attacks(PositionGenerator.initialPosition(), new Square(6, 0));
+        List<Square> squares = mechanics.attacks(PositionGenerator.initialPosition(), new Square(6, 0));
         List<Square> reference = new ArrayList<>(List.of(new Square(5, 1)));
 
         assertEquals(reference, squares);
@@ -21,8 +22,7 @@ class BlackPawnMechanicsTest {
 
     @Test
     void attackingIndexesRightEdge() {
-        PieceMechanics pieceMechanics = new BlackPawnMechanics();
-        List<Square> squares = pieceMechanics.attacks(PositionGenerator.initialPosition(), new Square(6, 7));
+        List<Square> squares = mechanics.attacks(PositionGenerator.initialPosition(), new Square(6, 7));
         List<Square> reference = new ArrayList<>(List.of(new Square(5, 6)));
 
         assertEquals(reference, squares);
@@ -30,8 +30,7 @@ class BlackPawnMechanicsTest {
 
     @Test
     void attackingIndexesCenter() {
-        PieceMechanics pieceMechanics = new BlackPawnMechanics();
-        List<Square> squares = pieceMechanics.attacks(PositionGenerator.initialPosition(), new Square(6, 2));
+        List<Square> squares = mechanics.attacks(PositionGenerator.initialPosition(), new Square(6, 2));
         List<Square> reference = new ArrayList<>(List.of(
                 new Square(5, 1),
                 new Square(5, 3)
@@ -39,4 +38,27 @@ class BlackPawnMechanicsTest {
 
         assertEquals(reference, squares);
     }
+
+    @Test
+    void capture() {
+        List<Square> moves = mechanics.moves(PositionGenerator.customPosition(pawnCapture), new Square(2, 2));
+        List<Square> reference = new ArrayList<>(List.of(
+                new Square(1, 2),
+                new Square(1, 3)
+        ));
+
+        assertEquals(reference, moves);
+    }
+
+
+    private static final String[] pawnCapture = new String[]{
+            "........",
+            "...R....",
+            "..p.....",
+            "........",
+            "........",
+            "........",
+            "........",
+            "........"
+    };
 }
