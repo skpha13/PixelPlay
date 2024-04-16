@@ -16,10 +16,7 @@ public class PositionGenerator {
     };
 
     public static Position initialPosition() {
-        Position position = new Position();
-        position.setBoard(PositionUtil.translateBoard(initialBoardStrings));
-        position.setFlags(true, true, true, true);
-        return position;
+        return customPosition(initialBoardStrings);
     }
 
     public static Position customPosition(String[] boardStrings) {

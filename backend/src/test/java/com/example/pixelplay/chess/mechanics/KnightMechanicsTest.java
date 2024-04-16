@@ -30,7 +30,6 @@ class KnightMechanicsTest {
     void attackingIndexesCenter() {
         List< Square> squares = mechanics.attacks(PositionGenerator.initialPosition(),   new Square(3, 3));
         squares.sort(null);
-        List<Integer> indexes = squares.stream().map(Square::getIndex).toList();
         assertEquals(squares, List.of(  10,   12,   17,   21,   33,   37,   42,   44));
     }
 
@@ -39,7 +38,7 @@ class KnightMechanicsTest {
         List<Square> moves = mechanics.moves(PositionGenerator.customPosition(capture),   new Square(0, 3));
         moves.sort(null);
 
-        List<Square> expected = new ArrayList<Square>(List.of(
+        List<Square> expected = new ArrayList<>(List.of(
                 new Square(1, 1),
                 new Square(1, 5)
         ));

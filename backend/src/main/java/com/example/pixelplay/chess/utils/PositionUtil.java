@@ -46,22 +46,6 @@ public class PositionUtil {
         }
     }
 
-    public static int getRank(byte index) {
-        return index/ 8;
-    }
-
-    public static int getFile(byte index) {
-        return index% 8;
-    }
-
-    public static Square getSquare(byte index) {
-        return new Square(getRank(index), getFile(index));
-    }
-
-    public static boolean isOnBoard(int rank, int file) {
-        return rank >= 0 && rank < 8 && file >= 0 && file < 8;
-    }
-
     public static boolean isOnBoard(Square square) {
         return square.getRank() >= 0 && square.getRank() < 8 && square.getFile() >= 0 && square.getFile() < 8;
     }

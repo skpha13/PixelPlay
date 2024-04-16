@@ -8,7 +8,7 @@ import com.example.pixelplay.chess.mechanics.pieces.*;
 public class PieceMechanicsFactory {
     private PieceMechanicsFactory() {}
 
-    public static PieceMechanics getPieceMechanics(PieceType piece, Position position, Square square) {
+    public static PieceMechanics getPieceMechanics(PieceType piece) {
         return switch (piece) {
             case PieceType.BlackKing, PieceType.WhiteKing -> new KingMechanics();
             case PieceType.BlackBishop, PieceType.WhiteBishop -> new BishopMechanics();

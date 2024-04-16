@@ -82,6 +82,7 @@ public class Position {
 
     public boolean isChecked(Color color) {
         Square kingSquare = findKing(color);
+        assert kingSquare != null;
         Piece king = getPiece(kingSquare);
         return king.isAttacked();
     }
@@ -94,6 +95,7 @@ public class Position {
                 Piece piece = board[i][j];
                 Square square = new Square(i, j);
                 if(piece.type.color() == color) {
+                    assert piece.mechanics != null;
                     attacks.addAll(Objects.requireNonNull(piece.mechanics.attacks(this, square)));
                 }
             }

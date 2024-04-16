@@ -28,7 +28,7 @@ abstract class PawnMechanics : PieceMechanics() {
     }
 
     override fun moves(position: Position, square: Square): List<Square> {
-        var moves: MutableList<Square> = mutableListOf()
+        val moves: MutableList<Square> = mutableListOf()
 
         moves.tryMovingForward(position, square)
         moves.tryMovingForward2Squares(position, square)
