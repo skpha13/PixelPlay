@@ -1,5 +1,7 @@
 package com.example.pixelplay.chess.base;
 
+import com.example.pixelplay.chess.mechanics.CastlingController;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,10 +10,7 @@ import java.util.Objects;
 public class Position {
     private final Piece[][] board = new Piece[8][8];
 
-    private boolean whiteCanShortCastle;
-    private boolean whiteCanLongCastle;
-    private boolean blackCanShortCastle;
-    private boolean blackCanLongCastle;
+    private final CastlingController castlingController = new CastlingController(this);
 
     public PieceType getPieceType(Square square) {
         return board[square.getRank()][square.getFile()].type;
@@ -52,32 +51,6 @@ public class Position {
     private Piece createPiece(PieceType type, int rank, int file) {
         return new Piece(type, this, new Square(rank, file));
     }
-
-    public void setFlags(
-            boolean whiteCanShortCastle,
-            boolean whiteCanLongCastle,
-            boolean blackCanShortCastle,
-            boolean blackCanLongCastle
-    ) {
-        this.whiteCanShortCastle = whiteCanShortCastle;
-        this.whiteCanLongCastle = whiteCanLongCastle;
-        this.blackCanShortCastle = blackCanShortCastle;
-        this.blackCanLongCastle = blackCanLongCastle;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Position position = (Position) o;
-        return whiteCanShortCastle == position.whiteCanShortCastle && whiteCanLongCastle == position.whiteCanLongCastle && blackCanShortCastle == position.blackCanShortCastle && blackCanLongCastle == position.blackCanLongCastle && Objects.deepEquals(board, position.board);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(Arrays.deepHashCode(board), whiteCanShortCastle, whiteCanLongCastle, blackCanShortCastle, blackCanLongCastle);
-    }
-
 
 
     public boolean isChecked(Color color) {
@@ -137,5 +110,13 @@ public class Position {
         catch (Exception e) {
             return false;
         }
+    }
+
+    public boolean canShortCastle(Color color) {
+        return castlingController.canShortCastle(color);
+    }
+
+    public void clearFlags() {
+        castlingController.clearFlags();
     }
 }

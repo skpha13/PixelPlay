@@ -42,7 +42,7 @@ class KingMechanicsTest {
     }
 
     private val capture = arrayOf(
-        "..rk....",
+        "..rk.p..",
         "..p.Q...",
         "..p.p...",
         "........",
@@ -50,5 +50,27 @@ class KingMechanicsTest {
         "........",
         "........",
         "........"
+    )
+
+    @Test
+    fun shortCastle() {
+        val moves: MutableList<Square> = mechanics.moves(PositionGenerator.customPosition(capture), Square(7, 3)).toMutableList()
+
+        val expected: MutableList<Square> = ArrayList(
+            listOf(
+                Square(7, 1),
+            )
+        )
+        assertEquals(expected, moves)
+    }
+    private val shortCastlePosition = arrayOf(
+        "........",
+        "........",
+        "........",
+        "........",
+        "........",
+        "........",
+        "pppppppp",
+        "r..kq..r",
     )
 }

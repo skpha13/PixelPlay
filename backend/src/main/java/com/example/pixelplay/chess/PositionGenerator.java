@@ -22,7 +22,7 @@ public class PositionGenerator {
     public static Position customPosition(String[] boardStrings) {
         Position position = new Position();
         position.setBoard(PositionUtil.translateBoard(boardStrings));
-        position.setFlags(true, true, true, true);
+        position.clearFlags();
         return position;
     }
 
