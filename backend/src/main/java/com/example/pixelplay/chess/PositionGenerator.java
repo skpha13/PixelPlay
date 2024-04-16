@@ -22,7 +22,14 @@ public class PositionGenerator {
     public static Position customPosition(String[] boardStrings) {
         Position position = new Position();
         position.setBoard(PositionUtil.translateBoard(boardStrings));
-        position.clearFlags();
+        position.setCastlingFlags(true);
+        return position;
+    }
+
+    public static Position customPosition(String[] boardStrings, boolean castlingFlags) {
+        Position position = new Position();
+        position.setBoard(PositionUtil.translateBoard(boardStrings));
+        position.setCastlingFlags(castlingFlags);
         return position;
     }
 

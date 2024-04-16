@@ -1,12 +1,22 @@
 package com.example.pixelplay.chess.base
 
 class Square(private var rank: Int, private var file: Int): Comparable<Square> {
+    fun move(direction: Square, number: Int = 1): Square {
+        val square = Square(this.rank, this.file)
+        square.rank += direction.rank * number
+        square.file += direction.file * number
+        return square
+    }
+
     fun move(direction: Square): Square {
         val square = Square(this.rank, this.file)
         square.rank += direction.rank
         square.file += direction.file
         return square
     }
+
+
+
 
     fun getRank() = rank
     fun getFile() = file

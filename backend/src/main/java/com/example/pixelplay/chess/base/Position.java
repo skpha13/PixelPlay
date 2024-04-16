@@ -3,7 +3,6 @@ package com.example.pixelplay.chess.base;
 import com.example.pixelplay.chess.mechanics.CastlingController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -116,7 +115,11 @@ public class Position {
         return castlingController.canShortCastle(color);
     }
 
-    public void clearFlags() {
-        castlingController.clearFlags();
+    public boolean canLongCastle(Color color) {
+        return castlingController.canLongCastle(color);
+    }
+
+    public void setCastlingFlags(boolean value) {
+        castlingController.setFlags(value);
     }
 }

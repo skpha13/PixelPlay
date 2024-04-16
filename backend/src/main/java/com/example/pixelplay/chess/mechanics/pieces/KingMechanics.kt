@@ -8,11 +8,13 @@ class KingMechanics : ShortRangeMechanics() {
     override val movingDirection: List<Square>
         get() = Square.completeMoves
 
-    private val shortCastleDirection = Square(0, 2)
+    private val shortCastleDirection = Square(0, -2)
+    private val longCastleDirection = Square(0, 2)
 
     override fun moves(position: Position, square: Square): List<Square> {
         val moves = super.moves(position, square).toMutableList()
         moves.tryShortCastle(position, square)
+        moves.tryLongCastle(position, square)
         return moves
     }
 
@@ -20,6 +22,13 @@ class KingMechanics : ShortRangeMechanics() {
         val color = position.getPiece(square).type.color()
         if(position.canShortCastle(color)) {
             this.add(square.move(shortCastleDirection))
+        }
+    }
+
+    private fun MutableList<Square>.tryLongCastle(position: Position, square: Square) {
+        val color = position.getPiece(square).type.color()
+        if(position.canLongCastle(color)) {
+            this.add(square.move(longCastleDirection))
         }
     }
 }

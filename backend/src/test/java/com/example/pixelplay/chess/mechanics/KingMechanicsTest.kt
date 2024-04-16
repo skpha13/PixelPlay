@@ -54,13 +54,16 @@ class KingMechanicsTest {
 
     @Test
     fun shortCastle() {
-        val moves: MutableList<Square> = mechanics.moves(PositionGenerator.customPosition(capture), Square(7, 3)).toMutableList()
+        val moves: MutableList<Square> = mechanics.moves(PositionGenerator.customPosition(shortCastlePosition, false), Square(7, 3)).toMutableList()
 
         val expected: MutableList<Square> = ArrayList(
             listOf(
                 Square(7, 1),
+                Square(7, 2)
             )
         )
+        moves.sort()
+        expected.sort()
         assertEquals(expected, moves)
     }
     private val shortCastlePosition = arrayOf(
@@ -72,5 +75,30 @@ class KingMechanicsTest {
         "........",
         "pppppppp",
         "r..kq..r",
+    )
+
+    @Test
+    fun longCastle() {
+        val moves: MutableList<Square> = mechanics.moves(PositionGenerator.customPosition(longCastlePosition, false), Square(7, 3)).toMutableList()
+
+        val expected: MutableList<Square> = ArrayList(
+            listOf(
+                Square(7, 5),
+                Square(7, 4),
+            )
+        )
+        moves.sort()
+        expected.sort()
+        assertEquals(expected, moves)
+    }
+    private val longCastlePosition = arrayOf(
+        "........",
+        "........",
+        "........",
+        "........",
+        "........",
+        "........",
+        "pppppppp",
+        "r.bk...r",
     )
 }
