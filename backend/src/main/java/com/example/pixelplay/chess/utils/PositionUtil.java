@@ -6,7 +6,7 @@ import com.example.pixelplay.chess.base.Square;
 public class PositionUtil {
 
     // Converts a list of Strings representing pieces on a board to an 2d array of pieces
-    static PieceType[][] translateBoard(String[] boardStrings) {
+    public static PieceType[][] translateBoard(String[] boardStrings) {
         checkSize(boardStrings);
         PieceType[][] board = new PieceType[8][8];
         for(int i = 0; i < 8; i ++) {
