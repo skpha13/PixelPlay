@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class KingMechanicsTest {
+    private val mechanics = KingMechanics()
 
     @BeforeEach
     fun setUp() {
@@ -15,7 +16,6 @@ class KingMechanicsTest {
 
     @Test
     fun attackingIndexes() {
-        val mechanics: PieceMechanics = KingMechanics()
         val squares: MutableList<Square> = mechanics.attacks(PositionGenerator.initialPosition(), Square(2, 0)).map {
             it
         }.toMutableList()
@@ -24,4 +24,31 @@ class KingMechanicsTest {
         val expected: List<Square> = mutableListOf(Square(1, 0), Square(1, 1), Square(2, 1), Square(3, 0), Square(3, 1))
         assertEquals(expected, squares)
     }
+
+    @Test
+    fun moveWithCaptures() {
+        val moves: MutableList<Square> = mechanics.moves(PositionGenerator.customPosition(capture), Square(0, 3)).toMutableList()
+        moves.sort()
+
+        val expected: MutableList<Square> = ArrayList(
+            listOf(
+                Square(0, 4),
+                Square(1, 3),
+                Square(1, 4),
+            )
+        )
+        expected.sort()
+        assertEquals(expected, moves)
+    }
+
+    private val capture = arrayOf(
+        "..rk....",
+        "..p.Q...",
+        "..p.p...",
+        "........",
+        "........",
+        "........",
+        "........",
+        "........"
+    )
 }
