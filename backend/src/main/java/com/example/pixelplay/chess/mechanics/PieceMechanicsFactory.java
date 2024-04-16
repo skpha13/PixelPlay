@@ -2,6 +2,7 @@ package com.example.pixelplay.chess.mechanics;
 
 import com.example.pixelplay.chess.PieceType;
 import com.example.pixelplay.chess.Position;
+import com.example.pixelplay.chess.mechanics.pieces.*;
 
 public class PieceMechanicsFactory {
     private PieceMechanicsFactory() {}

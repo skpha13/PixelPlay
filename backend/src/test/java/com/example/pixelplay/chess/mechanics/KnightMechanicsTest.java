@@ -1,7 +1,7 @@
 package com.example.pixelplay.chess.mechanics;
 
-import com.example.pixelplay.chess.PieceType;
 import com.example.pixelplay.chess.PositionGenerator;
+import com.example.pixelplay.chess.mechanics.pieces.KnightMechanics;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
