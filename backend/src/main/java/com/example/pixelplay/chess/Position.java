@@ -130,4 +130,12 @@ public class Position {
             return false;
         }
     }
+    public boolean canCapture(Square targetSquare, Square initialSquare) {
+        try {
+            return getPiece(targetSquare).type.color() == getPiece(initialSquare).type.color().reverse();
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
 }

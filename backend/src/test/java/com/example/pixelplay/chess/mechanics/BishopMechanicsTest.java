@@ -11,13 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BishopMechanicsTest {
 
+    private final PieceMechanics mechanics = new BishopMechanics();
+
     @BeforeEach
     void setUp() {
     }
 
     @Test
     void attackingIndexes() {
-        PieceMechanics mechanics = new BishopMechanics();
         List<Square> squares = new ArrayList<>(mechanics.attacks(PositionGenerator.initialPosition(),   new Square(3, 1)));
         squares.sort(null);
 
@@ -32,4 +33,31 @@ class BishopMechanicsTest {
         ));
         assertEquals(expected, squares);
     }
+
+    @Test
+    void movesWithCapture() {
+        List<Square> moves = mechanics.moves(PositionGenerator.customPosition(capture), new Square(3, 4));
+        List<Square> expected = new ArrayList<>(List.of(
+                new Square(2, 3),
+                new Square(0, 7),
+                new Square(1, 6),
+                new Square(2, 5)
+        ));
+
+        moves.sort(null);
+        expected.sort(null);
+
+        assertEquals(expected, moves);
+    }
+
+    private final String[] capture = new String[] {
+            ".......K",
+            "........",
+            "...R....",
+            "....b...",
+            "...p.p..",
+            "........",
+            "........",
+            "........"
+    };
 }
