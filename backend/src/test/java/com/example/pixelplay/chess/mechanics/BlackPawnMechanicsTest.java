@@ -40,6 +40,24 @@ class BlackPawnMechanicsTest {
     }
 
     @Test
+    void moveFromStartingCell() {
+        List<Square> cells = mechanics.moves(PositionGenerator.initialPosition(), new Square(6, 2));
+        List<Square> reference = new ArrayList<>(List.of(new Square(5, 2), new Square(4, 2)));
+
+        cells.sort(null);
+        reference.sort(null);
+        assertEquals(reference, cells);
+    }
+
+    @Test
+    void moveFromNonStartingCell() {
+        List<Square> cells = mechanics.moves(PositionGenerator.initialPosition(), new Square(5, 2));
+        List<Square> reference = new ArrayList<>(List.of(new Square(4, 2)));
+
+        assertEquals(reference, cells);
+    }
+
+    @Test
     void capture() {
         List<Square> moves = mechanics.moves(PositionGenerator.customPosition(pawnCapture), new Square(2, 2));
         List<Square> reference = new ArrayList<>(List.of(
