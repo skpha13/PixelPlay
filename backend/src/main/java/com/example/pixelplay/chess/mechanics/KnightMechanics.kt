@@ -16,6 +16,16 @@ class KnightMechanics() : PieceMechanics {
     }
 
     override fun moves(position: Position, square: Square): List<Square> {
-        TODO("Not yet implemented")
+        val attackingSquares: List<Square> = attacks(position, square);
+        val moveSquares: MutableList<Square> = mutableListOf()
+        for(attackingSquare in attackingSquares) {
+            if(position.isFree(attackingSquare)) {
+                moveSquares.add(attackingSquare)
+            }
+            else if(position.canCapture(attackingSquare, square)) {
+                moveSquares.add(attackingSquare)
+            }
+        }
+        return moveSquares
     }
 }
