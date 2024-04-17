@@ -75,6 +75,21 @@ public class Position {
         return attacks;
     }
 
+    public NumberBoard getAttackBoardByColor(Color color) {
+        NumberBoard attackBoard = new NumberBoard();
+        for(int i = 0; i < 8; i ++) {
+            for (int j = 0; j < 8; j ++) {
+                Piece piece = board[i][j];
+                Square square = new Square(i, j);
+                if(piece.type.color() == color) {
+                    assert piece.mechanics != null;
+                    attackBoard.addAttacks(piece.mechanics.attacks(this, square));
+                }
+            }
+        }
+        return attackBoard;
+    }
+
     private Square findKing(Color color) {
         PieceType king;
         if(color == Color.WHITE) {
@@ -122,4 +137,6 @@ public class Position {
     public void setCastlingFlags(boolean value) {
         castlingController.setFlags(value);
     }
+
+
 }
