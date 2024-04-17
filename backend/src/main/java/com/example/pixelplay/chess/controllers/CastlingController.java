@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.mechanics;
+package com.example.pixelplay.chess.controllers;
 
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Position;
@@ -6,6 +6,7 @@ import com.example.pixelplay.chess.base.Square;
 
 public class CastlingController {
     private final Position position;
+    private final AttackController attackController;
 
     private Square whiteKingSquare = new Square(0, 3);
     private Square blackKingSquare = new Square(7, 3);
@@ -19,8 +20,9 @@ public class CastlingController {
     private boolean blackShortRookMoved = false;
     private boolean blackLongRookMoved = false;
 
-    public CastlingController(Position position, boolean flags) {
+    public CastlingController(Position position, AttackController attackController, boolean flags) {
         this.position = position;
+        this.attackController = attackController;
         setFlags(flags);
     }
 
@@ -43,8 +45,8 @@ public class CastlingController {
         boolean squaresFree = position.isFree(kingSquare.move(shortCastleDirection)) &&
                 position.isFree(kingSquare.move(shortCastleDirection, 2));
 
-        boolean squaresNotAttacked = !position.isAttackedBy(color.reverse(), kingSquare.move(shortCastleDirection)) &&
-                !position.isAttackedBy(color.reverse(), kingSquare.move(shortCastleDirection, 2));
+        boolean squaresNotAttacked = !attackController.isAttackedBy(color.reverse(), kingSquare.move(shortCastleDirection)) &&
+                !attackController.isAttackedBy(color.reverse(), kingSquare.move(shortCastleDirection, 2));
 
         return !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
 
@@ -69,8 +71,8 @@ public class CastlingController {
                 position.isFree(kingSquare.move(longCastleDirection, 2)) &&
                 position.isFree(kingSquare.move(longCastleDirection, 3));
 
-        boolean squaresNotAttacked = !position.isAttackedBy(color.reverse(), kingSquare.move(longCastleDirection)) &&
-                !position.isAttackedBy(color.reverse(), kingSquare.move(longCastleDirection, 2));
+        boolean squaresNotAttacked = !attackController.isAttackedBy(color.reverse(), kingSquare.move(longCastleDirection)) &&
+                !attackController.isAttackedBy(color.reverse(), kingSquare.move(longCastleDirection, 2));
 
         return !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
     }

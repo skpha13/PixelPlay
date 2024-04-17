@@ -1,8 +1,9 @@
-package com.example.pixelplay.chess.base.attacks;
+package com.example.pixelplay.chess.controllers;
 
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.base.Square;
+import com.example.pixelplay.chess.base.NumberBoard;
 
 public class AttackController {
     private final Position position;

@@ -1,9 +1,5 @@
 package com.example.pixelplay.chess.base;
 
-import com.example.pixelplay.chess.base.attacks.AttackController;
-import com.example.pixelplay.chess.base.attacks.NumberBoard;
-import com.example.pixelplay.chess.mechanics.CastlingController;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,15 +7,9 @@ import java.util.Objects;
 public class Position {
     private final Piece[][] board = new Piece[8][8];
 
-    private final CastlingController castlingController;
-
-    private final AttackController attackController;
 
     public Position(PieceType[][] board, boolean castlingFlags) {
         setBoard(board);
-
-        castlingController = new CastlingController(this, castlingFlags);
-        attackController = new AttackController(this);
     }
 
 
@@ -87,13 +77,13 @@ public class Position {
         return attacks;
     }
 
-    public NumberBoard getAttackBoardByColor(Color color) {
-        return attackController.getAttackBoard(color);
-    }
-
-    public boolean isAttackedBy(Color attacker, Square square) {
-        return attackController.isAttackedBy(attacker, square);
-    }
+//    public NumberBoard getAttackBoardByColor(Color color) {
+//        return attackController.getAttackBoard(color);
+//    }
+//
+//    public boolean isAttackedBy(Color attacker, Square square) {
+//        return attackController.isAttackedBy(attacker, square);
+//    }
 
     private Square findKing(Color color) {
         PieceType king;
@@ -131,11 +121,11 @@ public class Position {
         }
     }
 
-    public boolean canShortCastle(Color color) {
-        return castlingController.canShortCastle(color);
-    }
-
-    public boolean canLongCastle(Color color) {
-        return castlingController.canLongCastle(color);
-    }
+//    public boolean canShortCastle(Color color) {
+//        return castlingController.canShortCastle(color);
+//    }
+//
+//    public boolean canLongCastle(Color color) {
+//        return castlingController.canLongCastle(color);
+//    }
 }

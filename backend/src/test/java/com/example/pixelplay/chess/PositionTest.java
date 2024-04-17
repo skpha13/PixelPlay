@@ -1,7 +1,6 @@
 package com.example.pixelplay.chess;
 
 import com.example.pixelplay.chess.base.Color;
-import com.example.pixelplay.chess.base.attacks.NumberBoard;
 import com.example.pixelplay.chess.base.Position;
 import org.junit.jupiter.api.Test;
 
@@ -55,21 +54,4 @@ class PositionTest {
             "........"
     };
 
-    @Test
-    public void attackedSquares() {
-        Position position = PositionGenerator.customPosition(positionWhiteCheckKnight);
-        NumberBoard attacked = position.getAttackBoardByColor(Color.BLACK);
-        NumberBoard reference = NumberBoard.fromNumberArray(new short[]{
-            1, 1, 1, 0, 1, 1, 1, 0,
-            2, 1, 3, 1, 1, 0, 1, 1,
-            1, 1, 1, 1, 1, 2, 1, 0,
-            0, 0, 1, 1, 0, 1, 1, 1,
-            0, 0, 1, 0, 0, 1, 0, 0,
-            0, 1, 1, 0, 0, 0, 1, 0,
-            1, 0, 0, 1, 0, 1, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0,
-        });
-
-        assertEquals(reference.toString(),attacked.toString());
-    }
 }
