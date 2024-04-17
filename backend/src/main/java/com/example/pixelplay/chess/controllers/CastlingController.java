@@ -32,7 +32,7 @@ public class CastlingController {
         boolean kingMoved = kingMoved(color);
         boolean rookMoved = rookMoved(color, Castling.SHORT);
         boolean squaresFree = squaresFree(kingSquare, Castling.SHORT);
-        boolean squaresNotAttacked = squaresFree(kingSquare, Castling.SHORT);
+        boolean squaresNotAttacked = squaresNotAttacked(kingSquare, color, Castling.SHORT);
 
         return !kingChecked && !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
 
@@ -43,7 +43,7 @@ public class CastlingController {
         boolean kingMoved = kingMoved(color);
         boolean rookMoved = rookMoved(color, Castling.LONG);
         boolean squaresFree = squaresFree(kingSquare, Castling.LONG);
-        boolean squaresNotAttacked = squaresFree(kingSquare, Castling.LONG);
+        boolean squaresNotAttacked = squaresNotAttacked(kingSquare, color, Castling.LONG);
 
         return !kingChecked && !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
 
