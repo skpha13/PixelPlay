@@ -57,29 +57,6 @@ public class Position {
     }
 
 
-    public boolean isChecked(Color color) {
-        Square kingSquare = findKing(color);
-        assert kingSquare != null;
-        Piece king = getPiece(kingSquare);
-        return king.isAttacked();
-    }
-
-    public List<Square> attackByColor(Color color) {
-        List<Square> attacks = new ArrayList<>();
-
-        for(int i = 0; i < 8; i ++) {
-            for (int j = 0; j < 8; j ++) {
-                Piece piece = board[i][j];
-                Square square = new Square(i, j);
-                if(piece.type.color() == color) {
-                    assert piece.mechanics != null;
-                    attacks.addAll(Objects.requireNonNull(piece.mechanics.attacks(this, square)));
-                }
-            }
-        }
-        return attacks;
-    }
-
 //    public NumberBoard getAttackBoardByColor(Color color) {
 //        return attackController.getAttackBoard(color);
 //    }
@@ -88,7 +65,7 @@ public class Position {
 //        return attackController.isAttackedBy(attacker, square);
 //    }
 
-    private Square findKing(Color color) {
+    public Square findKing(Color color) {
         PieceType king;
         if(color == Color.WHITE) {
             king = PieceType.WhiteKing;

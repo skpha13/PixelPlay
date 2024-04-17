@@ -17,15 +17,4 @@ public final class Piece {
         this.position = position;
         this.square = square;
     }
-
-    public boolean isAttacked() {
-        assert type.color() != null;
-        List<Square> attacked = position.attackByColor(type.color().reverse());
-        for(Square attackedSquare : attacked) {
-            if(this.square.equals(attackedSquare)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

@@ -2,6 +2,7 @@ package com.example.pixelplay.chess;
 
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Position;
+import com.example.pixelplay.chess.controllers.AttackController;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,11 +12,13 @@ class PositionTest {
     @Test
     public void verifyCheck() {
         Position position = PositionGenerator.customPosition(positionWhiteCheckKnight);
-        boolean whiteChecked = position.isChecked(Color.WHITE);
+        AttackController attackController = new AttackController(position);
+        boolean whiteChecked = attackController.kingIsInCheck(Color.WHITE);
         assertTrue(whiteChecked);
 
         position = PositionGenerator.customPosition(positionWhiteCheckKnight);
-        whiteChecked = position.isChecked(Color.WHITE);
+        attackController = new AttackController(position);
+        whiteChecked = attackController.kingIsInCheck(Color.WHITE);
         assertTrue(whiteChecked);
 
     }
@@ -23,11 +26,13 @@ class PositionTest {
     @Test
     public void verifyNotCheck() {
         Position position = PositionGenerator.customPosition(positionWhiteCheckKnight);
-        boolean whiteChecked = position.isChecked(Color.BLACK);
+        AttackController attackController = new AttackController(position);
+        boolean whiteChecked = attackController.kingIsInCheck(Color.BLACK);
         assertFalse(whiteChecked);
 
         position = PositionGenerator.customPosition(positionWhiteCheckKnight);
-        whiteChecked = position.isChecked(Color.BLACK);
+        attackController = new AttackController(position);
+        whiteChecked = attackController.kingIsInCheck(Color.BLACK);
         assertFalse(whiteChecked);
 
     }
