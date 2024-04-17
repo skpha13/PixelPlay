@@ -8,11 +8,11 @@ public class CastlingController {
     private final Position position;
     private final AttackController attackController;
 
-    private Square whiteKingSquare = new Square(0, 3);
-    private Square blackKingSquare = new Square(7, 3);
+    private final Square whiteKingSquare = new Square(0, 3);
+    private final Square blackKingSquare = new Square(7, 3);
 
-    private Square shortCastleDirection = new Square(0, -1);
-    private Square longCastleDirection = new Square(0, 1);
+    private final Square shortCastleDirection = new Square(0, -1);
+    private final Square longCastleDirection = new Square(0, 1);
     private boolean whiteKingMoved = false;
     private boolean whiteShortRookMoved = false;
     private boolean whiteLongRookMoved = false;
