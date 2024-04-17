@@ -1,8 +1,15 @@
 package com.example.pixelplay.chess.mechanics.pieces
 
+import com.example.pixelplay.chess.base.Position
 import com.example.pixelplay.chess.base.Square
 
-class WhitePawnMechanics : PawnMechanics() {
+class WhitePawnMechanics(
+    position: Position,
+    square: Square,
+) : PawnMechanics(
+    position,
+    square
+) {
     override val forwardMove: Square
         get() = Square(1, 0)
     override val leftDiagonalMove: Square

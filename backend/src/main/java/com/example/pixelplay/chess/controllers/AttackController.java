@@ -50,7 +50,7 @@ public class AttackController {
                 Square square = new Square(i, j);
                 if(piece.type.color() == color) {
                     assert piece.mechanics != null;
-                    attacks.addAll(Objects.requireNonNull(piece.mechanics.attacks(position, square)));
+                    attacks.addAll(Objects.requireNonNull(piece.mechanics.attacks()));
                 }
             }
         }

@@ -8,7 +8,20 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 internal class QueenMechanicsTest {
-    private val mechanics = QueenMechanics()
+
+    private val capture = arrayOf(
+        "........",
+        "........",
+        "...HKP..",
+        "....q...",
+        "...ppp..",
+        "........",
+        "........",
+        "........"
+    )
+
+    private val initialPosition = PositionGenerator.initialPosition()
+    private val capturePosition = PositionGenerator.customPosition(capture)
 
     @BeforeEach
     fun setUp() {
@@ -16,7 +29,8 @@ internal class QueenMechanicsTest {
 
     @Test
     fun attackingIndexes() {
-        val squares: MutableList<Square> = mechanics.attacks(PositionGenerator.initialPosition(), Square(3, 1)).toMutableList()
+        val mechanics = QueenMechanics(initialPosition, Square(3, 1))
+        val squares: MutableList<Square> = mechanics.attacks().toMutableList()
         squares.sortWith(compareBy { it.getIndex() })
 
         val indexes = squares.map { obj: Square -> obj.getIndex() }
@@ -27,7 +41,8 @@ internal class QueenMechanicsTest {
 
     @Test
     fun movesWithCapture() {
-        val moves: MutableList<Square> = mechanics.moves(PositionGenerator.customPosition(capture), Square(3, 4)).toMutableList()
+        val mechanics = QueenMechanics(capturePosition, Square(3, 4))
+        val moves: MutableList<Square> = mechanics.moves().toMutableList()
         val expected: MutableList<Square> = java.util.ArrayList(
             java.util.List.of(
                 Square(2, 3),
@@ -49,14 +64,4 @@ internal class QueenMechanicsTest {
         Assertions.assertEquals(expected, moves)
     }
 
-    private val capture = arrayOf(
-        "........",
-        "........",
-        "...HKP..",
-        "....q...",
-        "...ppp..",
-        "........",
-        "........",
-        "........"
-    )
 }

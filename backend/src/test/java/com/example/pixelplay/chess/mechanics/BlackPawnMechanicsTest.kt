@@ -1,76 +1,81 @@
-package com.example.pixelplay.chess.mechanics;
+package com.example.pixelplay.chess.mechanics
 
-import com.example.pixelplay.chess.PositionGenerator;
-import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.mechanics.pieces.BlackPawnMechanics;
-import org.junit.jupiter.api.Test;
+import com.example.pixelplay.chess.PositionGenerator
+import com.example.pixelplay.chess.base.Position
+import com.example.pixelplay.chess.base.Square
+import com.example.pixelplay.chess.mechanics.pieces.BlackPawnMechanics
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-class BlackPawnMechanicsTest {
-    private final PieceMechanics mechanics = new BlackPawnMechanics();
+internal class BlackPawnMechanicsTest {
+    private val initialPosition: Position = PositionGenerator.initialPosition()
+    private val capturePosition: Position = PositionGenerator.customPosition(capture)
 
     @Test
-    void attackingIndexesLeftEdge() {
-        List<Square> squares = mechanics.attacks(PositionGenerator.initialPosition(), new Square(6, 0));
-        List<Square> reference = new ArrayList<>(List.of(new Square(5, 1)));
+    fun attackingIndexesLeftEdge() {
+        val mechanics = BlackPawnMechanics(initialPosition, Square(6, 0))
+        val squares: List<Square> = mechanics.attacks()
+        val reference: List<Square> = listOf(Square(5, 1))
 
-        assertEquals(reference, squares);
+        Assertions.assertEquals(reference, squares)
     }
 
     @Test
-    void attackingIndexesRightEdge() {
-        List<Square> squares = mechanics.attacks(PositionGenerator.initialPosition(), new Square(6, 7));
-        List<Square> reference = new ArrayList<>(List.of(new Square(5, 6)));
+    fun attackingIndexesRightEdge() {
+        val mechanics = BlackPawnMechanics(initialPosition, Square(6, 7))
+        val squares: List<Square> = mechanics.attacks()
+        val reference: List<Square> = listOf(Square(5, 6))
 
-        assertEquals(reference, squares);
+        Assertions.assertEquals(reference, squares)
     }
 
     @Test
-    void attackingIndexesCenter() {
-        List<Square> squares = mechanics.attacks(PositionGenerator.initialPosition(), new Square(6, 2));
-        List<Square> reference = new ArrayList<>(List.of(
-                new Square(5, 1),
-                new Square(5, 3)
-        ));
+    fun attackingIndexesCenter() {
+        val mechanics = BlackPawnMechanics(initialPosition, Square(6, 2))
+        val squares: List<Square> = mechanics.attacks()
+        val reference: List<Square> = listOf(
+                Square(5, 1),
+                Square(5, 3)
+        )
 
-        assertEquals(reference, squares);
+        Assertions.assertEquals(reference, squares)
     }
 
     @Test
-    void moveFromStartingCell() {
-        List<Square> cells = mechanics.moves(PositionGenerator.initialPosition(), new Square(6, 2));
-        List<Square> reference = new ArrayList<>(List.of(new Square(5, 2), new Square(4, 2)));
+    fun moveFromStartingCell() {
+        val mechanics = BlackPawnMechanics(initialPosition, Square(6, 2))
+        val cells: MutableList<Square> = mechanics.moves().toMutableList()
+        val reference: MutableList<Square> = mutableListOf(Square(5, 2), Square(4, 2))
 
-        cells.sort(null);
-        reference.sort(null);
-        assertEquals(reference, cells);
+        cells.sort()
+        reference.sort()
+        Assertions.assertEquals(reference, cells)
     }
 
     @Test
-    void moveFromNonStartingCell() {
-        List<Square> cells = mechanics.moves(PositionGenerator.initialPosition(), new Square(5, 2));
-        List<Square> reference = new ArrayList<>(List.of(new Square(4, 2)));
+    fun moveFromNonStartingCell() {
+        val mechanics = BlackPawnMechanics(initialPosition, Square(5, 2))
+        val cells: List<Square> = mechanics.moves()
+        val reference: List<Square> = listOf(Square(4, 2))
 
-        assertEquals(reference, cells);
+        Assertions.assertEquals(reference, cells)
     }
 
     @Test
-    void capture() {
-        List<Square> moves = mechanics.moves(PositionGenerator.customPosition(pawnCapture), new Square(2, 2));
-        List<Square> reference = new ArrayList<>(List.of(
-                new Square(1, 2),
-                new Square(1, 3)
-        ));
+    fun capture() {
+        val mechanics = BlackPawnMechanics(capturePosition, Square(2, 2))
+        val moves: List<Square> = mechanics.moves()
+        val reference: List<Square> = listOf(
+                Square(1, 2),
+                Square(1, 3)
+        )
 
-        assertEquals(reference, moves);
+        Assertions.assertEquals(reference, moves)
     }
 
 
-    private static final String[] pawnCapture = new String[]{
+    companion object {
+        val capture = arrayOf(
             "........",
             "...R....",
             "..p.....",
@@ -79,5 +84,6 @@ class BlackPawnMechanicsTest {
             "........",
             "........",
             "........"
-    };
+        )
+    }
 }

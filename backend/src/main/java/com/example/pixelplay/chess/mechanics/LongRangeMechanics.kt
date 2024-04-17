@@ -4,10 +4,16 @@ import com.example.pixelplay.chess.base.Position
 import com.example.pixelplay.chess.utils.PositionUtil
 import com.example.pixelplay.chess.base.Square
 
-abstract class LongRangeMechanics : PieceMechanics() {
+abstract class LongRangeMechanics(
+    position: Position,
+    square: Square
+) : PieceMechanics(
+    position,
+    square
+) {
     abstract val movingDirection: List<Square>
 
-    override fun attacks(position: Position, square: Square): List<Square> {
+    override fun attacks(): List<Square> {
         val attackingSquares: MutableList<Square> = ArrayList()
         for (moveDirection in movingDirection) {
             var nextSquare = square.move(moveDirection)

@@ -4,15 +4,21 @@ import com.example.pixelplay.chess.base.Position
 import com.example.pixelplay.chess.base.Square
 import com.example.pixelplay.chess.mechanics.ShortRangeMechanics
 
-class KingMechanics : ShortRangeMechanics() {
+class KingMechanics(
+    position: Position,
+    square: Square
+) : ShortRangeMechanics(
+    position,
+    square
+) {
     override val movingDirection: List<Square>
         get() = Square.completeMoves
 
     private val shortCastleDirection = Square(0, -2)
     private val longCastleDirection = Square(0, 2)
 
-    override fun moves(position: Position, square: Square): List<Square> {
-        val moves = super.moves(position, square).toMutableList()
+    override fun moves(): List<Square> {
+        val moves = super.moves().toMutableList()
 //        moves.tryShortCastle(position, square)
 //        moves.tryLongCastle(position, square)
 //

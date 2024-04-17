@@ -1,65 +1,64 @@
-package com.example.pixelplay.chess.mechanics;
+package com.example.pixelplay.chess.mechanics
 
-import com.example.pixelplay.chess.PositionGenerator;
-import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.mechanics.pieces.BishopMechanics;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.example.pixelplay.chess.PositionGenerator
+import com.example.pixelplay.chess.base.Position
+import com.example.pixelplay.chess.base.Square
+import com.example.pixelplay.chess.mechanics.pieces.BishopMechanics
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
-import java.util.ArrayList;
-import java.util.List;
+internal class BishopMechanicsTest {
+    private val capture = arrayOf(
+        ".......K",
+        "........",
+        "...R....",
+        "....b...",
+        "...p.p..",
+        "........",
+        "........",
+        "........"
+    )
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class BishopMechanicsTest {
-
-    private final PieceMechanics mechanics = new BishopMechanics();
+    private val initialPosition: Position = PositionGenerator.initialPosition()
+    private val capturePosition: Position = PositionGenerator.customPosition(capture)
 
     @BeforeEach
-    void setUp() {
+    fun setUp() {
     }
 
     @Test
-    void attackingIndexes() {
-        List<Square> squares = new ArrayList<>(mechanics.attacks(PositionGenerator.initialPosition(),   new Square(3, 1)));
-        squares.sort(null);
+    fun attackingIndexes() {
+        val mechanics = BishopMechanics(initialPosition, Square(3, 1))
+        val squares: MutableList<Square> =mechanics.attacks().toMutableList()
+        squares.sort()
 
-        List<Square> expected = new ArrayList<>(List.of(
-                new Square(1, 3),
-                new Square(2, 0),
-                new Square(2, 2),
-                new Square(4, 0),
-                new Square(4, 2),
-                new Square(5, 3),
-                new Square(6, 4)
-        ));
-        assertEquals(expected, squares);
+        val expected: MutableList<Square> = mutableListOf(
+                Square(1, 3),
+                Square(2, 0),
+                Square(2, 2),
+                Square(4, 0),
+                Square(4, 2),
+                Square(5, 3),
+                Square(6, 4)
+        )
+        Assertions.assertEquals(expected, squares)
     }
 
     @Test
-    void movesWithCapture() {
-        List<Square> moves = mechanics.moves(PositionGenerator.customPosition(capture), new Square(3, 4));
-        List<Square> expected = new ArrayList<>(List.of(
-                new Square(2, 3),
-                new Square(0, 7),
-                new Square(1, 6),
-                new Square(2, 5)
-        ));
+    fun movesWithCapture() {
+        val mechanics = BishopMechanics(capturePosition, Square(3, 4))
+        val moves: MutableList<Square> = mechanics.moves().toMutableList()
+        val expected: MutableList<Square> = mutableListOf(
+                Square(2, 3),
+                Square(0, 7),
+                Square(1, 6),
+                Square(2, 5)
+        )
 
-        moves.sort(null);
-        expected.sort(null);
+        moves.sort()
+        expected.sort()
 
-        assertEquals(expected, moves);
+        Assertions.assertEquals(expected, moves)
     }
-
-    private final String[] capture = new String[] {
-            ".......K",
-            "........",
-            "...R....",
-            "....b...",
-            "...p.p..",
-            "........",
-            "........",
-            "........"
-    };
 }

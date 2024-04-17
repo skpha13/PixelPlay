@@ -1,52 +1,55 @@
-package com.example.pixelplay.chess.mechanics;
+package com.example.pixelplay.chess.mechanics
 
-import com.example.pixelplay.chess.PositionGenerator;
-import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.mechanics.pieces.KnightMechanics;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.example.pixelplay.chess.PositionGenerator
+import com.example.pixelplay.chess.base.Position
+import com.example.pixelplay.chess.base.Square
+import com.example.pixelplay.chess.mechanics.pieces.KnightMechanics
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-class KnightMechanicsTest {
-    private final PieceMechanics mechanics = new KnightMechanics();
+internal class KnightMechanicsTest {
+    private val initialPosition: Position = PositionGenerator.initialPosition()
+    private val capturePosition: Position = PositionGenerator.customPosition(capture)
 
     @BeforeEach
-    void setUp() {
+    fun setUp() {
     }
 
     @Test
-    void attackingIndexesEdge() {
-        List<Square> squares = mechanics.attacks(PositionGenerator.initialPosition(),   new Square(0,1));
-        squares.sort(null);
-        List<Integer> indexes = squares.stream().map(Square::getIndex).toList();
-        assertEquals(indexes, List.of(  11,   16,   18));
+    fun attackingIndexesEdge() {
+        val mechanics = KnightMechanics(initialPosition, Square(0, 1))
+        val squares: MutableList<Square> = mechanics.attacks().toMutableList()
+        squares.sort()
+        val indexes = squares.map { obj: Square -> obj.getIndex() }.toList()
+        Assertions.assertEquals(indexes, listOf(11, 16, 18))
     }
 
     @Test
-    void attackingIndexesCenter() {
-        List< Square> squares = mechanics.attacks(PositionGenerator.initialPosition(),   new Square(3, 3));
-        squares.sort(null);
-        assertEquals(squares, List.of(  10,   12,   17,   21,   33,   37,   42,   44));
+    fun attackingIndexesCenter() {
+        val mechanics = KnightMechanics(initialPosition, Square(3, 3))
+        val squares: MutableList<Square> = mechanics.attacks().toMutableList()
+        squares.sort()
+        Assertions.assertEquals(squares, listOf(10, 12, 17, 21, 33, 37, 42, 44))
     }
 
     @Test
-    void moveWithCaptures() {
-        List<Square> moves = mechanics.moves(PositionGenerator.customPosition(capture),   new Square(0, 3));
-        moves.sort(null);
+    fun moveWithCaptures() {
 
-        List<Square> expected = new ArrayList<>(List.of(
-                new Square(1, 1),
-                new Square(1, 5)
-        ));
-        expected.sort(null);
-        assertEquals(expected, moves);
+        val mechanics = KnightMechanics(capturePosition, Square(0, 3))
+        val moves: MutableList<Square> = mechanics.moves().toMutableList()
+        moves.sort()
+
+        val expected: MutableList<Square> = mutableListOf(
+                Square(1, 1),
+                Square(1, 5)
+        )
+        expected.sort()
+        Assertions.assertEquals(expected, moves)
     }
 
-    private final String[] capture = new String[] {
+    companion object {
+        private val capture = arrayOf(
             "...h....",
             ".....Q..",
             "..p.p...",
@@ -55,5 +58,7 @@ class KnightMechanicsTest {
             "........",
             "........",
             "........"
-    };
+        )
+    }
+
 }

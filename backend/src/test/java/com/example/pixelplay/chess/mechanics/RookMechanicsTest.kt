@@ -1,62 +1,62 @@
-package com.example.pixelplay.chess.mechanics;
+package com.example.pixelplay.chess.mechanics
 
-import com.example.pixelplay.chess.PositionGenerator;
-import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.mechanics.pieces.RookMechanics;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.example.pixelplay.chess.PositionGenerator
+import com.example.pixelplay.chess.base.Position
+import com.example.pixelplay.chess.base.Square
+import com.example.pixelplay.chess.mechanics.pieces.RookMechanics
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
-import java.util.ArrayList;
-import java.util.List;
+internal class RookMechanicsTest {
+    private val capture = arrayOf(
+        ".......K",
+        "........",
+        "...RP...",
+        "..K.r.Q.",
+        "...p.p..",
+        "........",
+        "........",
+        "........"
+    )
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class RookMechanicsTest {
-    private final PieceMechanics mechanics = new RookMechanics();
+    private val initialPosition: Position = PositionGenerator.initialPosition()
+    private val capturePosition: Position = PositionGenerator.customPosition(capture)
 
     @BeforeEach
-    void setUp() {
+    fun setUp() {
     }
 
     @Test
-    void attackingIndexes() {
-        List<Square> squares = new ArrayList<>(mechanics.attacks(PositionGenerator.initialPosition(),   new Square(3, 1)));
-        squares.sort(null);
-        List<Integer> indexes = squares.stream().map(Square::getIndex).toList();
+    fun attackingIndexes() {
+        val mechanics = RookMechanics(initialPosition, Square(3, 1))
+        val squares: MutableList<Square> = mechanics.attacks().toMutableList()
+        squares.sort()
+        val indexes = squares.map { obj: Square -> obj.getIndex() }.toList()
 
-        List<Integer> expected = new ArrayList<>(List.of(9, 17, 24, 26, 27, 28, 29, 30, 31, 33, 41, 49));
-        assertEquals(expected, indexes);
+        val expected: List<Int> = ArrayList(listOf(9, 17, 24, 26, 27, 28, 29, 30, 31, 33, 41, 49))
+        Assertions.assertEquals(expected, indexes)
     }
 
     @Test
-    void movesWithCapture() {
-        List<Square> moves = mechanics.moves(PositionGenerator.customPosition(capture), new Square(3, 4));
-        List<Square> expected = new ArrayList<>(List.of(
-                new Square(2, 4),
-                new Square(3, 2),
-                new Square(3, 3),
-                new Square(3, 5),
-                new Square(3, 6),
-                new Square(4, 4),
-                new Square(5, 4),
-                new Square(6, 4),
-                new Square(7, 4)
-        ));
+    fun movesWithCapture() {
+        val mechanics = RookMechanics(capturePosition, Square(3, 4))
+        val moves: MutableList<Square> = mechanics.moves().toMutableList()
+        val expected: MutableList<Square> = mutableListOf(
+                Square(2, 4),
+                Square(3, 2),
+                Square(3, 3),
+                Square(3, 5),
+                Square(3, 6),
+                Square(4, 4),
+                Square(5, 4),
+                Square(6, 4),
+                Square(7, 4)
+        )
 
-        moves.sort(null);
-        expected.sort(null);
+        moves.sort()
+        expected.sort()
 
-        assertEquals(expected, moves);
+        Assertions.assertEquals(expected, moves)
     }
-
-    private final String[] capture = new String[] {
-            ".......K",
-            "........",
-            "...RP...",
-            "..K.r.Q.",
-            "...p.p..",
-            "........",
-            "........",
-            "........"
-    };
 }

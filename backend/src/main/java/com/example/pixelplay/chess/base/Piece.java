@@ -13,8 +13,16 @@ public final class Piece {
 
     public Piece(PieceType type, Position position, Square square) {
         this.type = type;
-        this.mechanics = PieceMechanicsFactory.getPieceMechanics(type);
         this.position = position;
         this.square = square;
+        this.mechanics = PieceMechanicsFactory.getPieceMechanics(this);
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public Square getSquare() {
+        return square;
     }
 }

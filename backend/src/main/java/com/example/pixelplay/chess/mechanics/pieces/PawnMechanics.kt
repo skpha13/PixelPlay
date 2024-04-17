@@ -4,52 +4,58 @@ import com.example.pixelplay.chess.base.Position
 import com.example.pixelplay.chess.mechanics.PieceMechanics
 import com.example.pixelplay.chess.base.Square
 
-abstract class PawnMechanics : PieceMechanics() {
+abstract class PawnMechanics(
+    position: Position,
+    square: Square
+) : PieceMechanics(
+    position,
+    square
+) {
     abstract val forwardMove: Square
     abstract val leftDiagonalMove: Square
     abstract val rightDiagonalMove: Square
     abstract val startingRank: Int
 
-    protected fun isOnLeftEdge(square: Square): Boolean = square.getFile() == 0
+    protected fun isOnLeftEdge(): Boolean = square.getFile() == 0
 
-    protected fun isOnRightEdge(square: Square): Boolean = square.getFile() == 7
+    protected fun isOnRightEdge(): Boolean = square.getFile() == 7
 
-    override fun attacks(position: Position, square: Square): List<Square> {
+    override fun attacks(): List<Square> {
         val attackingIndexes: MutableList<Square> = ArrayList()
 
-        if (!isOnLeftEdge(square)) {
+        if (!isOnLeftEdge()) {
             attackingIndexes.add((square.move(leftDiagonalMove)))
         }
-        if (!isOnRightEdge(square)) {
+        if (!isOnRightEdge()) {
             attackingIndexes.add((square.move(rightDiagonalMove)))
         }
 
         return attackingIndexes
     }
 
-    override fun moves(position: Position, square: Square): List<Square> {
+    override fun moves(): List<Square> {
         val moves: MutableList<Square> = mutableListOf()
 
-        moves.tryMovingForward(position, square)
-        moves.tryMovingForward2Squares(position, square)
-        moves.tryCapture(position, square)
+        moves.tryMovingForward()
+        moves.tryMovingForward2Squares()
+        moves.tryCapture()
 
         return moves
 
     }
 
-    private fun isOnStartingCell(square: Square): Boolean {
+    private fun isOnStartingCell(): Boolean {
         return square.getRank() == startingRank
     }
 
-    private fun MutableList<Square>.tryMovingForward(position: Position, square: Square) {
+    private fun MutableList<Square>.tryMovingForward() {
         val move = square.move(forwardMove)
         if(position.isFree(move)) {
             this@tryMovingForward.add(move)
         }
     }
-    private fun MutableList<Square>.tryMovingForward2Squares(position: Position, square: Square) {
-        if(isOnStartingCell(square)) {
+    private fun MutableList<Square>.tryMovingForward2Squares() {
+        if(isOnStartingCell()) {
             val move = square.move(forwardMove).move(forwardMove)
             if(position.isFree(move)) {
                 this@tryMovingForward2Squares.add(move)
@@ -57,14 +63,14 @@ abstract class PawnMechanics : PieceMechanics() {
         }
 
     }
-    private fun MutableList<Square>.tryCapture(position: Position, square: Square) {
+    private fun MutableList<Square>.tryCapture() {
         var capture = square.move(leftDiagonalMove)
-        if(canCapture(position ,square, capture)) {
+        if(canCapture(capture)) {
             this@tryCapture.add(capture)
         }
 
         capture = square.move(rightDiagonalMove)
-        if(canCapture(position, square, capture)) {
+        if(canCapture(capture)) {
             this@tryCapture.add(capture)
         }
     }
