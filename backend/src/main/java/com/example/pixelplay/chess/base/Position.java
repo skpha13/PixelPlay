@@ -56,15 +56,6 @@ public class Position {
         return new Piece(type, this, new Square(rank, file));
     }
 
-
-//    public NumberBoard getAttackBoardByColor(Color color) {
-//        return attackController.getAttackBoard(color);
-//    }
-//
-//    public boolean isAttackedBy(Color attacker, Square square) {
-//        return attackController.isAttackedBy(attacker, square);
-//    }
-
     public Square findKing(Color color) {
         PieceType king;
         if(color == Color.WHITE) {
@@ -83,12 +74,4 @@ public class Position {
         }
         return null;
     }
-
-//    public boolean canShortCastle(Color color) {
-//        return castlingController.canShortCastle(color);
-//    }
-//
-//    public boolean canLongCastle(Color color) {
-//        return castlingController.canLongCastle(color);
-//    }
 }

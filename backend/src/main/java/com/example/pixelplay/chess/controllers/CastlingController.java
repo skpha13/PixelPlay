@@ -27,6 +27,8 @@ public class CastlingController {
     }
 
     public boolean canShortCastle(Color color) {
+        boolean kingChecked = attackController.kingIsInCheck(color);
+
         Square kingSquare = switch (color) {
             case WHITE -> whiteKingSquare;
             case BLACK -> blackKingSquare;
@@ -48,10 +50,12 @@ public class CastlingController {
         boolean squaresNotAttacked = !attackController.isAttackedBy(color.reverse(), kingSquare.move(shortCastleDirection)) &&
                 !attackController.isAttackedBy(color.reverse(), kingSquare.move(shortCastleDirection, 2));
 
-        return !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
+        return !kingChecked && !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
 
     }
     public boolean canLongCastle(Color color) {
+        boolean kingChecked = attackController.kingIsInCheck(color);
+
         Square kingSquare = switch (color) {
             case WHITE -> whiteKingSquare;
             case BLACK -> blackKingSquare;
@@ -74,7 +78,7 @@ public class CastlingController {
         boolean squaresNotAttacked = !attackController.isAttackedBy(color.reverse(), kingSquare.move(longCastleDirection)) &&
                 !attackController.isAttackedBy(color.reverse(), kingSquare.move(longCastleDirection, 2));
 
-        return !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
+        return !kingChecked && !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
     }
 
     public void setFlags(boolean value) {
