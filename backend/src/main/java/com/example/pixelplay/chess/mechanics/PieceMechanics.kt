@@ -3,6 +3,7 @@ package com.example.pixelplay.chess.mechanics
 import com.example.pixelplay.chess.base.Color
 import com.example.pixelplay.chess.base.Position
 import com.example.pixelplay.chess.base.Square
+import kotlin.math.sqrt
 
 abstract class PieceMechanics {
     abstract fun attacks(position: Position, square: Square): List<Square>
@@ -14,7 +15,7 @@ abstract class PieceMechanics {
             if(position.isFree(attackingSquare)) {
                 moveSquares.add(attackingSquare)
             }
-            else if(position.canCapture(attackingSquare, square)) {
+            else if(canCapture(position, square, attackingSquare)) {
                 moveSquares.add(attackingSquare)
             }
         }
@@ -23,5 +24,11 @@ abstract class PieceMechanics {
 
     fun getColor(position: Position, square: Square): Color {
         return position.getPiece(square).type.color()
+    }
+
+    fun canCapture(position: Position, start: Square, end: Square): Boolean {
+        val isAnotherPiece = !position.isFree(end)
+        val differentColor = position.getPieceColor(start) != position.getPieceColor(end)
+        return isAnotherPiece && differentColor
     }
 }

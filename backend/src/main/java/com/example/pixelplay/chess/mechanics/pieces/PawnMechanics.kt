@@ -59,13 +59,12 @@ abstract class PawnMechanics : PieceMechanics() {
     }
     private fun MutableList<Square>.tryCapture(position: Position, square: Square) {
         var capture = square.move(leftDiagonalMove)
-        val currentColor = position.getPieceType(square).color()
-        if(position.canCapture(capture, currentColor)) {
+        if(canCapture(position ,square, capture)) {
             this@tryCapture.add(capture)
         }
 
         capture = square.move(rightDiagonalMove)
-        if(position.canCapture(capture, currentColor)) {
+        if(canCapture(position, square, capture)) {
             this@tryCapture.add(capture)
         }
     }

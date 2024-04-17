@@ -19,6 +19,9 @@ public class Position {
     public Piece getPiece(Square square) {
         return board[square.getRank()][square.getFile()];
     }
+    public Color getPieceColor(Square square) {
+        return getPieceType(square).color();
+    }
 
     public boolean isFree(Square square) {
         return board[square.getRank()][square.getFile()].type == PieceType.None;
@@ -102,23 +105,6 @@ public class Position {
             }
         }
         return null;
-    }
-
-    public boolean canCapture(Square square, Color attackerColor) {
-        try {
-            return getPiece(square).type.color() == attackerColor.reverse();
-        }
-        catch (Exception e) {
-            return false;
-        }
-    }
-    public boolean canCapture(Square targetSquare, Square initialSquare) {
-        try {
-            return getPiece(targetSquare).type.color() == getPiece(initialSquare).type.color().reverse();
-        }
-        catch (Exception e) {
-            return false;
-        }
     }
 
 //    public boolean canShortCastle(Color color) {
