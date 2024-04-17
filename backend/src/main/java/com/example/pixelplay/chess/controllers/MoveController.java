@@ -1,9 +1,7 @@
 package com.example.pixelplay.chess.controllers;
 
-import com.example.pixelplay.chess.base.Move;
-import com.example.pixelplay.chess.base.Piece;
-import com.example.pixelplay.chess.base.Position;
-import com.example.pixelplay.chess.base.Square;
+import com.example.pixelplay.chess.base.*;
+import com.example.pixelplay.chess.exceptions.IncorrectTurnException;
 import com.example.pixelplay.chess.mechanics.PieceMechanics;
 import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
 
@@ -24,15 +22,16 @@ public class MoveController {
         this.castlingController = castlingController;
     }
 
-    public boolean isValid(Move move) {
+    public boolean isValid(Move move, Color currentTurn) {
         try {
             Piece piece = tryToGetPiece(move);
+            checkCurrentTurnColor(piece, currentTurn);
             return checkMoveIsInPieceMoves(piece, move);
 
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
-            return false;
+            throw e;
         }
     }
 
@@ -48,6 +47,12 @@ public class MoveController {
         PieceMechanics mechanics = PieceMechanicsFactory.getPieceMechanics(piece);
         List<Square> targetSquares = mechanics.moves();
         return targetSquares.stream().anyMatch(square -> square.equals(move.end));
+    }
+
+    private void checkCurrentTurnColor(Piece piece, Color currentTurn) {
+        if(piece.type.color() != currentTurn) {
+            throw  new IncorrectTurnException("It is " + currentTurn.toString() + "'s turn!");
+        }
     }
 
     private static class EmptySquareException extends RuntimeException {

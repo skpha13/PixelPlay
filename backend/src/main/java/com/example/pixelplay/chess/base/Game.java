@@ -14,6 +14,8 @@ public class Game {
 
     private final MoveController moveController;
 
+    private Color turn = Color.WHITE;
+
     public Game() {
         position = PositionGenerator.initialPosition();
         this.attackController = new AttackController(position);
@@ -26,11 +28,16 @@ public class Game {
     }
 
     public void makeMove(Move move) {
-        if(moveController.isValid(move)) {
+        if(moveController.isValid(move, turn)) {
             position.makeMove(move);
+            nextTurn();
         }
         else {
             throw new RuntimeException("Trying to make invalid move");
         }
+    }
+
+    public void nextTurn() {
+        turn = turn.reverse();
     }
 }

@@ -82,6 +82,6 @@ public class Position {
     public void makeMove(Move move) {
         Piece piece = getPiece(move.start);
         setPiece(move.end, piece);
-        setPiece(move.start, null);
+        setPiece(move.start, new Piece(PieceType.None, this, move.start));
     }
 }
