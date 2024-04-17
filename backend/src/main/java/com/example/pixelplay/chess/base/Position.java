@@ -74,4 +74,14 @@ public class Position {
         }
         return null;
     }
+
+    private void setPiece(Square square, Piece piece) {
+        board[square.getRank()][square.getFile()] = piece;
+    }
+
+    public void makeMove(Move move) {
+        Piece piece = getPiece(move.start);
+        setPiece(move.end, piece);
+        setPiece(move.start, null);
+    }
 }
