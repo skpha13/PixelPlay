@@ -19,53 +19,60 @@ public class CastlingController {
     private boolean blackShortRookMoved = false;
     private boolean blackLongRookMoved = false;
 
-    public CastlingController(Position position) {
+    public CastlingController(Position position, boolean flags) {
         this.position = position;
+        setFlags(flags);
     }
 
     public boolean canShortCastle(Color color) {
-        return switch (color) {
-            case WHITE -> canWhiteShortCastle();
-            case BLACK -> canBlackShortCastle();
-            default -> false;
+        Square kingSquare = switch (color) {
+            case WHITE -> whiteKingSquare;
+            case BLACK -> blackKingSquare;
         };
+
+        boolean kingMoved = switch (color) {
+            case WHITE -> whiteKingMoved;
+            case BLACK -> blackKingMoved;
+        };
+
+        boolean rookMoved = switch (color) {
+            case WHITE -> whiteShortRookMoved;
+            case BLACK -> blackKingMoved;
+        };
+
+        boolean squaresFree = position.isFree(kingSquare.move(shortCastleDirection)) &&
+                position.isFree(kingSquare.move(shortCastleDirection, 2));
+
+        boolean squaresNotAttacked = !position.isAttackedBy(color.reverse(), kingSquare.move(shortCastleDirection)) &&
+                !position.isAttackedBy(color.reverse(), kingSquare.move(shortCastleDirection, 2));
+
+        return !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
+
     }
     public boolean canLongCastle(Color color) {
-        return switch (color) {
-            case WHITE -> canWhiteLongCastle();
-            case BLACK -> canBlackLongCastle();
-            default -> false;
+        Square kingSquare = switch (color) {
+            case WHITE -> whiteKingSquare;
+            case BLACK -> blackKingSquare;
         };
-    }
 
-    private boolean canWhiteShortCastle() {
-        boolean squaresFree = position.isFree(whiteKingSquare.move(shortCastleDirection)) &&
-                                 position.isFree(whiteKingSquare.move(shortCastleDirection, 2));
+        boolean kingMoved = switch (color) {
+            case WHITE -> whiteKingMoved;
+            case BLACK -> blackKingMoved;
+        };
 
-        return !whiteKingMoved && !whiteShortRookMoved && squaresFree;
-    }
+        boolean rookMoved = switch (color) {
+            case WHITE -> whiteShortRookMoved;
+            case BLACK -> blackKingMoved;
+        };
 
-    private boolean canBlackShortCastle() {
-        boolean squaresFree = position.isFree(blackKingSquare.move(shortCastleDirection)) &&
-                                position.isFree(blackKingSquare.move(shortCastleDirection, 2));
+        boolean squaresFree = position.isFree(kingSquare.move(longCastleDirection)) &&
+                position.isFree(kingSquare.move(longCastleDirection, 2)) &&
+                position.isFree(kingSquare.move(longCastleDirection, 3));
 
-        return !blackKingMoved && !blackShortRookMoved && squaresFree;
-    }
+        boolean squaresNotAttacked = !position.isAttackedBy(color.reverse(), kingSquare.move(longCastleDirection)) &&
+                !position.isAttackedBy(color.reverse(), kingSquare.move(longCastleDirection, 2));
 
-    private boolean canWhiteLongCastle() {
-        boolean squaresFree = position.isFree(whiteKingSquare.move(longCastleDirection)) &&
-                                position.isFree(whiteKingSquare.move(longCastleDirection, 2)) &&
-                                position.isFree(whiteKingSquare.move(longCastleDirection, 3));
-
-        return !whiteKingMoved && !whiteLongRookMoved && squaresFree;
-    }
-
-    private boolean canBlackLongCastle() {
-        boolean squaresFree = position.isFree(blackKingSquare.move(longCastleDirection)) &&
-                                position.isFree(blackKingSquare.move(longCastleDirection, 2)) &&
-                                position.isFree(blackKingSquare.move(longCastleDirection, 3));
-
-        return !blackKingMoved && !blackLongRookMoved && squaresFree;
+        return !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
     }
 
     public void setFlags(boolean value) {

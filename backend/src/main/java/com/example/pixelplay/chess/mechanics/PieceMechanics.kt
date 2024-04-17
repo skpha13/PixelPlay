@@ -1,5 +1,6 @@
 package com.example.pixelplay.chess.mechanics
 
+import com.example.pixelplay.chess.base.Color
 import com.example.pixelplay.chess.base.Position
 import com.example.pixelplay.chess.base.Square
 
@@ -18,5 +19,9 @@ abstract class PieceMechanics {
             }
         }
         return moveSquares
+    }
+
+    fun getColor(position: Position, square: Square): Color {
+        return position.getPiece(square).type.color()
     }
 }

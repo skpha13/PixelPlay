@@ -1,18 +1,18 @@
-package com.example.pixelplay.chess.base;
+package com.example.pixelplay.chess.base.attacks;
+
+import com.example.pixelplay.chess.base.Square;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class NumberBoard {
-    private short[][] board = new short[8][8];
+    private short[] board = new short[64];
 
-    public static NumberBoard fromNumberMatrix(short[][] matrix) {
+    public static NumberBoard fromNumberArray(short[] array) {
         NumberBoard board = new NumberBoard();
-        for(int i = 0; i < 8; i ++) {
-            for(int j = 0; j < 8; j ++) {
-                board.board[i][j] = matrix[i][j];
-            }
+        for(int i = 0; i < 64; i ++) {
+            board.board[i] = array[i];
         }
         return board;
     }
@@ -27,19 +27,23 @@ public class NumberBoard {
 
     @Override
     public int hashCode() {
-        return Arrays.deepHashCode(board);
+        return Arrays.hashCode(board);
     }
 
     @Override
     public String toString() {
         return "NumberBoard{" +
-                "board=" + Arrays.deepToString(board) +
+                "board=" + Arrays.toString(board) +
                 '}';
     }
 
     public void addAttacks(List<Square> attacks) {
         for(Square square : attacks) {
-            board[square.getRank()][square.getFile()] ++;
+            board[square.getIndex()] ++;
         }
+    }
+
+    public int getValue(Square square) {
+        return board[square.getIndex()];
     }
 }

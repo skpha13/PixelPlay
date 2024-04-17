@@ -1,5 +1,7 @@
 package com.example.pixelplay.chess.base;
 
+import com.example.pixelplay.chess.base.attacks.AttackController;
+import com.example.pixelplay.chess.base.attacks.NumberBoard;
 import com.example.pixelplay.chess.mechanics.CastlingController;
 
 import java.util.ArrayList;
@@ -9,7 +11,17 @@ import java.util.Objects;
 public class Position {
     private final Piece[][] board = new Piece[8][8];
 
-    private final CastlingController castlingController = new CastlingController(this);
+    private final CastlingController castlingController;
+
+    private final AttackController attackController;
+
+    public Position(PieceType[][] board, boolean castlingFlags) {
+        setBoard(board);
+
+        castlingController = new CastlingController(this, castlingFlags);
+        attackController = new AttackController(this);
+    }
+
 
     public PieceType getPieceType(Square square) {
         return board[square.getRank()][square.getFile()].type;
@@ -34,7 +46,7 @@ public class Position {
         return true;
     }
 
-    public void setBoard(PieceType[][] board) {
+    private void setBoard(PieceType[][] board) {
         if(!checkBoardSize(board)) {
             throw new IllegalArgumentException("Board is not valid");
         }
@@ -76,18 +88,11 @@ public class Position {
     }
 
     public NumberBoard getAttackBoardByColor(Color color) {
-        NumberBoard attackBoard = new NumberBoard();
-        for(int i = 0; i < 8; i ++) {
-            for (int j = 0; j < 8; j ++) {
-                Piece piece = board[i][j];
-                Square square = new Square(i, j);
-                if(piece.type.color() == color) {
-                    assert piece.mechanics != null;
-                    attackBoard.addAttacks(piece.mechanics.attacks(this, square));
-                }
-            }
-        }
-        return attackBoard;
+        return attackController.getAttackBoard(color);
+    }
+
+    public boolean isAttackedBy(Color attacker, Square square) {
+        return attackController.isAttackedBy(attacker, square);
     }
 
     private Square findKing(Color color) {
@@ -133,10 +138,4 @@ public class Position {
     public boolean canLongCastle(Color color) {
         return castlingController.canLongCastle(color);
     }
-
-    public void setCastlingFlags(boolean value) {
-        castlingController.setFlags(value);
-    }
-
-
 }

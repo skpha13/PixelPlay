@@ -15,6 +15,8 @@ class KingMechanics : ShortRangeMechanics() {
         val moves = super.moves(position, square).toMutableList()
         moves.tryShortCastle(position, square)
         moves.tryLongCastle(position, square)
+
+        moves.removeMovesInCheck(position, square)
         return moves
     }
 
@@ -30,5 +32,12 @@ class KingMechanics : ShortRangeMechanics() {
         if(position.canLongCastle(color)) {
             this.add(square.move(longCastleDirection))
         }
+    }
+
+    private fun MutableList<Square>.removeMovesInCheck(position: Position, square: Square) {
+        val color = getColor(position, square)
+        this.removeAll {
+            position.isAttackedBy(color.reverse(), it)
+        };
     }
 }

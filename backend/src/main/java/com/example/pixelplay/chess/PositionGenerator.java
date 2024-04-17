@@ -20,17 +20,11 @@ public class PositionGenerator {
     }
 
     public static Position customPosition(String[] boardStrings) {
-        Position position = new Position();
-        position.setBoard(PositionUtil.translateBoard(boardStrings));
-        position.setCastlingFlags(true);
-        return position;
+        return new Position(PositionUtil.translateBoard(boardStrings), true);
     }
 
     public static Position customPosition(String[] boardStrings, boolean castlingFlags) {
-        Position position = new Position();
-        position.setBoard(PositionUtil.translateBoard(boardStrings));
-        position.setCastlingFlags(castlingFlags);
-        return position;
+        return new Position(PositionUtil.translateBoard(boardStrings), castlingFlags);
     }
 
 
