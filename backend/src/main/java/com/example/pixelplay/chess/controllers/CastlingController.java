@@ -28,57 +28,25 @@ public class CastlingController {
 
     public boolean canShortCastle(Color color) {
         boolean kingChecked = attackController.kingIsInCheck(color);
-
-        Square kingSquare = switch (color) {
-            case WHITE -> whiteKingSquare;
-            case BLACK -> blackKingSquare;
-        };
-
-        boolean kingMoved = switch (color) {
-            case WHITE -> whiteKingMoved;
-            case BLACK -> blackKingMoved;
-        };
-
-        boolean rookMoved = switch (color) {
-            case WHITE -> whiteShortRookMoved;
-            case BLACK -> blackKingMoved;
-        };
-
-        boolean squaresFree = position.isFree(kingSquare.move(shortCastleDirection)) &&
-                position.isFree(kingSquare.move(shortCastleDirection, 2));
-
-        boolean squaresNotAttacked = !attackController.isAttackedBy(color.reverse(), kingSquare.move(shortCastleDirection)) &&
-                !attackController.isAttackedBy(color.reverse(), kingSquare.move(shortCastleDirection, 2));
+        Square kingSquare = getKingSquare(color);
+        boolean kingMoved = kingMoved(color);
+        boolean rookMoved = rookMoved(color, Castling.SHORT);
+        boolean squaresFree = squaresFree(kingSquare, Castling.SHORT);
+        boolean squaresNotAttacked = squaresFree(kingSquare, Castling.SHORT);
 
         return !kingChecked && !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
 
     }
     public boolean canLongCastle(Color color) {
         boolean kingChecked = attackController.kingIsInCheck(color);
-
-        Square kingSquare = switch (color) {
-            case WHITE -> whiteKingSquare;
-            case BLACK -> blackKingSquare;
-        };
-
-        boolean kingMoved = switch (color) {
-            case WHITE -> whiteKingMoved;
-            case BLACK -> blackKingMoved;
-        };
-
-        boolean rookMoved = switch (color) {
-            case WHITE -> whiteShortRookMoved;
-            case BLACK -> blackKingMoved;
-        };
-
-        boolean squaresFree = position.isFree(kingSquare.move(longCastleDirection)) &&
-                position.isFree(kingSquare.move(longCastleDirection, 2)) &&
-                position.isFree(kingSquare.move(longCastleDirection, 3));
-
-        boolean squaresNotAttacked = !attackController.isAttackedBy(color.reverse(), kingSquare.move(longCastleDirection)) &&
-                !attackController.isAttackedBy(color.reverse(), kingSquare.move(longCastleDirection, 2));
+        Square kingSquare = getKingSquare(color);
+        boolean kingMoved = kingMoved(color);
+        boolean rookMoved = rookMoved(color, Castling.LONG);
+        boolean squaresFree = squaresFree(kingSquare, Castling.LONG);
+        boolean squaresNotAttacked = squaresFree(kingSquare, Castling.LONG);
 
         return !kingChecked && !kingMoved && !rookMoved && squaresFree && squaresNotAttacked;
+
     }
 
     public void setFlags(boolean value) {
@@ -88,5 +56,55 @@ public class CastlingController {
         blackKingMoved = value;
         blackShortRookMoved = value;
         blackLongRookMoved = value;
+    }
+
+    private Square getKingSquare(Color color) {
+        return switch (color) {
+            case WHITE -> whiteKingSquare;
+            case BLACK -> blackKingSquare;
+        };
+    }
+
+    private boolean kingMoved(Color color) {
+        return switch (color) {
+            case WHITE -> whiteKingMoved;
+            case BLACK -> blackKingMoved;
+        };
+    }
+    private boolean rookMoved(Color color, Castling type) {
+        return switch (color) {
+            case WHITE -> switch (type) {
+                case SHORT -> whiteShortRookMoved;
+                case LONG -> whiteLongRookMoved;
+            };
+            case BLACK -> switch (type) {
+                case SHORT -> blackShortRookMoved;
+                case LONG -> blackLongRookMoved;
+            };
+        };
+    }
+
+    private boolean squaresFree(Square kingSquare, Castling type) {
+        return switch (type) {
+            case SHORT -> position.isFree(kingSquare.move(shortCastleDirection))
+                    && position.isFree(kingSquare.move(shortCastleDirection, 2));
+            case LONG -> position.isFree(kingSquare.move(longCastleDirection))
+                    && position.isFree(kingSquare.move(longCastleDirection, 2))
+                    && position.isFree(kingSquare.move(longCastleDirection, 3));
+        };
+    }
+
+    private boolean squaresNotAttacked(Square kingSquare, Color kingColor, Castling type) {
+        Square castleDirection = switch (type) {
+            case SHORT -> shortCastleDirection;
+            case LONG -> longCastleDirection;
+        };
+        Color enemyColor = kingColor.reverse();
+        return !attackController.isAttackedBy(enemyColor, kingSquare.move(castleDirection))
+                && !attackController.isAttackedBy(enemyColor, kingSquare.move(castleDirection, 2));
+    }
+
+    enum Castling {
+        SHORT, LONG;
     }
 }
