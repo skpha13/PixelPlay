@@ -1,12 +1,11 @@
 package com.example.pixelplay.chess.controllers;
 
 import com.example.pixelplay.chess.PositionGenerator;
-import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.exceptions.IncorrectMoveException;
-import com.example.pixelplay.chess.exceptions.IncorrectTurnException;
+import com.example.pixelplay.chess.moving.MoveValidator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.controllers;
+package com.example.pixelplay.chess.moving;
 
 import com.example.pixelplay.chess.base.*;
 import com.example.pixelplay.chess.exceptions.EmptySquareException;

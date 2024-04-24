@@ -4,7 +4,10 @@ import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.controllers.AttackController;
 import com.example.pixelplay.chess.controllers.CastlingController;
-import com.example.pixelplay.chess.controllers.MoveValidator;
+import com.example.pixelplay.chess.moving.MoveValidator;
+import com.example.pixelplay.chess.moving.handler.MoveHandler;
+import com.example.pixelplay.chess.moving.handler.MoveHandlerSelector;
+import com.example.pixelplay.chess.moving.handler.SimpleMoveHandler;
 
 public class Game {
     private final Position position;
@@ -28,7 +31,8 @@ public class Game {
 
     public void makeMove(Move move) {
         if(moveController.isValid(move)) {
-            position.makeMove(move);
+            MoveHandler handler = MoveHandlerSelector.getMoveHandler(position, move);
+            handler.makeMove(move);
         }
         else {
             throw new RuntimeException("Trying to make invalid move");
