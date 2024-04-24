@@ -1,9 +1,5 @@
 package com.example.pixelplay.chess.base;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 import static java.lang.Math.abs;
 
 public class Position {
@@ -71,30 +67,15 @@ public class Position {
         return null;
     }
 
-    public void makeMove(Move move) {
-        Piece piece = getPiece(move.start);
-        setPiece(move.end, piece);
-        setPiece(move.start, new Piece(PieceType.None, this, move.start));
-        nextTurn(move);
-    }
-
-    private void setPiece(Square square, Piece piece) {
+    public void setPiece(Square square, Piece piece) {
         board[square.getRank()][square.getFile()] = piece;
     }
 
-    private void nextTurn(Move move) {
+    public void swapTurn(Move move) {
         turn = turn.reverse();
-        updateEnPessant(move);
     }
 
-    private void updateEnPessant(Move move) {
-        if(pawnMoved2Squares(move)) {
-            enPessantSquare = computeEnPessantSquare(move);
-        }
-        else {
-            enPessantSquare = null;
-        }
-    }
+
 
     private boolean pawnMoved2Squares(Move move) {
         boolean isPawn = getPiece(move.end).getType() == PieceType.WhitePawn
@@ -103,16 +84,12 @@ public class Position {
         return isPawn && movedTwoSquares;
     }
 
-    private Square computeEnPessantSquare(Move move) {
-        Square square = new Square(
-                (move.start.getRank() + move.end.getRank())/ 2,
-                (move.start.getFile() + move.end.getFile())/ 2
-        );
-        return square;
-    }
-
     public Color getTurn() {
         return turn;
+    }
+
+    public void setEnPessantSquare(Square enPessantSquare) {
+        this.enPessantSquare = enPessantSquare;
     }
 
     public boolean canEnPessant(Square square) {

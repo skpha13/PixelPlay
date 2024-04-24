@@ -5,6 +5,9 @@ import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.controllers.AttackController;
+import com.example.pixelplay.chess.moving.handler.MoveHandler;
+import com.example.pixelplay.chess.moving.handler.MoveHandlerSelector;
+import com.example.pixelplay.chess.moving.handler.SimpleMoveHandler;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,7 +45,9 @@ class PositionTest {
     @Test
     public void verifyEnPessantFlag() {
         Position position = PositionGenerator.customPosition(enPessantSetup);
-        position.makeMove(new Move(new Square(1, 3), new Square(3, 3)));
+        Move move = new Move(new Square(1, 3), new Square(3, 3));
+        MoveHandler moveHandler = MoveHandlerSelector.getMoveHandler(position, move);
+        moveHandler.makeMove(move);
         assertTrue(position.canEnPessant(new Square(2, 3)));
     }
 
