@@ -31,4 +31,8 @@ public final class Piece {
     public Color getColor() {
         return type.color();
     }
+
+    public boolean isColor(Color color) {
+        return type.color() == color;
+    }
 }

@@ -49,7 +49,7 @@ public class AttackController {
         for(int i = 0; i < 8; i ++) {
             for (int j = 0; j < 8; j ++) {
                 Piece piece =position.getPiece(new Square(i, j));
-                if(piece.getColor() == color) {
+                if(piece.isColor(color)) {
                     PieceMechanics mechanics = PieceMechanicsFactory.getPieceMechanics(piece);
                     attacks.addAll(Objects.requireNonNull(mechanics.attacks()));
                 }
