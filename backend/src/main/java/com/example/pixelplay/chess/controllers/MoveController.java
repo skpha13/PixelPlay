@@ -22,8 +22,9 @@ public class MoveController {
         this.castlingController = castlingController;
     }
 
-    public boolean isValid(Move move, Color currentTurn) {
+    public boolean isValid(Move move) {
         try {
+            Color currentTurn = position.getTurn();
             Piece piece = tryToGetPiece(move);
             checkCurrentTurnColor(piece, currentTurn);
             return checkMoveIsInPieceMoves(piece, move);

@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Position {
     private final Piece[][] board = new Piece[8][8];
-
+    private Color turn = Color.WHITE;
 
     public Position(PieceType[][] board, boolean castlingFlags) {
         setBoard(board);
@@ -83,5 +83,10 @@ public class Position {
         Piece piece = getPiece(move.start);
         setPiece(move.end, piece);
         setPiece(move.start, new Piece(PieceType.None, this, move.start));
+        turn = turn.reverse();
+    }
+
+    public Color getTurn() {
+        return turn;
     }
 }

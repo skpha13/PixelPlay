@@ -22,11 +22,11 @@ class MoveControllerTest {
         Move pawnMove2 = new Move(new Square(1, 0), new Square(3, 0));
         Move knightMove = new Move(new Square(0, 1), new Square(2, 0));
 
-        assertTrue(moveController.isValid(pawnMove, Color.WHITE));
-        assertTrue(moveController.isValid(pawnMove2, Color.WHITE));
-        assertTrue(moveController.isValid(knightMove, Color.WHITE));
+        assertTrue(moveController.isValid(pawnMove));
+        assertTrue(moveController.isValid(pawnMove2));
+        assertTrue(moveController.isValid(knightMove));
 
         Move kingMove = new Move(new Square(0, 4), new Square(0, 5));
-        assertFalse(moveController.isValid(kingMove, Color.WHITE));
+        assertFalse(moveController.isValid(kingMove));
     }
 }

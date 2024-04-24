@@ -3,7 +3,6 @@ package com.example.pixelplay.chess;
 import com.example.pixelplay.chess.base.*;
 import com.example.pixelplay.chess.exceptions.IncorrectTurnException;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 
 import static org.junit.jupiter.api.Assertions.*;
 

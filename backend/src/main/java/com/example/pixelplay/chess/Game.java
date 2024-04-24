@@ -1,6 +1,8 @@
-package com.example.pixelplay.chess.base;
+package com.example.pixelplay.chess;
 
-import com.example.pixelplay.chess.PositionGenerator;
+import com.example.pixelplay.chess.base.Color;
+import com.example.pixelplay.chess.base.Move;
+import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.controllers.AttackController;
 import com.example.pixelplay.chess.controllers.CastlingController;
 import com.example.pixelplay.chess.controllers.MoveController;
@@ -14,8 +16,6 @@ public class Game {
 
     private final MoveController moveController;
 
-    private Color turn = Color.WHITE;
-
     public Game() {
         position = PositionGenerator.initialPosition();
         this.attackController = new AttackController(position);
@@ -28,16 +28,11 @@ public class Game {
     }
 
     public void makeMove(Move move) {
-        if(moveController.isValid(move, turn)) {
+        if(moveController.isValid(move)) {
             position.makeMove(move);
-            nextTurn();
         }
         else {
             throw new RuntimeException("Trying to make invalid move");
         }
-    }
-
-    public void nextTurn() {
-        turn = turn.reverse();
     }
 }
