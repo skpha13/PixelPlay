@@ -11,17 +11,10 @@ import java.util.List;
 
 public class MoveController {
     private final Position position;
-    private final AttackController attackController;
-    private final CastlingController castlingController;
 
     public MoveController(
-            Position position,
-            AttackController attackController,
-            CastlingController castlingController
-    ) {
+            Position position    ) {
         this.position = position;
-        this.attackController = attackController;
-        this.castlingController = castlingController;
     }
 
     public boolean isValid(Move move) {
