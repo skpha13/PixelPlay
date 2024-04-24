@@ -12,19 +12,12 @@ public class Position {
         setBoard(board);
     }
 
-
-    public PieceType getPieceType(Square square) {
-        return board[square.getRank()][square.getFile()].type;
-    }
     public Piece getPiece(Square square) {
         return board[square.getRank()][square.getFile()];
     }
-    public Color getPieceColor(Square square) {
-        return getPieceType(square).color();
-    }
 
     public boolean isFree(Square square) {
-        return board[square.getRank()][square.getFile()].type == PieceType.None;
+        return board[square.getRank()][square.getFile()].getType() == PieceType.None;
     }
 
     private boolean checkBoardSize(PieceType[][] board) {
@@ -67,7 +60,7 @@ public class Position {
 
         for(int i = 0; i < 8; i++) {
             for(int j = 0; j < 8; j++) {
-                if(board[i][j].type == king) {
+                if(board[i][j].getType() == king) {
                     return new Square(i, j);
                 }
             }
@@ -75,15 +68,15 @@ public class Position {
         return null;
     }
 
-    private void setPiece(Square square, Piece piece) {
-        board[square.getRank()][square.getFile()] = piece;
-    }
-
     public void makeMove(Move move) {
         Piece piece = getPiece(move.start);
         setPiece(move.end, piece);
         setPiece(move.start, new Piece(PieceType.None, this, move.start));
         turn = turn.reverse();
+    }
+
+    private void setPiece(Square square, Piece piece) {
+        board[square.getRank()][square.getFile()] = piece;
     }
 
     public Color getTurn() {

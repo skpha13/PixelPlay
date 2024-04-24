@@ -16,7 +16,7 @@ class GameTest {
         game.makeMove(pawnMove);
 
         assertEquals(knight, game.getPosition().getPiece(pawnMove.end));
-        assertEquals(PieceType.None, game.getPosition().getPiece(pawnMove.start).type);
+        assertEquals(PieceType.None, game.getPosition().getPiece(pawnMove.start).getType());
     }
 
     @Test

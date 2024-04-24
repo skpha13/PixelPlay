@@ -50,7 +50,7 @@ public class AttackController {
             for (int j = 0; j < 8; j ++) {
                 Piece piece =position.getPiece(new Square(i, j));
                 Square square = new Square(i, j);
-                if(piece.type.color() == color) {
+                if(piece.getColor() == color) {
                     PieceMechanics mechanics = PieceMechanicsFactory.getPieceMechanics(piece);
                     attacks.addAll(Objects.requireNonNull(mechanics.attacks()));
                 }

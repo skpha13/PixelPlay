@@ -12,7 +12,7 @@ public class PieceMechanicsFactory {
     public static PieceMechanics getPieceMechanics(Piece piece) {
         Position position = piece.getPosition();
         Square square = piece.getSquare();
-        return switch (piece.type) {
+        return switch (piece.getType()) {
             case PieceType.BlackKing, PieceType.WhiteKing -> new KingMechanics(position, square);
             case PieceType.BlackBishop, PieceType.WhiteBishop -> new BishopMechanics(position, square);
             case PieceType.BlackKnight, PieceType.WhiteKnight -> new KnightMechanics(position, square);

@@ -51,7 +51,7 @@ public class MoveController {
     }
 
     private void checkCurrentTurnColor(Piece piece, Color currentTurn) {
-        if(piece.type.color() != currentTurn) {
+        if(piece.getColor() != currentTurn) {
             throw  new IncorrectTurnException("It is " + currentTurn.toString() + "'s turn!");
         }
     }

@@ -33,7 +33,7 @@ abstract class PieceMechanics(
     fun canCapture(target: Square): Boolean {
         try {
             val isAnotherPiece = !position.isFree(target)
-            val differentColor = position.getPieceColor(square) != position.getPieceColor(target)
+            val differentColor = position.getPiece(square).color != position.getPiece(target).color
             return isAnotherPiece && differentColor
         }
         catch (e: Exception) {

@@ -6,7 +6,7 @@ import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
 import java.util.List;
 
 public final class Piece {
-    public final PieceType type;
+    private final PieceType type;
     private final Position position;
     private final Square square;
 
@@ -22,5 +22,13 @@ public final class Piece {
 
     public Square getSquare() {
         return square;
+    }
+
+    public PieceType getType() {
+        return type;
+    }
+
+    public Color getColor() {
+        return type.color();
     }
 }
