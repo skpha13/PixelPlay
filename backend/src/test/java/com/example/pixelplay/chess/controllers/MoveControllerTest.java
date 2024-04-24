@@ -18,7 +18,7 @@ class MoveControllerTest {
     void isValid() {
         AttackController attackController = new AttackController(position);
         CastlingController castlingController = new CastlingController(position, attackController, false);
-        MoveController moveController = new MoveController(position);
+        MoveValidator moveController = new MoveValidator(position);
 
         Move pawnMove = new Move(new Square(1, 0), new Square(2, 0));
         Move pawnMove2 = new Move(new Square(1, 0), new Square(3, 0));
