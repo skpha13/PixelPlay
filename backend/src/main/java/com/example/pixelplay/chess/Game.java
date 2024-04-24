@@ -20,7 +20,7 @@ public class Game {
         position = PositionGenerator.initialPosition();
         this.attackController = new AttackController(position);
         this.castlingController = new CastlingController(position, attackController, false);
-        moveController = new MoveController(position, attackController, castlingController);
+        moveController = new MoveController(position);
     }
 
     public Position getPosition() {
