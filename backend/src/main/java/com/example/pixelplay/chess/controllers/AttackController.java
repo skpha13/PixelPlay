@@ -51,7 +51,7 @@ public class AttackController {
                 Piece piece =position.getPiece(new Square(i, j));
                 if(piece.isColor(color)) {
                     PieceMechanics mechanics = PieceMechanicsFactory.getPieceMechanics(piece);
-                    attacks.addAll(Objects.requireNonNull(mechanics.attacks()));
+                    attacks.addAll(mechanics.attacks());
                 }
             }
         }
