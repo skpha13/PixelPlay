@@ -1,11 +1,10 @@
 package com.example.pixelplay.chess;
 
-import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.controllers.AttackController;
 import com.example.pixelplay.chess.controllers.CastlingController;
-import com.example.pixelplay.chess.controllers.MoveController;
+import com.example.pixelplay.chess.controllers.MoveValidator;
 
 public class Game {
     private final Position position;
@@ -14,13 +13,13 @@ public class Game {
 
     private final AttackController attackController;
 
-    private final MoveController moveController;
+    private final MoveValidator moveController;
 
     public Game() {
         position = PositionGenerator.initialPosition();
         this.attackController = new AttackController(position);
         this.castlingController = new CastlingController(position, attackController, false);
-        moveController = new MoveController(position);
+        moveController = new MoveValidator(position);
     }
 
     public Position getPosition() {

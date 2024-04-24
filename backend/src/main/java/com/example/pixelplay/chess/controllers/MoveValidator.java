@@ -9,11 +9,10 @@ import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
 
 import java.util.List;
 
-public class MoveController {
+public class MoveValidator {
     private final Position position;
 
-    public MoveController(
-            Position position    ) {
+    public MoveValidator(Position position) {
         this.position = position;
     }
 
