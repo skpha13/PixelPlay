@@ -1,6 +1,7 @@
 package com.example.pixelplay.chess.controllers;
 
 import com.example.pixelplay.chess.base.*;
+import com.example.pixelplay.chess.exceptions.EmptySquareException;
 import com.example.pixelplay.chess.exceptions.IncorrectTurnException;
 import com.example.pixelplay.chess.mechanics.PieceMechanics;
 import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
@@ -54,9 +55,5 @@ public class MoveController {
         if(piece.getColor() != currentTurn) {
             throw  new IncorrectTurnException("It is " + currentTurn.toString() + "'s turn!");
         }
-    }
-
-    private static class EmptySquareException extends RuntimeException {
-        public EmptySquareException(String message) {}
     }
 }
