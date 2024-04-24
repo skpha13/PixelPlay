@@ -5,6 +5,8 @@ import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.base.Square;
+import com.example.pixelplay.chess.exceptions.IncorrectMoveException;
+import com.example.pixelplay.chess.exceptions.IncorrectTurnException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,6 +29,6 @@ class MoveControllerTest {
         assertTrue(moveController.isValid(knightMove));
 
         Move kingMove = new Move(new Square(0, 4), new Square(0, 5));
-        assertFalse(moveController.isValid(kingMove));
+        assertThrows(IncorrectMoveException.class,() -> moveController.isValid(kingMove));
     }
 }
