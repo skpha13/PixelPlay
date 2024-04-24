@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.lang.Math.abs;
+
 public class Position {
     private final Piece[][] board = new Piece[8][8];
     private Color turn = Color.WHITE;
+    private Square enPessantSquare = null;
 
     public Position(PieceType[][] board, boolean castlingFlags) {
         setBoard(board);
@@ -72,14 +75,47 @@ public class Position {
         Piece piece = getPiece(move.start);
         setPiece(move.end, piece);
         setPiece(move.start, new Piece(PieceType.None, this, move.start));
-        turn = turn.reverse();
+        nextTurn(move);
     }
 
     private void setPiece(Square square, Piece piece) {
         board[square.getRank()][square.getFile()] = piece;
     }
 
+    private void nextTurn(Move move) {
+        turn = turn.reverse();
+        updateEnPessant(move);
+    }
+
+    private void updateEnPessant(Move move) {
+        if(pawnMoved2Squares(move)) {
+            enPessantSquare = computeEnPessantSquare(move);
+        }
+        else {
+            enPessantSquare = null;
+        }
+    }
+
+    private boolean pawnMoved2Squares(Move move) {
+        boolean isPawn = getPiece(move.end).getType() == PieceType.WhitePawn
+            || getPiece(move.end).getType() == PieceType.BlackPawn;
+        boolean movedTwoSquares = abs(move.direction().getRank()) == 2;
+        return isPawn && movedTwoSquares;
+    }
+
+    private Square computeEnPessantSquare(Move move) {
+        Square square = new Square(
+                (move.start.getRank() + move.end.getRank())/ 2,
+                (move.start.getFile() + move.end.getFile())/ 2
+        );
+        return square;
+    }
+
     public Color getTurn() {
         return turn;
+    }
+
+    public boolean canEnPessant(Square square) {
+        return square.equals(enPessantSquare);
     }
 }

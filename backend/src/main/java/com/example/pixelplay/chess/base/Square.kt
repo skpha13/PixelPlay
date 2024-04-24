@@ -15,7 +15,12 @@ class Square(private var rank: Int, private var file: Int): Comparable<Square> {
         return square
     }
 
-
+    fun minus(square: Square): Square {
+        val result = Square(this.rank, this.file)
+        result.rank -= square.rank
+        result.file -= square.file
+        return result;
+    }
 
 
     fun getRank() = rank

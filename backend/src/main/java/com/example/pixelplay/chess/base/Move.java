@@ -8,4 +8,8 @@ public final class Move {
         this.start = start;
         this.end = end;
     }
+
+    public Square direction() {
+        return end.minus(start);
+    }
 }
