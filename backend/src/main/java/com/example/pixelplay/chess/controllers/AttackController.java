@@ -20,10 +20,10 @@ public class AttackController {
 
     private void initializeAttackBoards() {
         whiteAttacks = new NumberBoard();
-        whiteAttacks.addAttacks(attackByColor(Color.WHITE));
+        whiteAttacks.addAttacks(attacksByColor(Color.WHITE));
 
         blackAttacks = new NumberBoard();
-        blackAttacks.addAttacks(attackByColor(Color.BLACK));
+        blackAttacks.addAttacks(attacksByColor(Color.BLACK));
     }
 
     public NumberBoard getAttackBoard(Color color) {
@@ -43,7 +43,7 @@ public class AttackController {
     }
 
 
-    public List<Square> attackByColor(Color color) {
+    public List<Square> attacksByColor(Color color) {
         List<Square> attacks = new ArrayList<>();
 
         for(int i = 0; i < 8; i ++) {
