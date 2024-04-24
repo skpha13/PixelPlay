@@ -1,6 +1,8 @@
 package com.example.pixelplay.chess.controllers;
 
 import com.example.pixelplay.chess.base.*;
+import com.example.pixelplay.chess.mechanics.PieceMechanics;
+import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +51,8 @@ public class AttackController {
                 Piece piece =position.getPiece(new Square(i, j));
                 Square square = new Square(i, j);
                 if(piece.type.color() == color) {
-                    assert piece.mechanics != null;
-                    attacks.addAll(Objects.requireNonNull(piece.mechanics.attacks()));
+                    PieceMechanics mechanics = PieceMechanicsFactory.getPieceMechanics(piece);
+                    attacks.addAll(Objects.requireNonNull(mechanics.attacks()));
                 }
             }
         }

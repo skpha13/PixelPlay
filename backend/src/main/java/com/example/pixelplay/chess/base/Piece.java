@@ -7,7 +7,6 @@ import java.util.List;
 
 public final class Piece {
     public final PieceType type;
-    public final PieceMechanics mechanics;
     private final Position position;
     private final Square square;
 
@@ -15,7 +14,6 @@ public final class Piece {
         this.type = type;
         this.position = position;
         this.square = square;
-        this.mechanics = PieceMechanicsFactory.getPieceMechanics(this);
     }
 
     public Position getPosition() {
