@@ -1,5 +1,6 @@
 package com.example.pixelplay.chess;
 
+import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.controllers.AttackController;
@@ -12,17 +13,26 @@ import com.example.pixelplay.chess.moving.handler.SimpleMoveHandler;
 public class Game {
     private final Position position;
 
-    private final CastlingController castlingController;
+    private CastlingController castlingController;
 
-    private final AttackController attackController;
+    private AttackController attackController;
 
-    private final MoveValidator moveController;
+    private MoveValidator moveValidator;
 
     public Game() {
         position = PositionGenerator.initialPosition();
+        init();
+    }
+
+    public Game(Position position) {
+        this.position = position;
+        init();
+    }
+
+    private void init() {
         this.attackController = new AttackController(position);
         this.castlingController = new CastlingController(position, attackController, false);
-        moveController = new MoveValidator(position);
+        moveValidator = new MoveValidator(position);
     }
 
     public Position getPosition() {
@@ -30,7 +40,7 @@ public class Game {
     }
 
     public void makeMove(Move move) {
-        if(moveController.isValid(move)) {
+        if(moveValidator.isValid(move)) {
             MoveHandler handler = MoveHandlerSelector.getMoveHandler(position, move);
             handler.makeMove(move);
         }
