@@ -36,11 +36,4 @@ class GameTest {
         game.makeMove(pawnMove);
         assertThrows(IncorrectTurnException.class, () -> game.makeMove(knightMove));
     }
-
-//    @Test
-//    void checkPositionAfterInitialize() {
-//        Position position = game.getPosition();
-//        Position initialPosition = PositionGenerator.initialPosition();
-//        assert(position.equals(initialPosition));
-//    }
 }

@@ -1,5 +1,6 @@
 package com.example.pixelplay.chess;
 
+import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.utils.PositionUtil;
 
@@ -20,11 +21,15 @@ public class PositionGenerator {
     }
 
     public static Position customPosition(String[] boardStrings) {
-        return new Position(PositionUtil.translateBoard(boardStrings), true);
+        return new Position(PositionUtil.translateBoard(boardStrings), Color.WHITE);
     }
 
     public static Position customPosition(String[] boardStrings, boolean castlingFlags) {
-        return new Position(PositionUtil.translateBoard(boardStrings), castlingFlags);
+        return new Position(PositionUtil.translateBoard(boardStrings), Color.WHITE);
+    }
+
+    public static Position customPosition(String[] boardStrings, Color whoseTurn) {
+        return new Position(PositionUtil.translateBoard(boardStrings), whoseTurn);
     }
 
 

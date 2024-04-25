@@ -7,8 +7,9 @@ public class Position {
     private Color turn = Color.WHITE;
     private Square enPessantSquare = null;
 
-    public Position(PieceType[][] board, boolean castlingFlags) {
+    public Position(PieceType[][] board, Color turn) {
         setBoard(board);
+        this.turn = turn;
     }
 
     public Piece getPiece(Square square) {
