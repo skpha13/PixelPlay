@@ -36,4 +36,27 @@ class GameTest {
         game.makeMove(pawnMove);
         assertThrows(IncorrectTurnException.class, () -> game.makeMove(knightMove));
     }
+
+    @Test
+    void makeMove_shortCastle() {
+        Position position = PositionGenerator.customPosition(stringPosition, Color.BLACK);
+        Game game = new Game(position);
+
+        Move shortCastle = new Move(new Square(7, 3), new Square(7, 1));
+        game.makeMove(shortCastle);
+
+        assertEquals(PieceType.BlackKing, position.getPiece(new Square(7, 1)).getType());
+        assertEquals(PieceType.BlackRook, position.getPiece(new Square(7, 2)).getType());
+    }
+
+    private final static String[] stringPosition = new String[]{
+            "........",
+            "PPPPPP.p",
+            "........",
+            "p.......",
+            "........",
+            "........",
+            ".ppppppp",
+            "r..k...r"
+    };
 }

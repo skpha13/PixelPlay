@@ -5,7 +5,7 @@ import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.exceptions.IncorrectMoveException;
-import com.example.pixelplay.chess.moving.MoveValidator;
+import com.example.pixelplay.chess.moving.validator.SimpleMoveValidator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +17,7 @@ class MoveControllerTest {
     void isValid() {
         AttackController attackController = new AttackController(position);
         CastlingController castlingController = new CastlingController(position, attackController, false);
-        MoveValidator moveController = new MoveValidator(position);
+        SimpleMoveValidator moveController = new SimpleMoveValidator(position);
 
         Move pawnMove = new Move(new Square(1, 0), new Square(2, 0));
         Move pawnMove2 = new Move(new Square(1, 0), new Square(3, 0));
