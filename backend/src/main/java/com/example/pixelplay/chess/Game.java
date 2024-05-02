@@ -6,6 +6,8 @@ import com.example.pixelplay.chess.controllers.AttackController;
 import com.example.pixelplay.chess.controllers.CastlingController;
 import com.example.pixelplay.chess.moving.handler.MoveHandler;
 import com.example.pixelplay.chess.moving.handler.MoveHandlerSelector;
+import com.example.pixelplay.chess.moving.validator.GeneralMoveValidator;
+import com.example.pixelplay.chess.moving.validator.MoveValidator;
 
 public class Game {
     private final Position position;
@@ -34,9 +36,8 @@ public class Game {
     }
 
     public void makeMove(Move move) {
-
-
-        if(moveValidator.isValid(move)) {
+        MoveValidator validator = new GeneralMoveValidator(position);
+        if(validator.isValid(move)) {
             MoveHandler handler = MoveHandlerSelector.getMoveHandler(position, move);
             handler.makeMove(move);
         }

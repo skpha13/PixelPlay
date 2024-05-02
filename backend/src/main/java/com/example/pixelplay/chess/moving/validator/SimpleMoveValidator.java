@@ -7,13 +7,19 @@ import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
 
 import java.util.List;
 
-public class SimpleMoveValidator implements MoveValidator {
+class SimpleMoveValidator implements MoveValidator {
+    private final Position position;
+
+    public SimpleMoveValidator(Position position) {
+        this.position = position;
+    }
+
 
     @Override
-    public boolean isValid(Position position, Move move) {
+    public boolean isValid(Move move) {
         try {
             Color currentTurn = position.getTurn();
-            Piece piece = tryToGetPiece(position, move);
+            Piece piece = getPiece(move);
             checkCurrentTurnColor(piece, currentTurn);
             checkMoveIsInPieceMoves(piece, move);
             return true;
@@ -24,7 +30,12 @@ public class SimpleMoveValidator implements MoveValidator {
         }
     }
 
-    void checkMoveIsInPieceMoves(Piece piece, Move move) {
+    private Piece getPiece(Move move) {
+        PieceGetter pieceGetter = new PieceGetter(position);
+        return pieceGetter.tryToGetPiece(move);
+    }
+
+    private void checkMoveIsInPieceMoves(Piece piece, Move move) {
         PieceMechanics mechanics = PieceMechanicsFactory.getPieceMechanics(piece);
         List<Square> targetSquares = mechanics.moves();
         if (!targetSquares.stream().anyMatch(square -> square.equals(move.end))) {
