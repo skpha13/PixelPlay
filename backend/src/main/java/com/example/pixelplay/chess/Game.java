@@ -3,7 +3,7 @@ package com.example.pixelplay.chess;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.controllers.AttackController;
 import com.example.pixelplay.chess.moving.handler.MoveHandler;
-import com.example.pixelplay.chess.moving.handler.MoveHandlerSelector;
+import com.example.pixelplay.chess.moving.handler.GeneralHandler;
 import com.example.pixelplay.chess.moving.validator.GeneralMoveValidator;
 import com.example.pixelplay.chess.moving.validator.MoveValidator;
 
@@ -12,6 +12,8 @@ public class Game {
 
 
     private AttackController attackController;
+    private MoveHandler moveHandler;
+    private MoveValidator moveValidator;
 
     public Game() {
         position = PositionGenerator.initialPosition();
@@ -25,6 +27,8 @@ public class Game {
 
     private void init() {
         this.attackController = new AttackController(position);
+        this.moveValidator = new GeneralMoveValidator(position);
+        this.moveHandler = new GeneralHandler(position);
     }
 
     public Position getPosition() {
@@ -32,10 +36,8 @@ public class Game {
     }
 
     public void makeMove(Move move) {
-        MoveValidator validator = new GeneralMoveValidator(position);
-        if(validator.isValid(move)) {
-            MoveHandler handler = MoveHandlerSelector.getMoveHandler(position, move);
-            handler.makeMove(move);
+        if(moveValidator.isValid(move)) {
+            moveHandler.makeMove(move);
         }
         else {
             throw new RuntimeException("Trying to make invalid move");

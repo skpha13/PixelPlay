@@ -5,8 +5,20 @@ import com.example.pixelplay.chess.base.*;
 
 import static java.lang.Math.abs;
 
-public class MoveHandlerSelector {
-    public static MoveHandler getMoveHandler(Position position, Move move) {
+public class GeneralHandler implements MoveHandler{
+    private final Position position;
+
+    public GeneralHandler(Position position) {
+        this.position = position;
+    }
+
+    @Override
+    public void makeMove(Move move) {
+        MoveHandler handler = getMoveHandler(move);
+        handler.makeMove(move);
+    }
+
+    private MoveHandler getMoveHandler(Move move) {
         if(isCastle(position, move)){
             return new CastleHandler(position);
         }
