@@ -3,14 +3,14 @@ package com.example.pixelplay.chess.position;
 import com.example.pixelplay.chess.base.*;
 
 public class Position {
-    private final Piece[][] board = new Piece[8][8];
+    private Piece[][] board = new Piece[8][8];
     private Color turn = Color.WHITE;
     private Square enPessantSquare = null;
 
     private final PositionFlags positionFlags = new PositionFlags();
 
-    public Position(PieceType[][] board, Color turn) {
-        setBoard(board);
+    public Position(Piece[][] board, Color turn) {
+        this.board = board;
         this.turn = turn;
     }
 
@@ -34,35 +34,10 @@ public class Position {
         return true;
     }
 
-    private void setBoard(PieceType[][] board) {
-        if(!checkBoardSize(board)) {
-            throw new IllegalArgumentException("Board is not valid");
-        }
-
-        for(int i = 0; i < 8; i++) {
-            for(int j = 0; j < 8; j++) {
-                PieceType type = board[i][j];
-                this.board[i][j] = createPiece(type, i, j);
-            }
-        }
-    }
-
-    private Piece createPiece(PieceType type, int rank, int file) {
-        return new Piece(type);
-    }
-
     public Square findKing(Color color) {
-        PieceType king;
-        if(color == Color.WHITE) {
-            king = PieceType.WhiteKing;
-        }
-        else {
-            king = PieceType.BlackKing;
-        }
-
         for(int i = 0; i < 8; i++) {
             for(int j = 0; j < 8; j++) {
-                if(board[i][j].type() == king) {
+                if(board[i][j].type() == PieceType.King && board[i][j].color() == color) {
                     return new Square(i, j);
                 }
             }

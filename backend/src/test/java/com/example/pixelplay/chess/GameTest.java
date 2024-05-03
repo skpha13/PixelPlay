@@ -47,8 +47,8 @@ class GameTest {
         Move shortCastle = new Move(new Square(7, 4), new Square(7, 6));
         game.makeMove(shortCastle);
 
-        assertEquals(PieceType.BlackKing, position.getPiece(new Square(7, 6)).type());
-        assertEquals(PieceType.BlackRook, position.getPiece(new Square(7, 5)).type());
+        assertEquals(PieceType.King, position.getPiece(new Square(7, 6)).type());
+        assertEquals(PieceType.Rook, position.getPiece(new Square(7, 5)).type());
     }
 
     private final static String[] stringPosition = new String[]{

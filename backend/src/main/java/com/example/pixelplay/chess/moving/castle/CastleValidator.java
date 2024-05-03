@@ -58,7 +58,7 @@ public class CastleValidator implements MoveValidator {
 
     private Color getKingColor(Move move) {
         Piece piece = getPiece(move);
-        return piece.getColor();
+        return piece.color();
     }
 
     public boolean canShortCastle(Color color) {

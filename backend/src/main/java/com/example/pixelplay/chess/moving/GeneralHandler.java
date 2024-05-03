@@ -35,7 +35,7 @@ public class GeneralHandler implements MoveHandler{
 
     private static boolean isCastle(Position position, Move move) {
         Piece piece = position.getPiece(move.start());
-        boolean kingMoved = (piece.type() == PieceType.BlackKing) || (piece.type() == PieceType.WhiteKing);
+        boolean kingMoved = (piece.type() == PieceType.King);
         boolean movedTwoFiles = abs(move.direction().getFile()) == 2;
 
         return kingMoved && movedTwoFiles;
@@ -47,8 +47,7 @@ public class GeneralHandler implements MoveHandler{
     }
 
     private static boolean isPawn(Piece piece) {
-        return piece.type() == PieceType.WhitePawn
-                || piece.type() == PieceType.BlackPawn;
+        return piece.type() == PieceType.Pawn;
     }
 
     private static boolean is2SquaresJump(Move move) {

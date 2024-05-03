@@ -1,6 +1,7 @@
 package com.example.pixelplay.chess.position;
 
 import com.example.pixelplay.chess.base.Color;
+import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.base.PieceType;
 
 public class PositionGenerator {
@@ -28,9 +29,9 @@ public class PositionGenerator {
     }
 
     // Converts a list of Strings representing pieces on a board to a 2d array of pieces
-    public static PieceType[][] translateBoard(String[] boardStrings) {
+    public static Piece[][] translateBoard(String[] boardStrings) {
         checkSize(boardStrings);
-        PieceType[][] board = new PieceType[8][8];
+        Piece[][] board = new Piece[8][8];
         for(int i = 0; i < 8; i ++) {
             for(int j = 0; j < 8; j ++) {
                 board[i][j] = translatePiece(boardStrings[i].charAt(j));
@@ -39,22 +40,20 @@ public class PositionGenerator {
         return board;
     }
 
-    private static PieceType translatePiece(char chr) {
-        return switch(chr) {
-            case 'r' -> PieceType.BlackRook;
-            case 'h' -> PieceType.BlackKnight;
-            case 'b' -> PieceType.BlackBishop;
-            case 'q' -> PieceType.BlackQueen;
-            case 'k' -> PieceType.BlackKing;
-            case 'p' -> PieceType.BlackPawn;
-            case 'R' -> PieceType.WhiteRook;
-            case 'H' -> PieceType.WhiteKnight;
-            case 'B' -> PieceType.WhiteBishop;
-            case 'Q' -> PieceType.WhiteQueen;
-            case 'K' -> PieceType.WhiteKing;
-            case 'P' -> PieceType.WhitePawn;
+    private static Piece translatePiece(char chr) {
+        PieceType type = switch(chr) {
+            case 'r', 'R' -> PieceType.Rook;
+            case 'h', 'H' -> PieceType.Knight;
+            case 'b', 'B' -> PieceType.Bishop;
+            case 'q', 'Q' -> PieceType.Queen;
+            case 'k', 'K' -> PieceType.King;
+            case 'p', 'P' -> PieceType.Pawn;
             default -> PieceType.None;
         };
+
+        Color color = Character.isLowerCase(chr) ? Color.BLACK : Color.WHITE;
+
+        return new Piece(type, color);
     }
 
     private static void checkSize(String[] board) {
