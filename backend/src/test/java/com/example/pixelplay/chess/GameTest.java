@@ -61,4 +61,28 @@ class GameTest {
             ".ppppppp",
             "r...k..r"
     };
+
+
+    private final Position promotionPosition = PositionGenerator.customPosition(
+            new String[]{
+                    "........",
+                    ".....k.K",
+                    "........",
+                    "........",
+                    "........",
+                    "........",
+                    ".P......",
+                    "..r.....",
+            }
+    );
+
+    @Test
+    void move_promoteToBishop() {
+        Game game = new Game(promotionPosition);
+        Square start = new Square(6, 1);
+        Square end = new Square(7, 2);
+        Move move = new Move(start, end, PieceType.Bishop);
+        game.makeMove(move);
+        assertEquals(PieceType.Bishop, game.getPosition().getPiece(end).type());
+    }
 }

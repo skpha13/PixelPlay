@@ -1,12 +1,15 @@
 package com.example.pixelplay.chess.moving;
 
 import com.example.pixelplay.chess.base.*;
+import com.example.pixelplay.chess.moving.exceptions.IncorrectMoveException;
 import com.example.pixelplay.chess.moving.exceptions.KingCheckedException;
+import com.example.pixelplay.chess.moving.promotion.PromotionValidator;
 import com.example.pixelplay.chess.position.AttackCalculator;
 import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.moving.exceptions.IncorrectTurnException;
 import com.example.pixelplay.chess.moving.basic.SimpleMoveValidator;
 import com.example.pixelplay.chess.moving.castle.CastleValidator;
+import kotlin.NotImplementedError;
 
 import static java.lang.Math.abs;
 
@@ -51,17 +54,11 @@ public class GeneralMoveValidator implements MoveValidator{
 
 
     private MoveValidator getValidator(Move move) {
-        if(isCastle(move)) {
-            return new CastleValidator(position);
-        }
-        return new SimpleMoveValidator(position);
-    }
-
-    private boolean isCastle(Move move) {
-        Piece piece = position.getPiece(move.start());
-        boolean kingMoved = (piece.type() == PieceType.King);
-        boolean movedTwoFiles = abs(move.direction().getFile()) == 2;
-
-        return kingMoved && movedTwoFiles;
+        MoveType moveType = MoveType.getMoveType(position, move);
+        return switch (moveType) {
+            case CASTLE -> new CastleValidator(position);
+            case BASIC, PAWN_JUMP -> new SimpleMoveValidator(position);
+            case PROMOTION -> new PromotionValidator(position);
+        };
     }
 }
