@@ -2,7 +2,6 @@ package com.example.pixelplay.chess.moving.castle;
 
 import com.example.pixelplay.chess.position.Flag;
 import com.example.pixelplay.chess.position.Position;
-import com.example.pixelplay.chess.position.PositionFlags;
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
@@ -10,6 +9,8 @@ import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.controllers.AttackController;
 import com.example.pixelplay.chess.moving.MoveValidator;
 import com.example.pixelplay.chess.moving.PieceGetter;
+
+import static com.example.pixelplay.chess.position.PositionUtil.*;
 
 public class CastleValidator implements MoveValidator {
     private final Position position;
@@ -132,12 +133,6 @@ public class CastleValidator implements MoveValidator {
         return !attackController.isAttackedBy(enemyColor, kingSquare.move(castleDirection))
                 && !attackController.isAttackedBy(enemyColor, kingSquare.move(castleDirection, 2));
     }
-
-    private static final Square whiteKingSquare = new Square(0, 4);
-    private static final Square blackKingSquare = new Square(7, 4);
-
-    private static final Square shortCastleDirection = new Square(0, 1);
-    private static final Square longCastleDirection = new Square(0, -1);
 
     enum Castle {
         SHORT, LONG;

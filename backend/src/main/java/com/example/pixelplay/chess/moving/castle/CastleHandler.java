@@ -2,12 +2,12 @@ package com.example.pixelplay.chess.moving.castle;
 
 import com.example.pixelplay.chess.position.Flag;
 import com.example.pixelplay.chess.position.Position;
-import com.example.pixelplay.chess.position.PositionFlags;
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.moving.MoveHandler;
+import com.example.pixelplay.chess.position.PositionUtil;
 
 public class CastleHandler implements MoveHandler {
     private final Position position;
@@ -44,8 +44,8 @@ public class CastleHandler implements MoveHandler {
 
     private Square getDirection(Move move) {
         return switch (move.direction().getFile()){
-            case 2 -> shortCastleDirection;
-            case -2 -> longCastleDirection;
+            case 2 -> PositionUtil.shortCastleDirection;
+            case -2 -> PositionUtil.longCastleDirection;
             default -> throw new IllegalStateException("Unexpected value: " + move.direction().getFile());
         };
     }
@@ -99,11 +99,6 @@ public class CastleHandler implements MoveHandler {
             }}
         }
     }
-
-
-
-    private static final Square shortCastleDirection = new Square(0, 1);
-    private static final Square longCastleDirection = new Square(0, -1);
 
     enum Castle {
         SHORT, LONG;
