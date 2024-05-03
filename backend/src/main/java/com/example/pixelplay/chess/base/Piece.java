@@ -1,9 +1,6 @@
 package com.example.pixelplay.chess.base;
 
-import com.example.pixelplay.chess.mechanics.PieceMechanics;
-import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
-
-import java.util.List;
+import com.example.pixelplay.chess.Position;
 
 public final class Piece {
     private final PieceType type;

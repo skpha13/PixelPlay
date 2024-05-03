@@ -2,7 +2,7 @@ package com.example.pixelplay.chess.moving.validator;
 
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
-import com.example.pixelplay.chess.base.Position;
+import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.exceptions.EmptySquareException;
 
 class PieceGetter {

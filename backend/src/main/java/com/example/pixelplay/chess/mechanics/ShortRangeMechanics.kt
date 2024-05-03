@@ -1,6 +1,6 @@
 package com.example.pixelplay.chess.mechanics
 
-import com.example.pixelplay.chess.base.Position
+import com.example.pixelplay.chess.Position
 import com.example.pixelplay.chess.base.Square
 import com.example.pixelplay.chess.utils.PositionUtil
 

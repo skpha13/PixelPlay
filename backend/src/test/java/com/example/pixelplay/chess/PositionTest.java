@@ -2,12 +2,10 @@ package com.example.pixelplay.chess;
 
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
-import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.controllers.AttackController;
 import com.example.pixelplay.chess.moving.handler.MoveHandler;
 import com.example.pixelplay.chess.moving.handler.MoveHandlerSelector;
-import com.example.pixelplay.chess.moving.handler.SimpleMoveHandler;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

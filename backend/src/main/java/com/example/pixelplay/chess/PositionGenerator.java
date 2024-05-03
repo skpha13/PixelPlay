@@ -1,7 +1,6 @@
 package com.example.pixelplay.chess;
 
 import com.example.pixelplay.chess.base.Color;
-import com.example.pixelplay.chess.base.Position;
 import com.example.pixelplay.chess.utils.PositionUtil;
 
 public class PositionGenerator {

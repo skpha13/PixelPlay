@@ -3,7 +3,7 @@ package com.example.pixelplay.chess.base.attacks;
 import com.example.pixelplay.chess.PositionGenerator;
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.NumberBoard;
-import com.example.pixelplay.chess.base.Position;
+import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.controllers.AttackController;
 import org.junit.jupiter.api.Test;
 

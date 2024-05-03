@@ -1,9 +1,8 @@
 package com.example.pixelplay.chess.mechanics
 
 import com.example.pixelplay.chess.PositionGenerator
-import com.example.pixelplay.chess.base.Position
+import com.example.pixelplay.chess.Position
 import com.example.pixelplay.chess.base.Square
-import com.example.pixelplay.chess.mechanics.BlackPawnMechanicsTest.Companion
 import com.example.pixelplay.chess.mechanics.pieces.WhitePawnMechanics
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach

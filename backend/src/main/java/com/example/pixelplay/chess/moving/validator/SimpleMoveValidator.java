@@ -1,5 +1,6 @@
 package com.example.pixelplay.chess.moving.validator;
 
+import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.base.*;
 import com.example.pixelplay.chess.exceptions.IncorrectMoveException;
 import com.example.pixelplay.chess.mechanics.PieceMechanics;

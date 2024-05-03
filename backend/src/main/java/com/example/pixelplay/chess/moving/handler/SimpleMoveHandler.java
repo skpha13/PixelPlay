@@ -3,7 +3,7 @@ package com.example.pixelplay.chess.moving.handler;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.base.PieceType;
-import com.example.pixelplay.chess.base.Position;
+import com.example.pixelplay.chess.Position;
 
 public class SimpleMoveHandler implements MoveHandler{
     private final Position position;

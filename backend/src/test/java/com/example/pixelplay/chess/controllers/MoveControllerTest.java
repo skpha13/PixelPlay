@@ -2,7 +2,7 @@ package com.example.pixelplay.chess.controllers;
 
 import com.example.pixelplay.chess.PositionGenerator;
 import com.example.pixelplay.chess.base.Move;
-import com.example.pixelplay.chess.base.Position;
+import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.exceptions.IncorrectMoveException;
 import com.example.pixelplay.chess.moving.validator.GeneralMoveValidator;

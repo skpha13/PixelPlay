@@ -42,11 +42,11 @@ class GameTest {
         Position position = PositionGenerator.customPosition(stringPosition, Color.BLACK);
         Game game = new Game(position);
 
-        Move shortCastle = new Move(new Square(7, 3), new Square(7, 1));
+        Move shortCastle = new Move(new Square(7, 4), new Square(7, 6));
         game.makeMove(shortCastle);
 
-        assertEquals(PieceType.BlackKing, position.getPiece(new Square(7, 1)).getType());
-        assertEquals(PieceType.BlackRook, position.getPiece(new Square(7, 2)).getType());
+        assertEquals(PieceType.BlackKing, position.getPiece(new Square(7, 6)).getType());
+        assertEquals(PieceType.BlackRook, position.getPiece(new Square(7, 5)).getType());
     }
 
     private final static String[] stringPosition = new String[]{
@@ -57,6 +57,6 @@ class GameTest {
             "........",
             "........",
             ".ppppppp",
-            "r..k...r"
+            "r...k..r"
     };
 }

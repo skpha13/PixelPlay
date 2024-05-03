@@ -2,41 +2,43 @@ package com.example.pixelplay.chess.controllers;
 
 import com.example.pixelplay.chess.PositionGenerator;
 import com.example.pixelplay.chess.base.Color;
-import com.example.pixelplay.chess.base.Position;
+import com.example.pixelplay.chess.Position;
+import com.example.pixelplay.chess.moving.validator.CastleValidator;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class CastlingControllerTest {
+class CastleValidatorTest {
     private String[] shortCastle = new String[]{
-            ".....R..",
+            "...R....",
             "........",
             "........",
             "........",
             "........",
             "........",
             "........",
-            "r..k...r"
+            "r...k..r"
     };
     private String[] longCastle = new String[]{
             "........",
             "........",
             "........",
             "........",
-            "....B...",
-            "....B...",
+            "...B....",
+            "...B....",
             "........",
-            "r..k...r"
+            "r...k..r"
     };
     private String[] noCastle = new String[]{
             "........",
             "........",
-            "...Q....",
+            "....Q...",
             "........",
             "........",
             "........",
             "........",
-            "r..k...r"
+            "r...k..r"
     };
 
     private final Position shortCastlePosition = PositionGenerator.customPosition(shortCastle, false);
@@ -45,24 +47,21 @@ class CastlingControllerTest {
 
     @Test
     void canShortCastle() {
-        AttackController attackController = new AttackController(shortCastlePosition);
-        CastlingController castlingController = new CastlingController(shortCastlePosition, attackController, false);
+        CastleValidator castlingController = new CastleValidator(shortCastlePosition);
         assertTrue(castlingController.canShortCastle(Color.BLACK));
         assertFalse(castlingController.canLongCastle(Color.BLACK));
     }
 
     @Test
     void canLongCastle() {
-        AttackController attackController = new AttackController(longCastlePosition);
-        CastlingController castlingController = new CastlingController(longCastlePosition, attackController, false);
+        CastleValidator castlingController = new CastleValidator(longCastlePosition);
         assertTrue(castlingController.canLongCastle(Color.BLACK));
         assertFalse(castlingController.canShortCastle(Color.BLACK));
     }
 
     @Test
     void noCastle() {
-        AttackController attackController = new AttackController(noCastlePosition);
-        CastlingController castlingController = new CastlingController(noCastlePosition, attackController, false);
+        CastleValidator castlingController = new CastleValidator(noCastlePosition);
         assertFalse(castlingController.canShortCastle(Color.BLACK));
         assertFalse(castlingController.canLongCastle(Color.BLACK));
     }

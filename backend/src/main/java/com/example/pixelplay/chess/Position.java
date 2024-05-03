@@ -1,4 +1,6 @@
-package com.example.pixelplay.chess.base;
+package com.example.pixelplay.chess;
+
+import com.example.pixelplay.chess.base.*;
 
 import static java.lang.Math.abs;
 
@@ -6,6 +8,8 @@ public class Position {
     private final Piece[][] board = new Piece[8][8];
     private Color turn = Color.WHITE;
     private Square enPessantSquare = null;
+
+    private final PositionFlags positionFlags = new PositionFlags();
 
     public Position(PieceType[][] board, Color turn) {
         setBoard(board);
@@ -95,5 +99,13 @@ public class Position {
 
     public boolean canEnPessant(Square square) {
         return square.equals(enPessantSquare);
+    }
+
+    public boolean getFlag(PositionFlags.Flag flag) {
+        return positionFlags.getFlag(flag);
+    }
+
+    public void setFlag(PositionFlags.Flag flag, boolean value) {
+        positionFlags.setFlag(flag, value);
     }
 }
