@@ -1,6 +1,6 @@
 package com.example.pixelplay.chess.moving.pawnjump;
 
-import com.example.pixelplay.chess.Position;
+import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.base.*;
 import com.example.pixelplay.chess.moving.MoveHandler;
 

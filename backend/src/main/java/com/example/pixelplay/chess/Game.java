@@ -6,6 +6,8 @@ import com.example.pixelplay.chess.moving.MoveHandler;
 import com.example.pixelplay.chess.moving.GeneralHandler;
 import com.example.pixelplay.chess.moving.GeneralMoveValidator;
 import com.example.pixelplay.chess.moving.MoveValidator;
+import com.example.pixelplay.chess.position.Position;
+import com.example.pixelplay.chess.position.PositionGenerator;
 
 public class Game {
     private final Position position;

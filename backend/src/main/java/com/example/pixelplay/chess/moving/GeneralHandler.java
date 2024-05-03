@@ -1,6 +1,6 @@
 package com.example.pixelplay.chess.moving;
 
-import com.example.pixelplay.chess.Position;
+import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.base.*;
 import com.example.pixelplay.chess.moving.basic.SimpleMoveHandler;
 import com.example.pixelplay.chess.moving.castle.CastleHandler;

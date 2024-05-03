@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess;
+package com.example.pixelplay.chess.position;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,14 +21,5 @@ public class PositionFlags {
 
     public void setFlag(Flag flag, boolean value) {
         flags.put(flag, value);
-    }
-
-    public enum Flag {
-        WHITE_KING_MOVED,
-        BLACK_KING_MOVED,
-        WHITE_SHORT_ROOK_MOVED,
-        BLACK_SHORT_ROOK_MOVED,
-        BLACK_LONG_ROOK_MOVED,
-        WHITE_LONG_ROOK_MOVED,
     }
 }

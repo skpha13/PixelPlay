@@ -1,6 +1,6 @@
 package com.example.pixelplay.chess.mechanics.pieces
 
-import com.example.pixelplay.chess.Position
+import com.example.pixelplay.chess.position.Position
 import com.example.pixelplay.chess.base.Square
 
 class BlackPawnMechanics (

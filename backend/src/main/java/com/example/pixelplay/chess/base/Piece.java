@@ -1,6 +1,6 @@
 package com.example.pixelplay.chess.base;
 
-import com.example.pixelplay.chess.Position;
+import com.example.pixelplay.chess.position.Position;
 
 public final class Piece {
     private final PieceType type;

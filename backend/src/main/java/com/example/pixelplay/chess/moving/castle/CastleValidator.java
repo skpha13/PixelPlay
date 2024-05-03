@@ -1,7 +1,8 @@
 package com.example.pixelplay.chess.moving.castle;
 
-import com.example.pixelplay.chess.Position;
-import com.example.pixelplay.chess.PositionFlags;
+import com.example.pixelplay.chess.position.Flag;
+import com.example.pixelplay.chess.position.Position;
+import com.example.pixelplay.chess.position.PositionFlags;
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
@@ -95,19 +96,19 @@ public class CastleValidator implements MoveValidator {
 
     private boolean kingMoved(Color color) {
         return switch (color) {
-            case WHITE -> position.getFlag(PositionFlags.Flag.WHITE_KING_MOVED);
-            case BLACK -> position.getFlag(PositionFlags.Flag.BLACK_KING_MOVED);
+            case WHITE -> position.getFlag(Flag.WHITE_KING_MOVED);
+            case BLACK -> position.getFlag(Flag.BLACK_KING_MOVED);
         };
     }
     private boolean rookMoved(Color color, Castle type) {
         return switch (color) {
             case WHITE -> switch (type) {
-                case SHORT -> position.getFlag(PositionFlags.Flag.WHITE_SHORT_ROOK_MOVED);
-                case LONG -> position.getFlag(PositionFlags.Flag.WHITE_LONG_ROOK_MOVED);
+                case SHORT -> position.getFlag(Flag.WHITE_SHORT_ROOK_MOVED);
+                case LONG -> position.getFlag(Flag.WHITE_LONG_ROOK_MOVED);
             };
             case BLACK -> switch (type) {
-                case SHORT -> position.getFlag(PositionFlags.Flag.BLACK_SHORT_ROOK_MOVED);
-                case LONG -> position.getFlag(PositionFlags.Flag.BLACK_LONG_ROOK_MOVED);
+                case SHORT -> position.getFlag(Flag.BLACK_SHORT_ROOK_MOVED);
+                case LONG -> position.getFlag(Flag.BLACK_LONG_ROOK_MOVED);
             };
         };
     }

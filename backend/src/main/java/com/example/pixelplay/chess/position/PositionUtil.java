@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.utils;
+package com.example.pixelplay.chess.position;
 
 import com.example.pixelplay.chess.base.PieceType;
 import com.example.pixelplay.chess.base.Square;

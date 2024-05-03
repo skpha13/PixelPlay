@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess;
+package com.example.pixelplay.chess.position;
 
 import com.example.pixelplay.chess.base.*;
 
@@ -101,11 +101,11 @@ public class Position {
         return square.equals(enPessantSquare);
     }
 
-    public boolean getFlag(PositionFlags.Flag flag) {
+    public boolean getFlag(Flag flag) {
         return positionFlags.getFlag(flag);
     }
 
-    public void setFlag(PositionFlags.Flag flag, boolean value) {
+    public void setFlag(Flag flag, boolean value) {
         positionFlags.setFlag(flag, value);
     }
 }

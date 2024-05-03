@@ -2,6 +2,8 @@ package com.example.pixelplay.chess;
 
 import com.example.pixelplay.chess.base.*;
 import com.example.pixelplay.chess.exceptions.IncorrectTurnException;
+import com.example.pixelplay.chess.position.Position;
+import com.example.pixelplay.chess.position.PositionGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

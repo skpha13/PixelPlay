@@ -1,7 +1,8 @@
 package com.example.pixelplay.chess.moving.castle;
 
-import com.example.pixelplay.chess.Position;
-import com.example.pixelplay.chess.PositionFlags;
+import com.example.pixelplay.chess.position.Flag;
+import com.example.pixelplay.chess.position.Position;
+import com.example.pixelplay.chess.position.PositionFlags;
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
@@ -78,22 +79,22 @@ public class CastleHandler implements MoveHandler {
         switch (getColor(move)) {
             case WHITE -> {switch (getType(move)) {
                 case SHORT -> {
-                    position.setFlag(PositionFlags.Flag.WHITE_KING_MOVED, true);
-                    position.setFlag(PositionFlags.Flag.WHITE_SHORT_ROOK_MOVED, true);
+                    position.setFlag(Flag.WHITE_KING_MOVED, true);
+                    position.setFlag(Flag.WHITE_SHORT_ROOK_MOVED, true);
                 }
                 case LONG -> {
-                    position.setFlag(PositionFlags.Flag.WHITE_KING_MOVED, true);
-                    position.setFlag(PositionFlags.Flag.WHITE_LONG_ROOK_MOVED, true);
+                    position.setFlag(Flag.WHITE_KING_MOVED, true);
+                    position.setFlag(Flag.WHITE_LONG_ROOK_MOVED, true);
                 }
             }}
             case BLACK -> {switch (getType(move)) {
                 case SHORT -> {
-                    position.setFlag(PositionFlags.Flag.BLACK_KING_MOVED, true);
-                    position.setFlag(PositionFlags.Flag.BLACK_SHORT_ROOK_MOVED, true);
+                    position.setFlag(Flag.BLACK_KING_MOVED, true);
+                    position.setFlag(Flag.BLACK_SHORT_ROOK_MOVED, true);
                 }
                 case LONG -> {
-                    position.setFlag(PositionFlags.Flag.BLACK_KING_MOVED, true);
-                    position.setFlag(PositionFlags.Flag.BLACK_LONG_ROOK_MOVED, true);
+                    position.setFlag(Flag.BLACK_KING_MOVED, true);
+                    position.setFlag(Flag.BLACK_LONG_ROOK_MOVED, true);
                 }
             }}
         }

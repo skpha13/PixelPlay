@@ -6,6 +6,8 @@ import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.controllers.AttackController;
 import com.example.pixelplay.chess.moving.MoveHandler;
 import com.example.pixelplay.chess.moving.GeneralHandler;
+import com.example.pixelplay.chess.position.Position;
+import com.example.pixelplay.chess.position.PositionGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
