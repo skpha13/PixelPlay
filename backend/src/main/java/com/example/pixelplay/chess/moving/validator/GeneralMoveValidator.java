@@ -1,9 +1,11 @@
 package com.example.pixelplay.chess.moving.validator;
 
+import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.base.PieceType;
+import com.example.pixelplay.chess.exceptions.IncorrectTurnException;
 
 import static java.lang.Math.abs;
 
@@ -16,8 +18,18 @@ public class GeneralMoveValidator implements MoveValidator{
 
     @Override
     public boolean isValid(Move move) {
+        checkCurrentTurnColor(move);
+
         MoveValidator validator = getValidator(move);
         return validator.isValid(move);
+    }
+
+    void checkCurrentTurnColor(Move move) {
+        Piece piece = position.getPiece(move.start);
+        Color currentTurn = position.getTurn();
+        if (piece.getColor() != currentTurn) {
+            throw new IncorrectTurnException("It is " + currentTurn.toString() + "'s turn!");
+        }
     }
 
 

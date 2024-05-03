@@ -21,9 +21,6 @@ public class CastleValidator implements MoveValidator {
     @Override
     public boolean isValid(Move move) {
         try {
-            Color currentTurn = position.getTurn();
-            Piece piece = getPiece(move);
-            checkCurrentTurnColor(piece, currentTurn); //TODO move to moveValidator
             checkRules(move);
             return true;
         }

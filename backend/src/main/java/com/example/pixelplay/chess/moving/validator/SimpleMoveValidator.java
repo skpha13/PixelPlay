@@ -19,10 +19,7 @@ class SimpleMoveValidator implements MoveValidator {
     @Override
     public boolean isValid(Move move) {
         try {
-            Color currentTurn = position.getTurn();
-            Piece piece = getPiece(move);
-            checkCurrentTurnColor(piece, currentTurn);
-            checkMoveIsInPieceMoves(piece, move);
+            checkMoveIsInPieceMoves(move);
             return true;
         }
         catch (Exception e) {
@@ -36,10 +33,11 @@ class SimpleMoveValidator implements MoveValidator {
         return pieceGetter.tryToGetPiece(move);
     }
 
-    private void checkMoveIsInPieceMoves(Piece piece, Move move) {
+    private void checkMoveIsInPieceMoves(Move move) {
+        Piece piece = getPiece(move);
         PieceMechanics mechanics = PieceMechanicsFactory.getPieceMechanics(piece);
         List<Square> targetSquares = mechanics.moves();
-        if (!targetSquares.stream().anyMatch(square -> square.equals(move.end))) {
+        if (targetSquares.stream().noneMatch(square -> square.equals(move.end))) {
             throw new IncorrectMoveException("Move does not respect piece rules");
         }
     }
