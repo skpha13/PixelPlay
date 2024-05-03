@@ -12,7 +12,8 @@ public enum MoveType {
     BASIC,
     CASTLE,
     PROMOTION,
-    PAWN_JUMP;
+    PAWN_JUMP,
+    EN_PESSANT;
 
     public static MoveType getMoveType(Position position, Move move) {
         if(isCastle(position, move)) {
@@ -23,6 +24,9 @@ public enum MoveType {
         }
         if(isPawnJump(position, move)) {
             return PAWN_JUMP;
+        }
+        if(isEnPessant(position, move)) {
+            return EN_PESSANT;
         }
         return BASIC;
     }
@@ -48,5 +52,14 @@ public enum MoveType {
         boolean movedOnLastFile = (move.end().getRank() == 0 || move.end().getRank() == 7);
 
         return isPawn && movedOnLastFile;
+    }
+
+    private static boolean isEnPessant(Position position, Move move) {
+        Piece piece = position.getPiece(move.start());
+
+        boolean isPawn = piece.type() == PieceType.Pawn;
+        boolean canEnPessant = position.canEnPessant(move.end());
+
+        return isPawn && canEnPessant;
     }
 }

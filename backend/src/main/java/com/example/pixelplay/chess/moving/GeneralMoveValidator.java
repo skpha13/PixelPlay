@@ -1,15 +1,14 @@
 package com.example.pixelplay.chess.moving;
 
 import com.example.pixelplay.chess.base.*;
-import com.example.pixelplay.chess.moving.exceptions.IncorrectMoveException;
 import com.example.pixelplay.chess.moving.exceptions.KingCheckedException;
+import com.example.pixelplay.chess.moving.enpessant.EnPessantValidator;
 import com.example.pixelplay.chess.moving.promotion.PromotionValidator;
 import com.example.pixelplay.chess.position.AttackCalculator;
 import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.moving.exceptions.IncorrectTurnException;
 import com.example.pixelplay.chess.moving.basic.SimpleMoveValidator;
 import com.example.pixelplay.chess.moving.castle.CastleValidator;
-import kotlin.NotImplementedError;
 
 import static java.lang.Math.abs;
 
@@ -59,6 +58,7 @@ public class GeneralMoveValidator implements MoveValidator{
             case CASTLE -> new CastleValidator(position);
             case BASIC, PAWN_JUMP -> new SimpleMoveValidator(position);
             case PROMOTION -> new PromotionValidator(position);
+            case EN_PESSANT -> new EnPessantValidator(position);
         };
     }
 }

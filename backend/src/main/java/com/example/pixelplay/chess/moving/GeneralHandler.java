@@ -1,5 +1,6 @@
 package com.example.pixelplay.chess.moving;
 
+import com.example.pixelplay.chess.moving.enpessant.EnPessantHandler;
 import com.example.pixelplay.chess.moving.promotion.PromotionHandler;
 import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.base.*;
@@ -29,6 +30,7 @@ public class GeneralHandler implements MoveHandler{
             case PAWN_JUMP -> new PawnJumpHandler(position);
             case PROMOTION -> new PromotionHandler(position);
             case BASIC -> new SimpleMoveHandler(position);
+            case EN_PESSANT -> new EnPessantHandler(position);
         };
     }
 

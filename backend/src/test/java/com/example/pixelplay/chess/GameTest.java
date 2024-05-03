@@ -85,4 +85,30 @@ class GameTest {
         game.makeMove(move);
         assertEquals(PieceType.Bishop, game.getPosition().getPiece(end).type());
     }
+
+    private final Position enPessantPosition = PositionGenerator.customPosition(
+            new String[]{
+                    "...K....",
+                    "PPPPPPPP",
+                    "........",
+                    "..p.....",
+                    "........",
+                    "........",
+                    "........",
+                    ".....k.."
+            }
+    );
+
+    @Test
+    void move_enPessant() {
+        Game game = new Game(enPessantPosition);
+        Move whitePawnJump = new Move(new Square(1, 3), new Square(3, 3));
+        Move blackEnPessant = new Move(new Square(3, 2), new Square(2, 3));
+
+        game.makeMove(whitePawnJump);
+        game.makeMove(blackEnPessant);
+
+        assertEquals(PieceType.Pawn, game.getPosition().getPiece(new Square(2, 3)).type());
+        assertEquals(PieceType.None, game.getPosition().getPiece(new Square(3, 3)).type());
+    }
 }
