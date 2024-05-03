@@ -1,6 +1,5 @@
-package com.example.pixelplay.chess.controllers;
+package com.example.pixelplay.chess.position;
 
-import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.base.*;
 import com.example.pixelplay.chess.mechanics.PieceMechanics;
 import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
@@ -8,12 +7,12 @@ import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttackController {
+public class AttackCalculator {
     private final Position position;
     private NumberBoard whiteAttacks;
     private NumberBoard blackAttacks;
 
-    public AttackController(Position position) {
+    public AttackCalculator(Position position) {
         this.position = position;
         initializeAttackBoards();
     }

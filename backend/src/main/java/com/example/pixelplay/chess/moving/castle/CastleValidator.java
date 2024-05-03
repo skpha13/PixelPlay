@@ -1,12 +1,13 @@
 package com.example.pixelplay.chess.moving.castle;
 
+import com.example.pixelplay.chess.moving.exceptions.IncorrectCastlingException;
 import com.example.pixelplay.chess.position.Flag;
 import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.controllers.AttackController;
+import com.example.pixelplay.chess.position.AttackCalculator;
 import com.example.pixelplay.chess.moving.MoveValidator;
 import com.example.pixelplay.chess.moving.PieceGetter;
 
@@ -14,11 +15,11 @@ import static com.example.pixelplay.chess.position.PositionUtil.*;
 
 public class CastleValidator implements MoveValidator {
     private final Position position;
-    private final AttackController attackController;
+    private final AttackCalculator attackCalculator;
 
     public CastleValidator(Position position) {
         this.position = position;
-        this.attackController = new AttackController(position);
+        this.attackCalculator = new AttackCalculator(position);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class CastleValidator implements MoveValidator {
     }
 
     public boolean canShortCastle(Color color) {
-        boolean kingChecked = attackController.kingIsInCheck(color);
+        boolean kingChecked = attackCalculator.kingIsInCheck(color);
         Square kingSquare = getKingSquare(color);
         boolean kingMoved = kingMoved(color);
         boolean rookMoved = rookMoved(color, Castle.SHORT);
@@ -72,7 +73,7 @@ public class CastleValidator implements MoveValidator {
 
     }
     public boolean canLongCastle(Color color) {
-        boolean kingChecked = attackController.kingIsInCheck(color);
+        boolean kingChecked = attackCalculator.kingIsInCheck(color);
         Square kingSquare = getKingSquare(color);
         boolean kingMoved = kingMoved(color);
         boolean rookMoved = rookMoved(color, Castle.LONG);
@@ -130,8 +131,8 @@ public class CastleValidator implements MoveValidator {
             case LONG -> longCastleDirection;
         };
         Color enemyColor = kingColor.reverse();
-        return !attackController.isAttackedBy(enemyColor, kingSquare.move(castleDirection))
-                && !attackController.isAttackedBy(enemyColor, kingSquare.move(castleDirection, 2));
+        return !attackCalculator.isAttackedBy(enemyColor, kingSquare.move(castleDirection))
+                && !attackCalculator.isAttackedBy(enemyColor, kingSquare.move(castleDirection, 2));
     }
 
     enum Castle {

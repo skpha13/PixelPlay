@@ -5,7 +5,7 @@ import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.base.PieceType;
-import com.example.pixelplay.chess.exceptions.IncorrectTurnException;
+import com.example.pixelplay.chess.moving.exceptions.IncorrectTurnException;
 import com.example.pixelplay.chess.moving.basic.SimpleMoveValidator;
 import com.example.pixelplay.chess.moving.castle.CastleValidator;
 

@@ -4,12 +4,12 @@ import com.example.pixelplay.chess.position.PositionGenerator;
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.NumberBoard;
 import com.example.pixelplay.chess.position.Position;
-import com.example.pixelplay.chess.controllers.AttackController;
+import com.example.pixelplay.chess.position.AttackCalculator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AttackControllerTest {
+class AttackCalculatorTest {
 
     private static final String[] positionWhiteCheckKnight = new String[] {
             "........",
@@ -25,8 +25,8 @@ class AttackControllerTest {
     @Test
     public void attackedSquares() {
         Position position = PositionGenerator.customPosition(positionWhiteCheckKnight);
-        AttackController attackController = new AttackController(position);
-        NumberBoard attacked = attackController.getAttackBoard(Color.BLACK);
+        AttackCalculator attackCalculator = new AttackCalculator(position);
+        NumberBoard attacked = attackCalculator.getAttackBoard(Color.BLACK);
         NumberBoard reference = NumberBoard.fromNumberArray(new short[]{
                 1, 1, 1, 0, 1, 1, 1, 0,
                 2, 1, 3, 1, 1, 0, 1, 1,

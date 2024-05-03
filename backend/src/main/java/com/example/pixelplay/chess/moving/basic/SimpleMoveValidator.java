@@ -2,7 +2,7 @@ package com.example.pixelplay.chess.moving.basic;
 
 import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.base.*;
-import com.example.pixelplay.chess.exceptions.IncorrectMoveException;
+import com.example.pixelplay.chess.moving.exceptions.IncorrectMoveException;
 import com.example.pixelplay.chess.mechanics.PieceMechanics;
 import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
 import com.example.pixelplay.chess.moving.MoveValidator;

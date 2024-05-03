@@ -3,7 +3,7 @@ package com.example.pixelplay.chess;
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.controllers.AttackController;
+import com.example.pixelplay.chess.position.AttackCalculator;
 import com.example.pixelplay.chess.moving.MoveHandler;
 import com.example.pixelplay.chess.moving.GeneralHandler;
 import com.example.pixelplay.chess.position.Position;
@@ -17,13 +17,13 @@ class PositionTest {
     @Test
     public void verifyCheck() {
         Position position = PositionGenerator.customPosition(positionWhiteCheckKnight);
-        AttackController attackController = new AttackController(position);
-        boolean whiteChecked = attackController.kingIsInCheck(Color.WHITE);
+        AttackCalculator attackCalculator = new AttackCalculator(position);
+        boolean whiteChecked = attackCalculator.kingIsInCheck(Color.WHITE);
         assertTrue(whiteChecked);
 
         position = PositionGenerator.customPosition(positionWhiteCheckKnight);
-        attackController = new AttackController(position);
-        whiteChecked = attackController.kingIsInCheck(Color.WHITE);
+        attackCalculator = new AttackCalculator(position);
+        whiteChecked = attackCalculator.kingIsInCheck(Color.WHITE);
         assertTrue(whiteChecked);
 
     }
@@ -31,13 +31,13 @@ class PositionTest {
     @Test
     public void verifyNotCheck() {
         Position position = PositionGenerator.customPosition(positionWhiteCheckKnight);
-        AttackController attackController = new AttackController(position);
-        boolean whiteChecked = attackController.kingIsInCheck(Color.BLACK);
+        AttackCalculator attackCalculator = new AttackCalculator(position);
+        boolean whiteChecked = attackCalculator.kingIsInCheck(Color.BLACK);
         assertFalse(whiteChecked);
 
         position = PositionGenerator.customPosition(positionWhiteCheckKnight);
-        attackController = new AttackController(position);
-        whiteChecked = attackController.kingIsInCheck(Color.BLACK);
+        attackCalculator = new AttackCalculator(position);
+        whiteChecked = attackCalculator.kingIsInCheck(Color.BLACK);
         assertFalse(whiteChecked);
 
     }
