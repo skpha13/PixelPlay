@@ -42,6 +42,8 @@ public class GeneralMoveValidator implements MoveValidator{
             }
         }
         Position futurePosition = new Position(board, position.getTurn());
+        MoveHandler handler = new GeneralHandler(futurePosition);
+        handler.makeMove(move);
 
         AttackCalculator attackCalculator = new AttackCalculator(futurePosition);
         if(attackCalculator.kingIsInCheck(position.getTurn())) {
