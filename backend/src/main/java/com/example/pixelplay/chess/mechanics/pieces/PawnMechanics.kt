@@ -16,9 +16,9 @@ abstract class PawnMechanics(
     abstract val rightDiagonalMove: Square
     abstract val startingRank: Int
 
-    protected fun isOnLeftEdge(): Boolean = square.getFile() == 0
+    private fun isOnLeftEdge(): Boolean = square.getFile() == 0
 
-    protected fun isOnRightEdge(): Boolean = square.getFile() == 7
+    private fun isOnRightEdge(): Boolean = square.getFile() == 7
 
     override fun attacks(): List<Square> {
         val attackingIndexes: MutableList<Square> = ArrayList()

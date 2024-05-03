@@ -39,7 +39,7 @@ public class SimpleMoveValidator implements MoveValidator {
         Piece piece = getPiece(move);
         PieceMechanics mechanics = PieceMechanicsFactory.getPieceMechanics(piece);
         List<Square> targetSquares = mechanics.moves();
-        if (targetSquares.stream().noneMatch(square -> square.equals(move.end))) {
+        if (targetSquares.stream().noneMatch(square -> square.equals(move.end()))) {
             throw new IncorrectMoveException("Move does not respect piece rules");
         }
     }

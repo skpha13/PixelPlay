@@ -10,9 +10,9 @@ public class PieceMechanicsFactory {
     private PieceMechanicsFactory() {}
 
     public static PieceMechanics getPieceMechanics(Piece piece) {
-        Position position = piece.getPosition();
-        Square square = piece.getSquare();
-        return switch (piece.getType()) {
+        Position position = piece.position();
+        Square square = piece.square();
+        return switch (piece.type()) {
             case PieceType.BlackKing, PieceType.WhiteKing -> new KingMechanics(position, square);
             case PieceType.BlackBishop, PieceType.WhiteBishop -> new BishopMechanics(position, square);
             case PieceType.BlackKnight, PieceType.WhiteKnight -> new KnightMechanics(position, square);
@@ -20,7 +20,7 @@ public class PieceMechanicsFactory {
             case PieceType.BlackQueen, PieceType.WhiteQueen -> new QueenMechanics(position, square);
             case PieceType.BlackRook, PieceType.WhiteRook -> new RookMechanics(position, square);
             case PieceType.WhitePawn -> new WhitePawnMechanics(position, square);
-            default -> null;
+            default -> new EmptyMechanics(position, square);
         };
     }
 }

@@ -135,6 +135,6 @@ public class CastleValidator implements MoveValidator {
     }
 
     enum Castle {
-        SHORT, LONG;
+        SHORT, LONG
     }
 }

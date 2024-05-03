@@ -1,11 +1,10 @@
 package com.example.pixelplay.chess.mechanics
 
-import com.example.pixelplay.chess.position.PositionGenerator
-import com.example.pixelplay.chess.position.Position
 import com.example.pixelplay.chess.base.Square
 import com.example.pixelplay.chess.mechanics.pieces.KingMechanics
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
+import com.example.pixelplay.chess.position.Position
+import com.example.pixelplay.chess.position.PositionGenerator
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class KingMechanicsTest {
@@ -21,12 +20,8 @@ class KingMechanicsTest {
     )
 
     private val initialPosition: Position = PositionGenerator.initialPosition()
-    private val capturePosition: Position = PositionGenerator.customPosition(capture);
+    private val capturePosition: Position = PositionGenerator.customPosition(capture)
 
-
-    @BeforeEach
-    fun setUp() {
-    }
 
     @Test
     fun attackingIndexes() {

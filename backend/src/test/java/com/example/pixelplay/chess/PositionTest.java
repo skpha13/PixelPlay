@@ -51,17 +51,6 @@ class PositionTest {
         assertTrue(position.canEnPessant(new Square(2, 3)));
     }
 
-    private static final String[] positionWhiteCheckRook = new String[] {
-            "........",
-            ".....r..",
-            "..k.....",
-            "........",
-            "....P...",
-            "........",
-            ".....KB.",
-            "........"
-    };
-
     private static final String[] positionWhiteCheckKnight = new String[] {
             "........",
             ".k...q..",

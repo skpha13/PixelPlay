@@ -1,10 +1,9 @@
 package com.example.pixelplay.chess.mechanics
 
-import com.example.pixelplay.chess.position.PositionGenerator
 import com.example.pixelplay.chess.base.Square
 import com.example.pixelplay.chess.mechanics.pieces.QueenMechanics
+import com.example.pixelplay.chess.position.PositionGenerator
 import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 internal class QueenMechanicsTest {
@@ -23,9 +22,6 @@ internal class QueenMechanicsTest {
     private val initialPosition = PositionGenerator.initialPosition()
     private val capturePosition = PositionGenerator.customPosition(capture)
 
-    @BeforeEach
-    fun setUp() {
-    }
 
     @Test
     fun attackingIndexes() {
@@ -44,7 +40,7 @@ internal class QueenMechanicsTest {
         val mechanics = QueenMechanics(capturePosition, Square(3, 4))
         val moves: MutableList<Square> = mechanics.moves().toMutableList()
         val expected: MutableList<Square> = java.util.ArrayList(
-            java.util.List.of(
+            listOf(
                 Square(2, 3),
                 Square(2, 4),
                 Square(2, 5),

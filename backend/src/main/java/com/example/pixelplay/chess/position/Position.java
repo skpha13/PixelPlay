@@ -2,8 +2,6 @@ package com.example.pixelplay.chess.position;
 
 import com.example.pixelplay.chess.base.*;
 
-import static java.lang.Math.abs;
-
 public class Position {
     private final Piece[][] board = new Piece[8][8];
     private Color turn = Color.WHITE;
@@ -21,7 +19,7 @@ public class Position {
     }
 
     public boolean isFree(Square square) {
-        return board[square.getRank()][square.getFile()].getType() == PieceType.None;
+        return board[square.getRank()][square.getFile()].type() == PieceType.None;
     }
 
     private boolean checkBoardSize(PieceType[][] board) {
@@ -64,7 +62,7 @@ public class Position {
 
         for(int i = 0; i < 8; i++) {
             for(int j = 0; j < 8; j++) {
-                if(board[i][j].getType() == king) {
+                if(board[i][j].type() == king) {
                     return new Square(i, j);
                 }
             }
@@ -76,17 +74,8 @@ public class Position {
         board[square.getRank()][square.getFile()] = piece;
     }
 
-    public void swapTurn(Move move) {
+    public void swapTurn() {
         turn = turn.reverse();
-    }
-
-
-
-    private boolean pawnMoved2Squares(Move move) {
-        boolean isPawn = getPiece(move.end).getType() == PieceType.WhitePawn
-            || getPiece(move.end).getType() == PieceType.BlackPawn;
-        boolean movedTwoSquares = abs(move.direction().getRank()) == 2;
-        return isPawn && movedTwoSquares;
     }
 
     public Color getTurn() {

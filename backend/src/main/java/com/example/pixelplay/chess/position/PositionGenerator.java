@@ -23,15 +23,11 @@ public class PositionGenerator {
         return new Position(translateBoard(boardStrings), Color.WHITE);
     }
 
-    public static Position customPosition(String[] boardStrings, boolean castlingFlags) {
-        return new Position(translateBoard(boardStrings), Color.WHITE);
-    }
-
     public static Position customPosition(String[] boardStrings, Color whoseTurn) {
         return new Position(translateBoard(boardStrings), whoseTurn);
     }
 
-    // Converts a list of Strings representing pieces on a board to an 2d array of pieces
+    // Converts a list of Strings representing pieces on a board to a 2d array of pieces
     public static PieceType[][] translateBoard(String[] boardStrings) {
         checkSize(boardStrings);
         PieceType[][] board = new PieceType[8][8];

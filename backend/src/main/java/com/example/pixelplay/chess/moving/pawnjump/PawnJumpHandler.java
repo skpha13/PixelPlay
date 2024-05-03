@@ -13,10 +13,10 @@ public class PawnJumpHandler implements MoveHandler {
 
     @Override
     public void makeMove(Move move) {
-        Piece piece = position.getPiece(move.start);
-        position.setPiece(move.end, piece);
-        position.setPiece(move.start, new Piece(PieceType.None, position, move.start));
-        position.swapTurn(move);
+        Piece piece = position.getPiece(move.start());
+        position.setPiece(move.end(), piece);
+        position.setPiece(move.start(), new Piece(PieceType.None, position, move.start()));
+        position.swapTurn();
 
         updateEnPessant(move);
 
@@ -28,10 +28,9 @@ public class PawnJumpHandler implements MoveHandler {
     }
 
     private Square computeEnPessantSquare(Move move) {
-        Square square = new Square(
-                (move.start.getRank() + move.end.getRank())/ 2,
-                (move.start.getFile() + move.end.getFile())/ 2
+        return new Square(
+                (move.start().getRank() + move.end().getRank())/ 2,
+                (move.start().getFile() + move.end().getFile())/ 2
         );
-        return square;
     }
 }

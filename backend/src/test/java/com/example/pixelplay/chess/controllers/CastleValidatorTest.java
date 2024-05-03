@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CastleValidatorTest {
-    private String[] shortCastle = new String[]{
+    private final String[] shortCastle = new String[]{
             "...R....",
             "........",
             "........",
@@ -20,7 +20,7 @@ class CastleValidatorTest {
             "........",
             "r...k..r"
     };
-    private String[] longCastle = new String[]{
+    private final String[] longCastle = new String[]{
             "........",
             "........",
             "........",
@@ -30,7 +30,7 @@ class CastleValidatorTest {
             "........",
             "r...k..r"
     };
-    private String[] noCastle = new String[]{
+    private final String[] noCastle = new String[]{
             "........",
             "........",
             "....Q...",
@@ -41,9 +41,9 @@ class CastleValidatorTest {
             "r...k..r"
     };
 
-    private final Position shortCastlePosition = PositionGenerator.customPosition(shortCastle, false);
-    private final Position longCastlePosition = PositionGenerator.customPosition(longCastle, false);
-    private final Position noCastlePosition = PositionGenerator.customPosition(noCastle, false);
+    private final Position shortCastlePosition = PositionGenerator.customPosition(shortCastle);
+    private final Position longCastlePosition = PositionGenerator.customPosition(longCastle);
+    private final Position noCastlePosition = PositionGenerator.customPosition(noCastle);
 
     @Test
     void canShortCastle() {

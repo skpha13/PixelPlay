@@ -13,7 +13,7 @@ public class PieceGetter {
     }
 
     public Piece tryToGetPiece(Move move) {
-        Piece piece = position.getPiece(move.start);
+        Piece piece = position.getPiece(move.start());
         if (piece == null) {
             throw new EmptySquareException("No piece to move");
         }

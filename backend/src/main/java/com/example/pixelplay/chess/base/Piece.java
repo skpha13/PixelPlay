@@ -2,28 +2,7 @@ package com.example.pixelplay.chess.base;
 
 import com.example.pixelplay.chess.position.Position;
 
-public final class Piece {
-    private final PieceType type;
-    private final Position position;
-    private final Square square;
-
-    public Piece(PieceType type, Position position, Square square) {
-        this.type = type;
-        this.position = position;
-        this.square = square;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public Square getSquare() {
-        return square;
-    }
-
-    public PieceType getType() {
-        return type;
-    }
+public record Piece(PieceType type, Position position, Square square) {
 
     public Color getColor() {
         return type.color();

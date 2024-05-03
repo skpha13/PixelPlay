@@ -15,6 +15,7 @@ public enum PieceType {
     BlackKnight(11),
     BlackPawn(12);
 
+    @SuppressWarnings("unused")
     public final int value;
     PieceType(int value) {
         this.value = value;

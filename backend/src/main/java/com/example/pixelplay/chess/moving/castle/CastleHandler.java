@@ -25,16 +25,16 @@ public class CastleHandler implements MoveHandler {
     }
 
     private void moveKing(Move move) {
-        Piece king = position.getPiece(move.start);
-        Piece empty = position.getPiece(move.end);
-        position.setPiece(move.end, king);
-        position.setPiece(move.start, empty);
+        Piece king = position.getPiece(move.start());
+        Piece empty = position.getPiece(move.end());
+        position.setPiece(move.end(), king);
+        position.setPiece(move.start(), empty);
     }
 
     private void moveRook(Move move) {
         Square direction = getDirection(move);
         Square rookSquare = getRookSquare(move, direction);
-        Square emptySquare = move.start.move(direction, 1);
+        Square emptySquare = move.start().move(direction, 1);
         Piece rook = position.getPiece(rookSquare);
         Piece empty = position.getPiece(emptySquare);
 
@@ -52,8 +52,8 @@ public class CastleHandler implements MoveHandler {
 
     private Square getRookSquare(Move move, Square direction) {
         return switch (direction.getFile()){
-            case 1 -> move.start.move(direction, 3);
-            case -1 -> move.start.move(direction, 4);
+            case 1 -> move.start().move(direction, 3);
+            case -1 -> move.start().move(direction, 4);
             default -> throw new IllegalStateException("Unexpected value: " + move.direction().getFile());
         };
     }
@@ -68,10 +68,10 @@ public class CastleHandler implements MoveHandler {
     }
 
     private Color getColor(Move move) {
-        return switch (move.start.getRank()) {
+        return switch (move.start().getRank()) {
             case 0 -> Color.WHITE;
             case 7 -> Color.BLACK;
-            default -> throw new IllegalStateException("Unexpected value: " + move.start.getRank());
+            default -> throw new IllegalStateException("Unexpected value: " + move.start().getRank());
         };
     }
 
@@ -101,6 +101,6 @@ public class CastleHandler implements MoveHandler {
     }
 
     enum Castle {
-        SHORT, LONG;
+        SHORT, LONG
     }
 }

@@ -16,7 +16,6 @@ class MoveControllerTest {
 
     @Test
     void isValid() {
-        AttackController attackController = new AttackController(position);
         MoveValidator moveValidator = new GeneralMoveValidator(position);
 
         Move pawnMove = new Move(new Square(1, 0), new Square(2, 0));

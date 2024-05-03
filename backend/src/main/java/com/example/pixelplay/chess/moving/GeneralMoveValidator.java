@@ -27,7 +27,7 @@ public class GeneralMoveValidator implements MoveValidator{
     }
 
     void checkCurrentTurnColor(Move move) {
-        Piece piece = position.getPiece(move.start);
+        Piece piece = position.getPiece(move.start());
         Color currentTurn = position.getTurn();
         if (piece.getColor() != currentTurn) {
             throw new IncorrectTurnException("It is " + currentTurn.toString() + "'s turn!");
@@ -43,8 +43,8 @@ public class GeneralMoveValidator implements MoveValidator{
     }
 
     private boolean isCastle(Move move) {
-        Piece piece = position.getPiece(move.start);
-        boolean kingMoved = (piece.getType() == PieceType.BlackKing) || (piece.getType() == PieceType.WhiteKing);
+        Piece piece = position.getPiece(move.start());
+        boolean kingMoved = (piece.type() == PieceType.BlackKing) || (piece.type() == PieceType.WhiteKing);
         boolean movedTwoFiles = abs(move.direction().getFile()) == 2;
 
         return kingMoved && movedTwoFiles;

@@ -30,7 +30,6 @@ public class AttackController {
         return switch (color) {
             case WHITE -> whiteAttacks;
             case BLACK -> blackAttacks;
-            default -> throw new IllegalStateException("Unexpected value: " + color);
         };
     }
 

@@ -5,13 +5,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class NumberBoard {
-    private short[] board = new short[64];
+    private final short[] board = new short[64];
 
     public static NumberBoard fromNumberArray(short[] array) {
         NumberBoard board = new NumberBoard();
-        for(int i = 0; i < 64; i ++) {
-            board.board[i] = array[i];
-        }
+        System.arraycopy(array, 0, board.board, 0, 64);
         return board;
     }
 
