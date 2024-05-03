@@ -1,10 +1,9 @@
 package com.example.pixelplay.chess.moving;
 
-import com.example.pixelplay.chess.base.Color;
-import com.example.pixelplay.chess.base.Move;
+import com.example.pixelplay.chess.base.*;
+import com.example.pixelplay.chess.moving.exceptions.KingCheckedException;
+import com.example.pixelplay.chess.position.AttackCalculator;
 import com.example.pixelplay.chess.position.Position;
-import com.example.pixelplay.chess.base.Piece;
-import com.example.pixelplay.chess.base.PieceType;
 import com.example.pixelplay.chess.moving.exceptions.IncorrectTurnException;
 import com.example.pixelplay.chess.moving.basic.SimpleMoveValidator;
 import com.example.pixelplay.chess.moving.castle.CastleValidator;
@@ -21,6 +20,7 @@ public class GeneralMoveValidator implements MoveValidator{
     @Override
     public boolean isValid(Move move) {
         checkCurrentTurnColor(move);
+        checkKingSafetyAfterMove(move);
 
         MoveValidator validator = getValidator(move);
         return validator.isValid(move);
@@ -31,6 +31,21 @@ public class GeneralMoveValidator implements MoveValidator{
         Color currentTurn = position.getTurn();
         if (piece.getColor() != currentTurn) {
             throw new IncorrectTurnException("It is " + currentTurn.toString() + "'s turn!");
+        }
+    }
+
+    void checkKingSafetyAfterMove(Move move) {
+        PieceType[][] board = new PieceType[8][8];
+        for(int i = 0; i < 8; i ++) {
+            for(int j = 0; j < 8; j ++) {
+                board[i][j] = position.getPiece(new Square(i, j)).type();
+            }
+        }
+        Position futurePosition = new Position(board, position.getTurn());
+
+        AttackCalculator attackCalculator = new AttackCalculator(futurePosition);
+        if(attackCalculator.kingIsInCheck(position.getTurn())) {
+            throw new KingCheckedException("King is checked after move");
         }
     }
 
