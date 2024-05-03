@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.moving.validator;
+package com.example.pixelplay.chess.moving.castle;
 
 import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.PositionFlags;
@@ -7,7 +7,8 @@ import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.controllers.AttackController;
-import com.example.pixelplay.chess.moving.exceptions.IncorrectCastlingException;
+import com.example.pixelplay.chess.moving.MoveValidator;
+import com.example.pixelplay.chess.moving.PieceGetter;
 
 public class CastleValidator implements MoveValidator {
     private final Position position;

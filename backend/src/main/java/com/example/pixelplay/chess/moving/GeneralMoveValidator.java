@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.moving.validator;
+package com.example.pixelplay.chess.moving;
 
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
@@ -6,6 +6,8 @@ import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.base.PieceType;
 import com.example.pixelplay.chess.exceptions.IncorrectTurnException;
+import com.example.pixelplay.chess.moving.basic.SimpleMoveValidator;
+import com.example.pixelplay.chess.moving.castle.CastleValidator;
 
 import static java.lang.Math.abs;
 

@@ -2,10 +2,10 @@ package com.example.pixelplay.chess;
 
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.controllers.AttackController;
-import com.example.pixelplay.chess.moving.handler.MoveHandler;
-import com.example.pixelplay.chess.moving.handler.GeneralHandler;
-import com.example.pixelplay.chess.moving.validator.GeneralMoveValidator;
-import com.example.pixelplay.chess.moving.validator.MoveValidator;
+import com.example.pixelplay.chess.moving.MoveHandler;
+import com.example.pixelplay.chess.moving.GeneralHandler;
+import com.example.pixelplay.chess.moving.GeneralMoveValidator;
+import com.example.pixelplay.chess.moving.MoveValidator;
 
 public class Game {
     private final Position position;

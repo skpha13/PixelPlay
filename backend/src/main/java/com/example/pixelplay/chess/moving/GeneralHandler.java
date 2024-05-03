@@ -1,7 +1,10 @@
-package com.example.pixelplay.chess.moving.handler;
+package com.example.pixelplay.chess.moving;
 
 import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.base.*;
+import com.example.pixelplay.chess.moving.basic.SimpleMoveHandler;
+import com.example.pixelplay.chess.moving.castle.CastleHandler;
+import com.example.pixelplay.chess.moving.pawnjump.PawnJumpHandler;
 
 import static java.lang.Math.abs;
 

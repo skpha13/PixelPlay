@@ -1,11 +1,11 @@
-package com.example.pixelplay.chess.moving.validator;
+package com.example.pixelplay.chess.moving;
 
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.exceptions.EmptySquareException;
 
-class PieceGetter {
+public class PieceGetter {
     private final Position position;
 
     public PieceGetter(Position position) {

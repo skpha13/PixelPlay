@@ -5,8 +5,8 @@ import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.exceptions.IncorrectMoveException;
-import com.example.pixelplay.chess.moving.validator.GeneralMoveValidator;
-import com.example.pixelplay.chess.moving.validator.MoveValidator;
+import com.example.pixelplay.chess.moving.GeneralMoveValidator;
+import com.example.pixelplay.chess.moving.MoveValidator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

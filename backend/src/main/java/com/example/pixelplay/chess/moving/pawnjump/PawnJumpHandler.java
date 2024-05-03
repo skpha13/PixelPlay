@@ -1,7 +1,8 @@
-package com.example.pixelplay.chess.moving.handler;
+package com.example.pixelplay.chess.moving.pawnjump;
 
 import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.base.*;
+import com.example.pixelplay.chess.moving.MoveHandler;
 
 public class PawnJumpHandler implements MoveHandler {
     private final Position position;

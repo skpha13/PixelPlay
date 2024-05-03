@@ -1,14 +1,16 @@
-package com.example.pixelplay.chess.moving.validator;
+package com.example.pixelplay.chess.moving.basic;
 
 import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.base.*;
 import com.example.pixelplay.chess.exceptions.IncorrectMoveException;
 import com.example.pixelplay.chess.mechanics.PieceMechanics;
 import com.example.pixelplay.chess.mechanics.PieceMechanicsFactory;
+import com.example.pixelplay.chess.moving.MoveValidator;
+import com.example.pixelplay.chess.moving.PieceGetter;
 
 import java.util.List;
 
-class SimpleMoveValidator implements MoveValidator {
+public class SimpleMoveValidator implements MoveValidator {
     private final Position position;
 
     public SimpleMoveValidator(Position position) {

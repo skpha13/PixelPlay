@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.moving.handler;
+package com.example.pixelplay.chess.moving.castle;
 
 import com.example.pixelplay.chess.Position;
 import com.example.pixelplay.chess.PositionFlags;
@@ -6,9 +6,9 @@ import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.moving.validator.CastleValidator;
+import com.example.pixelplay.chess.moving.MoveHandler;
 
-public class CastleHandler implements MoveHandler{
+public class CastleHandler implements MoveHandler {
     private final Position position;
 
     public CastleHandler(Position position) {

@@ -3,7 +3,7 @@ package com.example.pixelplay.chess.controllers;
 import com.example.pixelplay.chess.PositionGenerator;
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.Position;
-import com.example.pixelplay.chess.moving.validator.CastleValidator;
+import com.example.pixelplay.chess.moving.castle.CastleValidator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

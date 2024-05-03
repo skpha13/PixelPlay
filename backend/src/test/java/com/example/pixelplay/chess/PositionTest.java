@@ -4,8 +4,8 @@ import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.controllers.AttackController;
-import com.example.pixelplay.chess.moving.handler.MoveHandler;
-import com.example.pixelplay.chess.moving.handler.GeneralHandler;
+import com.example.pixelplay.chess.moving.MoveHandler;
+import com.example.pixelplay.chess.moving.GeneralHandler;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
