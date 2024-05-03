@@ -48,7 +48,7 @@ public class Position {
     }
 
     private Piece createPiece(PieceType type, int rank, int file) {
-        return new Piece(type, new Square(rank, file));
+        return new Piece(type);
     }
 
     public Square findKing(Color color) {

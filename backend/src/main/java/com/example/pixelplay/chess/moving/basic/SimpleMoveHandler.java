@@ -16,7 +16,7 @@ public class SimpleMoveHandler implements MoveHandler {
     public void makeMove(Move move) {
         Piece piece = position.getPiece(move.start());
         position.setPiece(move.end(), piece);
-        position.setPiece(move.start(), new Piece(PieceType.None, move.start()));
+        position.setPiece(move.start(), new Piece(PieceType.None));
         position.swapTurn();
     }
 }

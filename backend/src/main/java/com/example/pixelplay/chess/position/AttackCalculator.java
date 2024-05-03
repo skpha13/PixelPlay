@@ -46,9 +46,10 @@ public class AttackCalculator {
 
         for(int i = 0; i < 8; i ++) {
             for (int j = 0; j < 8; j ++) {
-                Piece piece =position.getPiece(new Square(i, j));
+                Square square = new Square(i, j);
+                Piece piece = position.getPiece(square);
                 if(piece.isColor(color)) {
-                    PieceMechanics mechanics = PieceMechanicsFactory.getPieceMechanics(position, piece);
+                    PieceMechanics mechanics = PieceMechanicsFactory.getPieceMechanics(position, square, piece);
                     attacks.addAll(mechanics.attacks());
                 }
             }
