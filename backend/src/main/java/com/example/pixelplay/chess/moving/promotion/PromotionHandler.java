@@ -27,7 +27,7 @@ public class PromotionHandler implements MoveHandler {
 
     private Piece createNewPiece(Move move) {
         Color color = position.getPiece(move.start()).color();
-        PieceType type = move.promotionType;
+        PieceType type = move.promotionType();
         return new Piece(type, color);
     }
 }

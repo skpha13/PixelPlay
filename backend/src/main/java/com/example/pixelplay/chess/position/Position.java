@@ -3,8 +3,8 @@ package com.example.pixelplay.chess.position;
 import com.example.pixelplay.chess.base.*;
 
 public class Position {
-    private Piece[][] board = new Piece[8][8];
-    private Color turn = Color.WHITE;
+    private final Piece[][] board;
+    private Color turn;
     private Square enPessantSquare = null;
 
     private final PositionFlags positionFlags = new PositionFlags();
@@ -20,18 +20,6 @@ public class Position {
 
     public boolean isFree(Square square) {
         return board[square.getRank()][square.getFile()].type() == PieceType.None;
-    }
-
-    private boolean checkBoardSize(PieceType[][] board) {
-        if (board.length != 8) {
-            return false;
-        }
-        for(int i = 0; i < 8; i++) {
-            if(board[i].length != 8) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public Square findKing(Color color) {

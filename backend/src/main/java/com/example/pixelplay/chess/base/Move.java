@@ -3,7 +3,7 @@ package com.example.pixelplay.chess.base;
 public class Move {
     private final Square start;
     private final Square end;
-    public PieceType promotionType = PieceType.None;
+    private PieceType promotionType = PieceType.None;
 
     public Move(Square start, Square end) {
         this.start = start;

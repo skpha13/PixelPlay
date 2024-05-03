@@ -25,7 +25,7 @@ abstract class PieceMechanics(
     }
 
     fun getColor(): Color {
-        return position.getPiece(square).color;
+        return position.getPiece(square).color
     }
 
     fun canCapture(target: Square): Boolean {

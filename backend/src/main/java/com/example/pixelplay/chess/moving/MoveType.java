@@ -3,7 +3,6 @@ package com.example.pixelplay.chess.moving;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.base.PieceType;
-import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.position.Position;
 
 import static java.lang.Math.abs;

@@ -10,8 +10,6 @@ import com.example.pixelplay.chess.moving.exceptions.IncorrectTurnException;
 import com.example.pixelplay.chess.moving.basic.SimpleMoveValidator;
 import com.example.pixelplay.chess.moving.castle.CastleValidator;
 
-import static java.lang.Math.abs;
-
 public class GeneralMoveValidator implements MoveValidator{
     private final Position position;
 

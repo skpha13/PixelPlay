@@ -8,8 +8,6 @@ import com.example.pixelplay.chess.moving.basic.SimpleMoveHandler;
 import com.example.pixelplay.chess.moving.castle.CastleHandler;
 import com.example.pixelplay.chess.moving.pawnjump.PawnJumpHandler;
 
-import static java.lang.Math.abs;
-
 public class GeneralHandler implements MoveHandler{
     private final Position position;
 

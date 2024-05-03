@@ -6,8 +6,6 @@ import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.moving.MoveHandler;
 import com.example.pixelplay.chess.position.Position;
 
-import javax.swing.plaf.PanelUI;
-
 public class EnPessantHandler implements MoveHandler {
     private final Position position;
 

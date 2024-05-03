@@ -40,9 +40,9 @@ public class PromotionValidator implements MoveValidator {
         }
     }
     private void assertPromotionTypeIsCorrect(Move move) {
-        if(move.promotionType == PieceType.King ||
-                move.promotionType == PieceType.Pawn ||
-                move.promotionType == PieceType.None)
-            throw new InvalidPromotionException("You cannot promote to" + move.promotionType);
+        if(move.promotionType() == PieceType.King ||
+                move.promotionType() == PieceType.Pawn ||
+                move.promotionType() == PieceType.None)
+            throw new InvalidPromotionException("You cannot promote to" + move.promotionType());
     }
 }
