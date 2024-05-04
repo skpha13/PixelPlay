@@ -17,11 +17,17 @@ public class GeneralMoveValidator implements MoveValidator {
 
     @Override
     public boolean isValid(Move move) {
-        checkCurrentTurnColor(move);
-        checkKingSafetyAfterMove(move);
+        try {
+            checkCurrentTurnColor(move);
+            checkKingSafetyAfterMove(move);
 
-        MoveValidator validator = getValidator(move);
-        return validator.isValid(move);
+            MoveValidator validator = getValidator(move);
+            return validator.isValid(move);
+        }
+        catch (Exception e) {
+            return false;
+        }
+
     }
 
     void checkCurrentTurnColor(Move move) {

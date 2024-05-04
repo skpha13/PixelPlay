@@ -28,7 +28,7 @@ public class CastleValidator implements MoveValidator {
             return true;
         }
         catch (Exception e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 

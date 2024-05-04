@@ -4,8 +4,6 @@ import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.moving.validator.CastleValidator;
-import com.example.pixelplay.chess.moving.validator.IncorrectMoveException;
-import com.example.pixelplay.chess.moving.validator.KingCheckedException;
 import com.example.pixelplay.chess.moving.validator.GeneralMoveValidator;
 import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.position.PositionGenerator;
@@ -29,7 +27,7 @@ class GeneralMoveValidatorTest {
         assertTrue(moveValidator.isValid(knightMove));
 
         Move kingMove = new Move(new Square(0, 4), new Square(0, 5));
-        assertThrows(IncorrectMoveException.class,() -> moveValidator.isValid(kingMove));
+        assertFalse(moveValidator.isValid(kingMove));
     }
 
     private final Position kingInCheckPosition = PositionGenerator.customPosition(
@@ -105,6 +103,6 @@ class GeneralMoveValidatorTest {
     void move_kingStillInCheck() {
         MoveValidator validator = new GeneralMoveValidator(kingInCheckPosition);
         Move move = new Move(new Square(0, 3), new Square(0, 4));
-        assertThrows(KingCheckedException.class, () -> validator.isValid(move));
+        assertFalse(validator.isValid(move));
     }
 }

@@ -26,7 +26,7 @@ class GameTest {
         Game game = new Game();
         Move pawnMove = new Move(new Square(6, 3), new Square(5, 3));
 
-        assertThrows(IncorrectTurnException.class, () -> game.makeMove(pawnMove));
+        assertThrows(RuntimeException.class, () -> game.makeMove(pawnMove));
     }
 
     @Test
@@ -36,7 +36,7 @@ class GameTest {
         Move knightMove = new Move(new Square(0, 1), new Square(2, 2));
 
         game.makeMove(pawnMove);
-        assertThrows(IncorrectTurnException.class, () -> game.makeMove(knightMove));
+        assertThrows(RuntimeException.class, () -> game.makeMove(knightMove));
     }
 
     @Test
