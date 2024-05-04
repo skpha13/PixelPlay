@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.moving.castle;
+package com.example.pixelplay.chess.moving.handler;
 
 import com.example.pixelplay.chess.position.Flag;
 import com.example.pixelplay.chess.position.Position;

@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.moving.castle;
+package com.example.pixelplay.chess.moving.validator;
 
 import com.example.pixelplay.chess.position.Flag;
 import com.example.pixelplay.chess.position.Position;
@@ -8,7 +8,7 @@ import com.example.pixelplay.chess.base.Piece;
 import com.example.pixelplay.chess.base.Square;
 import com.example.pixelplay.chess.position.AttackCalculator;
 import com.example.pixelplay.chess.moving.MoveValidator;
-import com.example.pixelplay.chess.moving.PieceGetter;
+import com.example.pixelplay.chess.moving.util.PieceGetter;
 
 import static com.example.pixelplay.chess.position.PositionUtil.*;
 

@@ -1,16 +1,14 @@
-package com.example.pixelplay.chess.moving;
+package com.example.pixelplay.chess.moving.validator;
 
 import com.example.pixelplay.chess.base.*;
-import com.example.pixelplay.chess.moving.exceptions.KingCheckedException;
-import com.example.pixelplay.chess.moving.enpessant.EnPessantValidator;
-import com.example.pixelplay.chess.moving.promotion.PromotionValidator;
+import com.example.pixelplay.chess.moving.MoveHandler;
+import com.example.pixelplay.chess.moving.util.MoveType;
+import com.example.pixelplay.chess.moving.MoveValidator;
+import com.example.pixelplay.chess.moving.handler.GeneralHandler;
 import com.example.pixelplay.chess.position.AttackCalculator;
 import com.example.pixelplay.chess.position.Position;
-import com.example.pixelplay.chess.moving.exceptions.IncorrectTurnException;
-import com.example.pixelplay.chess.moving.basic.SimpleMoveValidator;
-import com.example.pixelplay.chess.moving.castle.CastleValidator;
 
-public class GeneralMoveValidator implements MoveValidator{
+public class GeneralMoveValidator implements MoveValidator {
     private final Position position;
 
     public GeneralMoveValidator(Position position) {

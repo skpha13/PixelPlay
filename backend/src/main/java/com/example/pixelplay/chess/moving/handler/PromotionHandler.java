@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.moving.promotion;
+package com.example.pixelplay.chess.moving.handler;
 
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;

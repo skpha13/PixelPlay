@@ -1,14 +1,11 @@
-package com.example.pixelplay.chess.moving;
+package com.example.pixelplay.chess.moving.handler;
 
-import com.example.pixelplay.chess.moving.enpessant.EnPessantHandler;
-import com.example.pixelplay.chess.moving.promotion.PromotionHandler;
+import com.example.pixelplay.chess.moving.MoveHandler;
+import com.example.pixelplay.chess.moving.util.MoveType;
 import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.base.*;
-import com.example.pixelplay.chess.moving.basic.SimpleMoveHandler;
-import com.example.pixelplay.chess.moving.castle.CastleHandler;
-import com.example.pixelplay.chess.moving.pawnjump.PawnJumpHandler;
 
-public class GeneralHandler implements MoveHandler{
+public class GeneralHandler implements MoveHandler {
     private final Position position;
 
     public GeneralHandler(Position position) {

@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.moving.exceptions;
+package com.example.pixelplay.chess.moving.validator;
 
 public class IncorrectTurnException extends RuntimeException {
     public IncorrectTurnException(String message, Throwable err) {

@@ -1,8 +1,7 @@
-package com.example.pixelplay.chess.moving;
+package com.example.pixelplay.chess.moving.util;
 
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
-import com.example.pixelplay.chess.moving.exceptions.EmptySquareException;
 import com.example.pixelplay.chess.position.Position;
 
 public class PieceGetter {

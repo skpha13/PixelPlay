@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.moving.promotion;
+package com.example.pixelplay.chess.moving.validator;
 
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Piece;
