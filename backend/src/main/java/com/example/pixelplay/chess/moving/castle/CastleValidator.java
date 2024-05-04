@@ -1,6 +1,5 @@
 package com.example.pixelplay.chess.moving.castle;
 
-import com.example.pixelplay.chess.moving.exceptions.IncorrectCastlingException;
 import com.example.pixelplay.chess.position.Flag;
 import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.base.Color;

@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.moving.exceptions;
+package com.example.pixelplay.chess.moving.castle;
 
 public class IncorrectCastlingException extends RuntimeException {
     public IncorrectCastlingException(String msg) {
