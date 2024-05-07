@@ -2,7 +2,7 @@ package com.example.pixelplay.chess.moving.generator;
 
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.moving.MoveGenerator;
+import com.example.pixelplay.chess.moving.PieceMoveGenerator;
 import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.position.PositionGenerator;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class KnightMoveGeneratorTest {
+class KnightPieceMoveGeneratorTest {
     private final Position position = PositionGenerator.customPosition(
             new String[] {
                     "..K.....",
@@ -30,7 +30,7 @@ class KnightMoveGeneratorTest {
     @Test
     public void getLegaMoves() {
         Square square = new Square(2, 7);
-        MoveGenerator generator = new KnightMoveGenerator(position, square);
+        PieceMoveGenerator generator = new KnightMoveGenerator(position, square);
 
         List<Move> moves = generator.getLegalMoves();
         List<Move> expected = new ArrayList<>(List.of(

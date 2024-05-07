@@ -3,7 +3,7 @@ package com.example.pixelplay.chess.moving.generator;
 import com.example.pixelplay.chess.base.Color;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.moving.MoveGenerator;
+import com.example.pixelplay.chess.moving.PieceMoveGenerator;
 import com.example.pixelplay.chess.moving.MoveValidator;
 import com.example.pixelplay.chess.moving.validator.GeneralMoveValidator;
 import com.example.pixelplay.chess.position.Position;
@@ -12,7 +12,7 @@ import com.example.pixelplay.chess.position.PositionUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-class KingMoveGenerator implements MoveGenerator {
+class KingMoveGenerator implements PieceMoveGenerator {
     private final Position position;
     private final Square start;
     private final MoveValidator validator;
