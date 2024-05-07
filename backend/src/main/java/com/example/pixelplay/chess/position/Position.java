@@ -15,11 +15,22 @@ public class Position {
     }
 
     public Piece getPiece(Square square) {
-        return board[square.getRank()][square.getFile()];
+        try {
+            return board[square.getRank()][square.getFile()];
+        }
+        catch (Exception ex) {
+            return new Piece();
+        }
+
     }
 
     public boolean isFree(Square square) {
-        return board[square.getRank()][square.getFile()].type() == PieceType.None;
+        try {
+            return board[square.getRank()][square.getFile()].type() == PieceType.None;
+        }
+        catch (Exception e) {
+            return false;
+        }
     }
 
     public Square findKing(Color color) {
