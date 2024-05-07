@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PawnMoveGenerator implements MoveGenerator {
+class PawnMoveGenerator implements MoveGenerator {
     private final Position position;
     private final Square square;
     private final MoveValidator validator;

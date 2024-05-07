@@ -10,7 +10,7 @@ import com.example.pixelplay.chess.position.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnightMoveGenerator implements MoveGenerator {
+class KnightMoveGenerator implements MoveGenerator {
     private final Position position;
     private final Square square;
     private final MoveValidator validator;
