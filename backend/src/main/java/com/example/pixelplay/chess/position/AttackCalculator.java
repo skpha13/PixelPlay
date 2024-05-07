@@ -59,7 +59,6 @@ public class AttackCalculator {
 
     public boolean kingIsInCheck(Color color) {
         Square kingSquare = position.findKing(color);
-        assert kingSquare != null;
         return isAttackedBy(color.reverse(), kingSquare);
     }
 }
