@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class KingPieceMoveGeneratorTest {
+class KingMoveGeneratorTest {
     private final Position position = PositionGenerator.customPosition(
             new String[] {
                     "R...K..R",

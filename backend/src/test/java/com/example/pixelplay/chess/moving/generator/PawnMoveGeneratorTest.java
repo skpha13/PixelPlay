@@ -3,7 +3,7 @@ package com.example.pixelplay.chess.moving.generator;
 import com.example.pixelplay.chess.base.Move;
 import com.example.pixelplay.chess.base.PieceType;
 import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.moving.PieceMoveGenerator;
+import com.example.pixelplay.chess.moving.MoveGenerator;
 import com.example.pixelplay.chess.position.Position;
 import com.example.pixelplay.chess.position.PositionGenerator;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PawnPieceMoveGeneratorTest {
+class PawnMoveGeneratorTest {
     private final Position position = PositionGenerator.customPosition(
             new String[] {
                     ".....K..",
@@ -32,9 +32,9 @@ class PawnPieceMoveGeneratorTest {
     public void getLegalMoves_enPessant() {
         Square pawn = new Square(4, 2);
         position.setEnPessantSquare(new Square(5, 1));
-        PieceMoveGenerator pieceMoveGenerator = new PawnMoveGenerator(position, pawn);
+        MoveGenerator moveGenerator = new PawnMoveGenerator(position, pawn);
 
-        List<Move> moves = (ArrayList<Move>)(pieceMoveGenerator.getLegalMoves());
+        List<Move> moves = (ArrayList<Move>)(moveGenerator.getLegalMoves());
         List<Move> expected = new ArrayList<Move>(List.of(
                 new Move(pawn, new Square(5, 1)),
                 new Move(pawn, new Square(5, 2)),
@@ -50,9 +50,9 @@ class PawnPieceMoveGeneratorTest {
     @Test
     public void getLegalMoves_promotion() {
         Square pawn = new Square(6, 7);
-        PieceMoveGenerator pieceMoveGenerator = new PawnMoveGenerator(position, pawn);
+        MoveGenerator moveGenerator = new PawnMoveGenerator(position, pawn);
 
-        List<Move> moves = (ArrayList<Move>)(pieceMoveGenerator.getLegalMoves());
+        List<Move> moves = (ArrayList<Move>)(moveGenerator.getLegalMoves());
         List<Move> expected = new ArrayList<Move>(List.of(
                 new Move(pawn, new Square(7, 6), PieceType.Queen),
                 new Move(pawn, new Square(7, 6), PieceType.Rook),
