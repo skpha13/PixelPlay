@@ -25,4 +25,24 @@ class PositionAnalyzerTest {
         assertTrue(analyzer.isCheckmate());
     }
 
+    private Position stalematePosition = PositionGenerator.customPosition(
+            new String[] {
+                    ".b....K.",
+                    "..q.....",
+                    "........",
+                    ".k......",
+                    ".....r.r",
+                    "........",
+                    "........",
+                    "........",
+            }
+    );
+
+    @Test
+    public void stalemate() {
+        PositionAnalyzer analyzer = new PositionAnalyzer(stalematePosition);
+
+        assertTrue(analyzer.isStalemate());
+    }
+
 }

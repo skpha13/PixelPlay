@@ -26,4 +26,8 @@ public class PositionAnalyzer {
         MoveGenerator generator = new PositionMoveGenerator(position);
         return generator.getLegalMoves().isEmpty();
     }
+
+    public boolean isStalemate() {
+        return !kingChecked() && noLegalMoves();
+    }
 }
