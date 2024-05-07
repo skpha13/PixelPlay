@@ -2,6 +2,9 @@ package com.example.pixelplay.chess.position;
 
 import com.example.pixelplay.chess.base.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Position {
     private final Piece[][] board;
     private Color turn;
@@ -21,7 +24,20 @@ public class Position {
         catch (Exception ex) {
             return new Piece();
         }
+    }
 
+    public List<Square> getPieceSquares(Color color) {
+        List<Square> squares = new ArrayList<>();
+
+        for(int rank = 0; rank < 8; rank ++) {
+            for(int file = 0; file < 8; file ++) {
+                if(board[rank][file].color() == color) {
+                    squares.add(new Square(rank, file));
+                }
+            }
+        }
+
+        return squares;
     }
 
     public boolean isFree(Square square) {
