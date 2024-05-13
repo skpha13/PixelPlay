@@ -4,11 +4,11 @@ import {ref} from "vue";
 import GlassButon from "@/components/GlassButon.vue";
 
 const table = ref([ [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0]])
+                          [0,0,0,0,0,0,0],
+                          [0,0,0,0,0,0,0],
+                          [0,0,0,0,0,0,0],
+                          [0,0,0,0,0,0,0],
+                          [0,0,0,0,0,0,0]]);
 
 const playerTurn = ref(1);
 
@@ -26,7 +26,11 @@ const dropPiece = (colIndex : number) => {
       table.value[i][colIndex] = playerTurn.value;
       if (checkWin(i, colIndex)) {
         winner.value = playerTurn.value;
-      } else {
+      }
+      else if (checkTie()) {
+        winner.value = 3;
+      }
+      else {
         switchPlayerTurn();
       }
       return;
@@ -49,6 +53,14 @@ const checkWin = (line : number, column : number) => {
     if (count >= 4) return true;
   }
   return false;
+}
+
+const checkTie = () => {
+  for (let i = 0; i < 7; ++i) {
+    if (table.value[0][i] == 0)
+      return false;
+  }
+  return true;
 }
 
 function countDirection(line: number, column: number, dx: number, dy: number) {
@@ -83,26 +95,28 @@ const reset = () => {
 <template>
   <div class="connect-four flex flex-col items-center justify-center">
     <h1 class="text-3xl font-bold mb-4">Connect Four</h1>
-    <div class="game-board border border-black inline-block">
+    <div class="game-board bg-blue-800 border-blue-800 border-8 inline-block">
       <div
           v-for="(row, rowIndex) in table"
           :key="rowIndex"
-          class="flex"
+          class="flex border-blue-800 border-4"
       >
         <div
             v-for="(cell, colIndex) in row"
             :key="colIndex"
-            class="cell border border-black w-12 h-12 flex justify-center items-center cursor-pointer"
+            class="cell border-4 border-blue-800 w-12 h-12 flex justify-center items-center cursor-pointer"
             @click="dropPiece(colIndex)"
             :class="{
+            'bg-gray-200' : cell === 0,
             'bg-pink-500': cell === 1,
-            'bg-indigo-500': cell === 2
+            'bg-yellow-500': cell === 2
           }"
         ></div>
       </div>
     </div>
     <div v-if="winner !== 0" class="winner mt-4">
-      <p class="text-lg font-bold">Congratulations Player {{ winner }}! You win!</p>
+      <p v-if="winner === 1 || winner === 2" class="text-lg font-bold">Congratulations Player {{ winner }}! You win!</p>
+      <p v-if="winner === 3" class="text-lg font-bold">It is a TIE!</p>
 
     </div>
 
@@ -127,6 +141,7 @@ const reset = () => {
 .cell {
   width: 50px;
   height: 50px;
+  border-radius: 50%;
 }
 
 .winner {
