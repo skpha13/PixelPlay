@@ -6,8 +6,8 @@ import TicTacToeAI from "@/views/TicTacToeAIView.vue";
 import ConnectFourPVP from "@/views/ConnectFourPVPView.vue";
 import ConnectFourAI from "@/views/ConnectFourAIView.vue";
 import Greeting from "@/components/Greeting.vue";
-import ChessPVPView from "@/views/ChessPVPView.vue";
-import ChessAIView from "@/views/ChessAIView.vue";
+import ChessPVPView from "@/chess/views/ChessPVPView.vue";
+import ChessAIView from "@/chess/views/ChessAIView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

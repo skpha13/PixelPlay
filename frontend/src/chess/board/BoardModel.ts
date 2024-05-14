@@ -1,4 +1,4 @@
-import type {PieceModel} from "@/components/chess/PieceModel";
+import type {PieceModel} from "@/chess/piece/PieceModel";
 
 export class BoardModel {
     readonly pieces: Array<PieceModel>
