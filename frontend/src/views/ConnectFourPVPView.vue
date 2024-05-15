@@ -3,7 +3,7 @@
 import {ref} from "vue";
 import GlassButon from "@/components/GlassButon.vue";
 
-const table = ref([ [0,0,0,0,0,0,0],
+const board = ref([ [0,0,0,0,0,0,0],
                           [0,0,0,0,0,0,0],
                           [0,0,0,0,0,0,0],
                           [0,0,0,0,0,0,0],
@@ -19,11 +19,11 @@ const switchPlayerTurn = () => {
 };
 
 const dropPiece = (colIndex : number) => {
-  if (colIndex < 0 || colIndex >= table.value[0].length) return;
+  if (colIndex < 0 || colIndex >= board.value[0].length) return;
   if (winner.value !== 0) return;
-  for (let i = table.value.length - 1; i >= 0 ; i--) {
-    if (table.value[i][colIndex] === 0) {
-      table.value[i][colIndex] = playerTurn.value;
+  for (let i = board.value.length - 1; i >= 0 ; i--) {
+    if (board.value[i][colIndex] === 0) {
+      board.value[i][colIndex] = playerTurn.value;
       if (checkWin(i, colIndex)) {
         winner.value = playerTurn.value;
       }
@@ -55,20 +55,12 @@ const checkWin = (line : number, column : number) => {
   return false;
 }
 
-const checkTie = () => {
-  for (let i = 0; i < 7; ++i) {
-    if (table.value[0][i] == 0)
-      return false;
-  }
-  return true;
-}
-
 function countDirection(line: number, column: number, dx: number, dy: number) {
-  const player = table.value[line][column];
+  const player = board.value[line][column];
   let count = 0;
   let x = line + dx;
   let y = column + dy;
-  while (x >= 0 && x < 6 && y >= 0 && y < 7 && table.value[x][y] === player) {
+  while (x >= 0 && x < 6 && y >= 0 && y < 7 && board.value[x][y] === player) {
     count += 1;
     x += dx;
     y += dy;
@@ -76,8 +68,16 @@ function countDirection(line: number, column: number, dx: number, dy: number) {
   return count;
 }
 
+const checkTie = () => {
+  for (let i = 0; i < 7; ++i) {
+    if (board.value[0][i] == 0)
+      return false;
+  }
+  return true;
+}
+
 const reset = () => {
-  table.value = [
+  board.value = [
       [0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0],
@@ -97,7 +97,7 @@ const reset = () => {
     <h1 class="text-3xl font-bold mb-4">Connect Four</h1>
     <div class="game-board bg-blue-800 border-blue-800 border-8 inline-block">
       <div
-          v-for="(row, rowIndex) in table"
+          v-for="(row, rowIndex) in board"
           :key="rowIndex"
           class="flex border-blue-800 border-4"
       >
