@@ -17,7 +17,7 @@ export class PieceModel {
             case "B":  return "src/chess/assets/piece/white-bishop.png"
             case "H":  return "src/chess/assets/piece/white-knight.png"
             case "P":  return "src/chess/assets/piece/white-pawn.png"
-            case "k":  return "src/chess/assets/piece/black   -king.png"
+            case "k":  return "src/chess/assets/piece/black-king.png"
             case "q":  return "src/chess/assets/piece/black-queen.png"
             case "r":  return "src/chess/assets/piece/black-rook.png"
             case "b":  return "src/chess/assets/piece/black-bishop.png"
