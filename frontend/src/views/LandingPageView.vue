@@ -50,8 +50,8 @@ const showChoiceForGame = (payload: any) => {
   <GamePreview @showChoice="payload => showChoiceForGame(payload)"
                title="Chess"
                img-src="src/assets/chess/logo.png"
-               link-ai="/chess-ai"
-               link-pvp="/chess-pvp"/>
+               link-ai="/chess/ai"
+               link-pvp="/chess/pvp"/>
 
   </div>
   <ChoiceMenu v-if="showChoice"

@@ -8,6 +8,8 @@ import ConnectFourAI from "@/views/ConnectFourAIView.vue";
 import Greeting from "@/components/Greeting.vue";
 import ChessPVPView from "@/chess/views/ChessPVPView.vue";
 import ChessAIView from "@/chess/views/ChessAIView.vue";
+import ChessPVPSetupView from "@/chess/views/ChessPVPSetupView.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,12 +40,17 @@ const router = createRouter({
       component: ConnectFourAI
     },
     {
-      path: '/chess-pvp',
+      path: '/chess/pvp/',
       name: 'chessPVP',
+      component: ChessPVPSetupView
+    },
+    {
+      path: '/chess/pvp/:id',
+      name: 'chessPVPGame',
       component: ChessPVPView
     },
     {
-      path: '/chess-ai',
+      path: '/chess/ai',
       name: 'chessAI',
       component: ChessAIView
     },
