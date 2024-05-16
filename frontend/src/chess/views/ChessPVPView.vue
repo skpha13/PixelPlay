@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-import Square from "@/chess/board/Square.vue";
-import Board from "@/chess/board/Board.vue";
+import Square from "@/chess/components/Square.vue";
+import Board from "@/chess/components/Board.vue";
 </script>
 
 <template>
