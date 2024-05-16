@@ -7,6 +7,8 @@
     size: {type:Number, required:true}
   })
 
+  const imgSrc = computed(() => props.model.getImagePath()).value
+  console.log(imgSrc)
   const height = computed(() => props.size)
   const width = computed(() => props.size)
   const translateX = computed(() => props.size * props.model.getRank() + 'px')
@@ -15,7 +17,7 @@
 
 <template>
   <div class="piece aspect-square flex items-center" :style="{transform: `translate(${translateX}, ${translateY})` }">
-    <img :src="props.model.getImagePath()" alt="" :width="width" :height="height" />
+    <img :src="imgSrc" alt="" :width="width" :height="height" />
   </div>
 </template>
 
