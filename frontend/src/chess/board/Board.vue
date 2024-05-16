@@ -2,9 +2,9 @@
   import {computed, ref} from "vue";
   import Square from "@/chess/board/Square.vue";
   import {useElementSize} from "@vueuse/core";
-  import {PieceModel} from "@/chess/piece/PieceModel";
+  import {PieceModel} from "@/chess/models/PieceModel";
   import Piece from "@/chess/piece/Piece.vue";
-  import {BoardModel} from "@/chess/board/BoardModel";
+  import {BoardModel} from "@/chess/models/BoardModel";
 
   const elem = ref(null)
   const squareSize = computed(() => useElementSize(elem).height.value/8)

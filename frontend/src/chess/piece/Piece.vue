@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import {computed} from "vue";
-  import {PieceModel} from "@/chess/piece/PieceModel";
+  import {PieceModel} from "@/chess/models/PieceModel";
 
   const props = defineProps({
     model: {type:PieceModel!!, required:true},
