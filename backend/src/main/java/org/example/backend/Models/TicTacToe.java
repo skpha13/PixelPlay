@@ -107,10 +107,10 @@ public class TicTacToe implements Cloneable {
         if (winner.equals("-"))
             return 0;
 
-        if (winner.equals("O"))
+        if (winner.equals("X"))
             return 10 + depth;
 
-        if (winner.equals("X"))
+        if (winner.equals("O"))
             return -10 - depth;
 
         return 0;

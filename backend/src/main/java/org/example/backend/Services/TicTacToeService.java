@@ -15,7 +15,9 @@ public class TicTacToeService {
         int row = move[0];
         int col = move[1];
 
-        ticTacToe.place(row, col, 'O');
+        try {
+            ticTacToe.place(row, col, 'O');
+        } catch (ArrayIndexOutOfBoundsException ignored) {}
 
         ticTacToe.checkWin();
         ticTacToe.checkTie();
