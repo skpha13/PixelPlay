@@ -12,6 +12,6 @@ public class TicTacToeService {
     }
 
     public TicTacToe playMove() {
-        return new TicTacToe();
+        return ticTacToe;
     }
 }
