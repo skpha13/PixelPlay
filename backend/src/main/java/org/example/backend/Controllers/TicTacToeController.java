@@ -1,6 +1,8 @@
 package org.example.backend.Controllers;
 
 import org.example.backend.Models.TicTacToe;
+import org.example.backend.Services.AIService;
+import org.example.backend.Services.TicTacToeService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +17,9 @@ public class TicTacToeController {
         TicTacToe newGameState = new TicTacToe();
         newGameState.setBoard(gameState.board);
 
-        // TODO: implement service logic to play a move
+        AIService AI = new AIService();
+        TicTacToeService ticTacToeService = new TicTacToeService(newGameState, AI);
 
-        return newGameState;
+        return ticTacToeService.playMove();
     }
 }

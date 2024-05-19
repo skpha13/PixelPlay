@@ -24,6 +24,7 @@ const checkTie = () => {
       }
     }
   }
+
   return true;
 }
 
@@ -67,10 +68,11 @@ const playMove = async (row: number, col: number) => {
       winner.value = currentPlayer.value;
     } else if (checkTie()) {
       isTie.value = true;
-    } else {
-      currentPlayer.value = currentPlayer.value === 'X' ? 'O' : 'X';
     }
   }
+
+  uiRefresh.value = false;
+  uiRefresh.value = true;
 }
 
 const requestAIMove = async (payloadBoard: string[]) => {
@@ -90,11 +92,11 @@ const requestAIMove = async (payloadBoard: string[]) => {
 }
 
 const stringArrayToMatrix = (array: string[]): string[][] => {
-  return array.map(str => str.split(''))
+  return array.map(str => str.split('').map(str => str.replace('-', '')))
 }
 
 const matrixToStringArray = (matrix: string[][]): string[] => {
-  return matrix.map(row => row.join(''))
+  return matrix.map(row => row.map(char => char === '' ? '-' : char).join(''))
 }
 </script>
 
@@ -102,7 +104,6 @@ const matrixToStringArray = (matrix: string[][]): string[] => {
   <Logo title="Tic Tac Toe" class="mb-10" />
 
   <div v-if="uiRefresh" class="flex flex-col items-center justify-center">
-    <p class=""> Current Player: <span class=""> {{ currentPlayer }} </span> </p>
     <div class="clear-both" v-for="(row, rowIndex) of board" :key="rowIndex">
       <div class="w-28 h-28 leading-[7rem] sm:w-40 sm:h-40 sm:leading-[10rem]
                   float-left mr-[-1px] mb-[-1px]
