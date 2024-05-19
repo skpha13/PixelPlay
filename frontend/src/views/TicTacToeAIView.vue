@@ -85,7 +85,7 @@ const requestAIMove = async (payloadBoard: string[]) => {
 
     board = stringArrayToMatrix(response.data.board)
     isTie.value = response.data.isTie
-    winner.value = response.data.winner
+    winner.value = response.data.winner === '-' ? null : response.data.winner
   } catch (e: any) {
     console.log(e.message)
   }

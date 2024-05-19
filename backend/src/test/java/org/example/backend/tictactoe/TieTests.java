@@ -43,4 +43,16 @@ public class TieTests {
 
         assertEquals(ticTacToe.isTie, false);
     }
+
+    @Test
+    void tieWithWinnerField() {
+        ticTacToe.setBoard(new String[]{
+                "XXO",
+                "XXO",
+                "OO-"
+        });
+        ticTacToe.checkWin();
+
+        assertEquals(ticTacToe.winner, "-");
+    }
 }

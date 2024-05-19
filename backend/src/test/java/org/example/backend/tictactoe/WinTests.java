@@ -91,4 +91,16 @@ public class WinTests {
 
         assertEquals(ticTacToe.winner, "-");
     }
+
+    @Test
+    void columnX() {
+        ticTacToe.setBoard(new String[]{
+                "X--",
+                "XOX",
+                "XXO"
+        });
+        ticTacToe.checkWin();
+
+        assertEquals(ticTacToe.winner, "X");
+    }
 }

@@ -14,8 +14,7 @@ public class TicTacToeController {
     @PostMapping("/tic-tac-toe/play-move")
     @ResponseBody
     public TicTacToe playMove(@Validated @RequestBody TicTacToe gameState) {
-        AIService AI = new AIService();
-        TicTacToeService ticTacToeService = new TicTacToeService(gameState, AI);
+        TicTacToeService ticTacToeService = new TicTacToeService(gameState);
 
         return ticTacToeService.playMove();
     }
