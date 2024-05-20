@@ -99,7 +99,7 @@ class KingMoveGenerator implements MoveGenerator {
             moves.add(shortCastle);
         }
 
-        Move longCastle = new Move(start, start.move(longCastleDirection, 3));
+        Move longCastle = new Move(start, start.move(longCastleDirection, 2));
         if(validator.isValid(longCastle)) {
             moves.add(longCastle);
         }
