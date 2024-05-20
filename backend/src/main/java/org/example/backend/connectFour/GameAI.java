@@ -8,9 +8,9 @@ public class GameAI {
         Game game = new Game(board, playerTurn);
         if (depth == 0 || isTerminalNode(game)) {
             if (isTerminalNode(game)) {
-                if (game.getWinner().value == 1) {
+                if (game.getWinner().value == 2) {
                     return new int[]{10000000, -1};
-                } else if (game.getWinner().value == 2) {
+                } else if (game.getWinner().value == 1) {
                     return new int[]{-10000000, -1};
                 }
 //                Board is full
@@ -76,17 +76,15 @@ public class GameAI {
         }
     }
 
+
     private static boolean isTerminalNode(Game game) {
         return game.getWinner() != null || game.getIsTie();
     }
 
-    private static int evaluateWindow(int[] window, Game game) {
+    private static int evaluateWindow(int[] window) {
         int score = 0;
-        int player = game.getPlayerTurn().value;
+        int player = 2;
         int opponent = 1;
-        if (player == 1) {
-            opponent = 2;
-        }
 
         int cntOpponent = 0, cntPlayer = 0;
 
@@ -106,8 +104,12 @@ public class GameAI {
             score += 2;
         }
 
-        if (cntOpponent == 3 && cntPlayer == 0) {
-            score -= 4;
+        if (cntOpponent == 4) {
+            score -= 1000;
+        } else if (cntOpponent == 3 && cntPlayer == 0) {
+            score -= 20;
+        } else if (cntOpponent == 2 && cntPlayer == 0) {
+            score -= 2;
         }
 
         return score;
@@ -117,23 +119,27 @@ public class GameAI {
         int score = 0;
 
 //        Score center column
-        int cntCenterPieces = 0;
-        int player = game.getPlayerTurn().value;
+        int player = 2;
+        int opponent = 1;
+        int cntOpponent = 0, cntPlayer = 0;
         int centerColumn = Game.COLUMNS / 2;
         int[][] board = game.getBoard();
         for (int row = 0; row < Game.ROWS; row++) {
             if (board[row][centerColumn] == player) {
-                cntCenterPieces++;
+                cntPlayer++;
+            } else if (board[row][centerColumn] == opponent) {
+                cntOpponent++;
             }
         }
-        score += cntCenterPieces * 3;
+        score += cntPlayer * 3;
+        score -= cntOpponent * 3;
 
 //        Score Horizontal
         for (int row = 0; row < Game.ROWS; row++) {
             for (int col = 0; col < Game.COLUMNS - 3; col++) {
                 int[] arr = new int[4];
                 System.arraycopy(board[row], col, arr, 0, 4);
-                score += evaluateWindow(arr, game);
+                score += evaluateWindow(arr);
             }
         }
 
@@ -144,7 +150,7 @@ public class GameAI {
                 for (int i = 0; i < 4; i++) {
                     arr[i] = board[row + i][col];
                 }
-                score += evaluateWindow(arr, game);
+                score += evaluateWindow(arr);
             }
         }
 
@@ -155,18 +161,18 @@ public class GameAI {
                 for (int i = 0; i < 4; i++) {
                     arr[i] = board[row + i][col + i];
                 }
-                score += evaluateWindow(arr, game);
+                score += evaluateWindow(arr);
             }
         }
 
 //        Score Diagonal / (i-1, j+1)
         for (int row = 0; row < Game.ROWS - 3; row++) {
-            for (int col = Game.COLUMNS - 3; col < Game.COLUMNS; col++) {
+            for (int col = Game.COLUMNS - 3 - 1; col < Game.COLUMNS; col++) {
                 int[] arr = new int[4];
                 for (int i = 0; i < 4; i++) {
                     arr[i] = board[row + i][col - i];
                 }
-                score += evaluateWindow(arr, game);
+                score += evaluateWindow(arr);
             }
         }
 

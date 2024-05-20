@@ -50,6 +50,10 @@ public class Game implements Cloneable{
         this.winner = winner;
     }
 
+    public void setBoard(int[][] board) {
+        this.board = board;
+    }
+
     public void switchPlayer() {
         playerTurn = (playerTurn == Player.RED) ? Player.YELLOW : Player.RED;
     }
