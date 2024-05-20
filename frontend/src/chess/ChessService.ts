@@ -50,4 +50,23 @@ export class ChessService {
             return []
         }
     }
+
+    static async makeMove(id: string, startSquare: SquareModel, endSquare: SquareModel)
+        : Promise<boolean> {
+        try {
+            const response = await axios.put(
+                'http://localhost:8080/chess/makeMove',
+                {
+                    id: id,
+                    startSquare: startSquare,
+                    endSquare: endSquare,
+                }
+            )
+            return response.data;
+        }
+        catch (e) {
+            console.error(e)
+            return false
+        }
+    }
 }

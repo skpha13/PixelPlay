@@ -3,6 +3,7 @@ package org.example.backend.chess;
 
 import org.example.backend.chess.dtos.GameDto;
 import org.example.backend.chess.dtos.PieceDto;
+import org.example.backend.chess.dtos.SquareDto;
 import org.example.backend.chess.logic.Game;
 import org.example.backend.chess.logic.base.Color;
 import org.example.backend.chess.logic.base.Piece;
@@ -47,5 +48,10 @@ public class Mapper {
 
         return new PieceDto(type, square.getRank(), square.getFile());
 
+    }
+
+    public static Square toSquare(SquareDto squareDto) {
+        Square square = new Square(squareDto.rank(), squareDto.file());
+        return square;
     }
 }

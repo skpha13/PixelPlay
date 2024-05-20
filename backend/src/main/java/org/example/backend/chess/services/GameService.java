@@ -2,6 +2,7 @@ package org.example.backend.chess.services;
 
 import org.example.backend.chess.Mapper;
 import org.example.backend.chess.dtos.GameDto;
+import org.example.backend.chess.dtos.SquareDto;
 import org.example.backend.chess.logic.Game;
 import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.base.Square;
@@ -47,5 +48,16 @@ public class GameService {
 
         List<Square> squares = generator.getLegalMoves().stream().map(Move::end).toList();
         return squares;
+    }
+
+    public void makeMove(String id, Move move) {
+        try {
+            Game game = gameRepository.getGame(UUID.fromString(id));
+            game.makeMove(move);
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
