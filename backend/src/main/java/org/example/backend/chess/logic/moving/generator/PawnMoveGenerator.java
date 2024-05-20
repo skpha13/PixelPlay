@@ -51,7 +51,7 @@ class PawnMoveGenerator implements MoveGenerator {
         List<Move> moves = new ArrayList<>();
         Square end = square.move(direction);
         boolean movesToLastRank = end.getRank() == getLastRank();
-        if(movesToLastRank) {
+        if(canMoveForward() && movesToLastRank) {
             moves.addAll(getPromotionMoves(end));
         }
         if(canMoveForward() &&!movesToLastRank) {
@@ -63,7 +63,7 @@ class PawnMoveGenerator implements MoveGenerator {
 
     private boolean canMoveForward() {
         Square end = square.move(direction);
-        Move forward = new Move(square, end);
+        Move forward = new Move(square, end, PieceType.Queen);
         boolean isFree = position.isFree(end);
         boolean isValid = validator.isValid(forward);
 
