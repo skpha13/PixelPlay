@@ -26,11 +26,7 @@ public class GameAI {
             int column = 0;
             for (int col = 0; col < Game.COLUMNS; col++) {
                 Game clonedGame;
-                try {
-                    clonedGame = (Game) game.clone();
-                } catch (CloneNotSupportedException e) {
-                    throw new RuntimeException(e);
-                }
+                clonedGame = cloneGame(game);
                 clonedGame.dropPiece(col);
 //                if that column is already full
                 if (Arrays.deepEquals(clonedGame.getBoard(), game.getBoard())) {
@@ -52,11 +48,7 @@ public class GameAI {
             int column = 0;
             for (int col = 0; col < Game.COLUMNS; col++) {
                 Game clonedGame;
-                try {
-                    clonedGame = (Game) game.clone();
-                } catch (CloneNotSupportedException e) {
-                    throw new RuntimeException(e);
-                }
+                clonedGame = cloneGame(game);
                 clonedGame.dropPiece(col);
                 // if that column is already full
                 if (Arrays.deepEquals(clonedGame.getBoard(), game.getBoard())) {
@@ -76,6 +68,13 @@ public class GameAI {
         }
     }
 
+    private static Game cloneGame(Game game) {
+        try {
+            return (Game) game.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private static boolean isTerminalNode(Game game) {
         return game.getWinner() != null || game.getIsTie();
@@ -88,29 +87,20 @@ public class GameAI {
 
         int cntOpponent = 0, cntPlayer = 0;
 
-        for (int j : window) {
-            if (j == opponent) {
-                cntOpponent++;
-            } else if (j == player) {
-                cntPlayer++;
-            }
+        for (int cell : window) {
+            if (cell == player) cntPlayer++;
+            if (cell == opponent) cntOpponent++;
         }
 
-        if (cntPlayer == 4) {
-            score += 1000;
-        } else if (cntPlayer == 3 && cntOpponent == 0) {
-            score += 5;
-        } else if (cntPlayer == 2 && cntOpponent == 0) {
-            score += 2;
-        }
+        if (cntPlayer == 4) score += 1000;
+        else if (cntPlayer == 3 && cntOpponent == 0) score += 5;
+        else if (cntPlayer == 2 && cntOpponent == 0) score += 2;
 
-        if (cntOpponent == 4) {
-            score -= 1000;
-        } else if (cntOpponent == 3 && cntPlayer == 0) {
-            score -= 20;
-        } else if (cntOpponent == 2 && cntPlayer == 0) {
-            score -= 2;
-        }
+
+        if (cntOpponent == 4) score -= 1000;
+        else if (cntOpponent == 3 && cntPlayer == 0) score -= 20;
+        else if (cntOpponent == 2 && cntPlayer == 0) score -= 2;
+
 
         return score;
     }
@@ -118,12 +108,22 @@ public class GameAI {
     private static int evaluateBoard(Game game) {
         int score = 0;
 
-//        Score center column
+        int[][] board = game.getBoard();
+
+        score += evaluateCenterColumn(board);
+
+        score += evaluateLines(board);
+
+        return score;
+    }
+
+    private static int evaluateCenterColumn(int[][] board) {
+        int score = 0;
+
         int player = 2;
         int opponent = 1;
         int cntOpponent = 0, cntPlayer = 0;
         int centerColumn = Game.COLUMNS / 2;
-        int[][] board = game.getBoard();
         for (int row = 0; row < Game.ROWS; row++) {
             if (board[row][centerColumn] == player) {
                 cntPlayer++;
@@ -133,39 +133,27 @@ public class GameAI {
         }
         score += cntPlayer * 3;
         score -= cntOpponent * 3;
+        return score;
+    }
 
-//        Score Horizontal
-        for (int row = 0; row < Game.ROWS; row++) {
-            for (int col = 0; col < Game.COLUMNS - 3; col++) {
-                int[] arr = new int[4];
-                System.arraycopy(board[row], col, arr, 0, 4);
-                score += evaluateWindow(arr);
-            }
-        }
+    private static int evaluateLines(int[][] board) {
+        int score = 0;
 
-//        Score Vertical
-        for (int col = 0; col < Game.COLUMNS; col++) {
-            for (int row = 0; row < Game.ROWS - 3; row++) {
-                int[] arr = new int[4];
-                for (int i = 0; i < 4; i++) {
-                    arr[i] = board[row + i][col];
-                }
-                score += evaluateWindow(arr);
-            }
-        }
+        score += evaluateHorizontalLines(board);
+        score += evaluateVerticalLines(board);
 
 //        Score Diagonal \ (i+1, j+1)
-        for (int row = 0; row < Game.ROWS - 3; row++) {
-            for (int col = 0; col < Game.COLUMNS - 3; col++) {
-                int[] arr = new int[4];
-                for (int i = 0; i < 4; i++) {
-                    arr[i] = board[row + i][col + i];
-                }
-                score += evaluateWindow(arr);
-            }
-        }
+        score += evaluateDiagonalsLeftUpRightDown(board);
 
 //        Score Diagonal / (i-1, j+1)
+        score += evaluateDiagonalsLeftDownRightUp(board);
+
+        return score;
+    }
+
+    private static int evaluateDiagonalsLeftDownRightUp(int[][] board) {
+        int score = 0;
+
         for (int row = 0; row < Game.ROWS - 3; row++) {
             for (int col = Game.COLUMNS - 3 - 1; col < Game.COLUMNS; col++) {
                 int[] arr = new int[4];
@@ -175,7 +163,49 @@ public class GameAI {
                 score += evaluateWindow(arr);
             }
         }
+        return score;
+    }
 
+    private static int evaluateDiagonalsLeftUpRightDown(int[][] board) {
+        int score = 0;
+
+        for (int row = 0; row < Game.ROWS - 3; row++) {
+            for (int col = 0; col < Game.COLUMNS - 3; col++) {
+                int[] arr = new int[4];
+                for (int i = 0; i < 4; i++) {
+                    arr[i] = board[row + i][col + i];
+                }
+                score += evaluateWindow(arr);
+            }
+        }
+        return score;
+    }
+
+    private static int evaluateVerticalLines(int[][] board) {
+        int score = 0;
+
+        for (int col = 0; col < Game.COLUMNS; col++) {
+            for (int row = 0; row < Game.ROWS - 3; row++) {
+                int[] arr = new int[4];
+                for (int i = 0; i < 4; i++) {
+                    arr[i] = board[row + i][col];
+                }
+                score += evaluateWindow(arr);
+            }
+        }
+        return score;
+    }
+
+    private static int evaluateHorizontalLines(int[][] board) {
+        int score = 0;
+
+        for (int row = 0; row < Game.ROWS; row++) {
+            for (int col = 0; col < Game.COLUMNS - 3; col++) {
+                int[] arr = new int[4];
+                System.arraycopy(board[row], col, arr, 0, 4);
+                score += evaluateWindow(arr);
+            }
+        }
         return score;
     }
 }
