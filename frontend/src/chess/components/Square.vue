@@ -33,7 +33,7 @@ import {computed, ref, watch} from "vue";
 
 <template>
   <div class="square aspect-square" :style="{backgroundColor, height}">
-    <div v-if="isHighlighted" class="highlight bg-gray-500 opacity-50" :style="{height}"/>
+    <div v-if="isHighlighted" class="highlight border-4 border-gray-700" :style="{height}"/>
   </div>
 </template>
 

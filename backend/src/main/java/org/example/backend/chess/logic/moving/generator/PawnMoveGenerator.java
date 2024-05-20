@@ -75,13 +75,13 @@ class PawnMoveGenerator implements MoveGenerator {
         Square end = square.move(direction, 2);
         Move forward = new Move(square, end);
         boolean isFree = position.isFree(end) && position.isFree(middle);
-        boolean isStartingFile = square.getFile() == getStartingFile();
+        boolean isStartingFile = square.getRank() == getStartingRank();
         boolean isValid = validator.isValid(forward);
 
         return isFree && isStartingFile && isValid;
     }
 
-    private int getStartingFile() {
+    private int getStartingRank() {
         return switch (position.getPiece(square).color()) {
             case Color.BLACK -> 6;
             case Color.WHITE -> 1;
