@@ -1,18 +1,18 @@
 <script setup lang="ts">
   import {computed} from "vue";
-  import {PieceModel} from "@/chess/models/PieceModel";
+  import {getImagePath, PieceModel} from "@/chess/models/PieceModel";
 
-  const props = defineProps({
-    model: {type:PieceModel!!, required:true},
-    size: {type:Number, required:true}
-  })
+  const props = defineProps<{
+    model: PieceModel,
+    size: number
+  }>();
 
-  const imgSrc = computed(() => props.model.getImagePath()).value
+  const imgSrc = computed(() => getImagePath(props.model.type))
   console.log(imgSrc)
   const height = computed(() => props.size)
   const width = computed(() => props.size)
-  const translateX = computed(() => props.size * props.model.getRank() + 'px')
-  const translateY = computed(() => props.size * props.model.getFile() + 'px')
+  const translateX = computed(() => props.size * props.model.file + 'px')
+  const translateY = computed(() => props.size * props.model.rank+ 'px')
 </script>
 
 <template>

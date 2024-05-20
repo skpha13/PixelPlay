@@ -1,5 +1,7 @@
 package org.example.backend.chess.services;
 
+import org.example.backend.chess.Mapper;
+import org.example.backend.chess.dtos.GameDto;
 import org.example.backend.chess.logic.Game;
 import org.example.backend.chess.repositories.GameRepository;
 
@@ -26,5 +28,11 @@ public class GameService {
             instance = new GameService();
         }
         return instance;
+    }
+
+    public GameDto getBoard(String id) {
+        UUID uuid = UUID.fromString(id);
+        Game game = gameRepository.getGame(uuid);
+        return Mapper.toGameDto(game);
     }
 }

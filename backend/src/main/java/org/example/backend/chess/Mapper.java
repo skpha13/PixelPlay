@@ -9,25 +9,25 @@ import org.example.backend.chess.logic.base.Piece;
 import org.example.backend.chess.logic.base.PieceType;
 import org.example.backend.chess.logic.base.Square;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Mapper {
     private Mapper() {}
 
-    public static GameDto toGameDto(UUID uuid, Game game) {
-        GameDto gameDto = new GameDto(uuid, List.of());
+    public static GameDto toGameDto(Game game) {
+        List<PieceDto> pieces = new ArrayList<>();
 
         for(int rank=0; rank<8; rank++) {
             for(int file=0; file<8; file++) {
                 Square square = new Square(rank, file);
                 if(!game.getPosition().isFree(square)) {
                     PieceDto pieceDto = toPieceDto(game.getPosition().getPiece(square), square);
-                    gameDto.pieces().add(pieceDto);
+                    pieces.add(pieceDto);
                 }
             }
         }
-
+        GameDto gameDto = new GameDto(pieces);
         return gameDto;
     }
 
