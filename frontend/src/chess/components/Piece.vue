@@ -8,7 +8,6 @@
   }>();
 
   const imgSrc = computed(() => getImagePath(props.model.type))
-  console.log(imgSrc)
   const height = computed(() => props.size)
   const width = computed(() => props.size)
   const translateX = computed(() => props.size * props.model.file + 'px')

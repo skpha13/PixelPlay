@@ -1,6 +1,7 @@
 import axios from "axios";
 import type {GameModel} from "@/chess/models/GameModel";
 import type {RouteParamValue} from "vue-router";
+import type {SquareModel} from "@/chess/models/SquareModel";
 
 export class ChessService {
     public static async createGame(): Promise<string>{
@@ -21,11 +22,32 @@ export class ChessService {
                         id: id
                     }
                 })
-            console.log(response.data)
             return response.data
         }
         catch (e) {
             throw e
+        }
+    }
+
+    public static async getPossibleSquaresToMove(id: string, rank: number, file: number)
+    : Promise<SquareModel[]>{
+        try {
+            const response = await axios.get(
+                `http://localhost:8080/chess/getSquaresToMove`,
+                {
+                    params: {
+                        id: id,
+                        rank: rank,
+                        file: file
+                    }
+
+                })
+
+            return response.data
+        }
+        catch (e) {
+            console.error(e)
+            return []
         }
     }
 }
