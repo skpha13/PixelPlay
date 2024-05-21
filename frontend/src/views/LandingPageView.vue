@@ -41,11 +41,17 @@ const showChoiceForGame = (payload: any) => {
                link-ai="/tic-tac-toe-ai"
                link-pvp="/tic-tac-toe-pvp"/>
 
-    <GamePreview @showChoice="payload => showChoiceForGame(payload)"
+  <GamePreview @showChoice="payload => showChoiceForGame(payload)"
                  title="Connect Four"
                  img-src="src/assets/connect-four.jpeg"
                  link-ai="/connect-four-ai"
                  link-pvp="/connect-four-pvp"/>
+
+  <GamePreview @showChoice="payload => showChoiceForGame(payload)"
+                 title="Blackjack"
+                 img-src="src/assets/cardGames/blackjack/blackjack.png"
+                 link-ai="/blackjack-ai"
+                 link-pvp="/blackjack-pvp"/>
 
   </div>
   <ChoiceMenu v-if="showChoice"

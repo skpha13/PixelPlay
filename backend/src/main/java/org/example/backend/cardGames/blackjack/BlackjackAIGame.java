@@ -17,6 +17,18 @@ public class BlackjackAIGame {
         this.isPlayingSplitHand = false;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Dealer getDealer() {
+        return dealer;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
     public void startGame() {
         dealInitialCards();
     }
@@ -120,6 +132,8 @@ public class BlackjackAIGame {
             }
         }
     }
+
+
 
     public GameState getGameState() {
         return new GameState(

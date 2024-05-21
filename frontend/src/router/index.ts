@@ -6,6 +6,9 @@ import TicTacToeAI from "@/views/TicTacToeAIView.vue";
 import ConnectFourPVP from "@/views/ConnectFourPVPView.vue";
 import ConnectFourAI from "@/views/ConnectFourAIView.vue";
 import Greeting from "@/components/Greeting.vue";
+import BlackjackPVP from "@/views/BlackjackPVPView.vue";
+import BlackjackAI from "@/views/BlackjackAIView.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +47,16 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'notFound',
       component: NotFound
+    },
+    {
+      path: '/blackjack-pvp',
+      name: 'blackjackPVP',
+      component: BlackjackPVP
+    },
+    {
+      path: '/blackjack-ai',
+      name: 'blackjackAI',
+      component: BlackjackAI
     }
   ]
 })
