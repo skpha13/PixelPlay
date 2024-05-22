@@ -10,10 +10,12 @@
     <div class="players">
       <div class="player" v-if="gameState">
         <Logo title="Player 1" class="player-title" />
+        <CasinoDivider />
         <div class="cards">
           <img v-for="card in gameState.player1Hand.hand" :key="card.suit + card.value" :src="getCardImage(card)" alt="Card image" class="card"/>
         </div>
-        <p class="score">Score: {{ gameState.player1Score === 21 ? 'Blackjack (21)!' : gameState.player1Score }}</p>
+        <p class="score">Score: {{ gameState.player1Score }}</p>
+        <p v-if="gameState.player1Score === 21" class="blackjack21">Blackjack!</p>
         <p v-if="gameState.player1Bust" class="bust">Busted!</p>
         <div class="buttons">
           <button @click="player1Hit" :disabled="gameState.player1Stand || gameState.player1Bust || turn !== 1">Hit</button>
@@ -23,10 +25,12 @@
       <CasinoDivider />
       <div class="player" v-if="gameState">
         <Logo title="Player 2" class="player-title" />
+        <CasinoDivider />
         <div class="cards">
           <img v-for="card in gameState.player2Hand.hand" :key="card.suit + card.value" :src="getCardImage(card)" alt="Card image" class="card"/>
         </div>
-        <p class="score">Score: {{ gameState.player2Score === 21 ? 'Blackjack (21)!' : gameState.player2Score }}</p>
+        <p class="score">Score: {{ gameState.player2Score }}</p>
+        <p v-if="gameState.player2Score === 21" class="blackjack21">Blackjack!</p>
         <p v-if="gameState.player2Bust" class="bust">Busted!</p>
         <div class="buttons">
           <button @click="player2Hit" :disabled="gameState.player2Stand || gameState.player2Bust || turn !== 2">Hit</button>
@@ -42,7 +46,7 @@
       <CasinoDivider />
     </div>
     
-    <button @click="toggleTutorial" class="tutorial-button">Tutorial</button>
+    <button v-if="!winnerMessage" @click="toggleTutorial" class="tutorial-button">Tutorial</button>
     <div v-if="showTutorial" class="tutorial" @mouseleave="hideTutorial" @click="hideTutorial">
       <p>Welcome to Blackjack PVP!</p>
       <p>Rules:</p>
@@ -56,7 +60,7 @@
         <li>The current player's turn is highlighted.</li>
       </ul>
     </div>
-    <CasinoDivider />
+    <CasinoDivider v-if="!winnerMessage" />
   </div>
 </template>
 
@@ -262,6 +266,7 @@ button:hover:not(:disabled) {
   font-size: 24px;
   font-weight: bold;
   color: #fff;
+  margin-bottom: 1rem;
 }
 
 .winner-message h2 {
@@ -294,7 +299,7 @@ button:hover:not(:disabled) {
   padding: 20px;
   border-radius: 5px;
   position: absolute;
-  top: 750px;
+  top: 790px;
   left: 50%;
   transform: translateX(-50%);
   width: 300px;
@@ -314,7 +319,16 @@ button:hover:not(:disabled) {
 }
 
 .bust {
+  font-size: 24px;
   color: red;
   font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.blackjack21 {
+  font-size: 24px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 </style>

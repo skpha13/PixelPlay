@@ -1,6 +1,10 @@
 package org.example.backend.cardGames.blackjack;
 
+import org.example.backend.cardGames.cardDeck.Card;
 import org.example.backend.cardGames.cardDeck.Deck;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 public class BlackjackAIGame {
 
@@ -68,16 +72,21 @@ public class BlackjackAIGame {
     }
 
     public void playerSplit() {
-        if (player.getHand().getHand().size() == 2 &&
-                player.getHand().getHand().get(0).getValue().equals(player.getHand().getHand().get(1).getValue())) {
+        try {
+            Hand hand = player.getHand();
             Hand splitHand = new Hand();
-            splitHand.addCard(player.getHand().getHand().remove(1));
+
+            Field field = Hand.class.getDeclaredField("hand");
+            field.setAccessible(true);
+            ArrayList<Card> handList = (ArrayList<Card>) field.get(hand);
+
+            splitHand.addCard(handList.remove(1));
             player.setSplitHand(splitHand);
             player.setSplit(true);
             player.getHand().addCard(deck.draw());
             player.getSplitHand().addCard(deck.draw());
-        } else {
-            throw new IllegalStateException("Cannot split hand. Ensure hand has exactly two cards of the same value.");
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 

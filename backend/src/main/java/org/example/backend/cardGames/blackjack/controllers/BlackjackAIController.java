@@ -49,7 +49,7 @@ public class BlackjackAIController {
         try {
             game.playerSplit();
         } catch (IllegalStateException e) {
-            // Handle exception
+            e.printStackTrace();
         }
         return game.getGameState();
     }
