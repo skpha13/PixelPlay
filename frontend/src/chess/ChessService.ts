@@ -2,6 +2,7 @@ import axios from "axios";
 import type {GameModel} from "@/chess/models/GameModel";
 import type {RouteParamValue} from "vue-router";
 import type {SquareModel} from "@/chess/models/SquareModel";
+import type {MoveModel} from "@/chess/models/MoveModel";
 
 export class ChessService {
     public static async createGame(): Promise<string>{
@@ -51,15 +52,16 @@ export class ChessService {
         }
     }
 
-    static async makeMove(id: string, startSquare: SquareModel, endSquare: SquareModel)
+    static async makeMove(id: string, move: MoveModel)
         : Promise<boolean> {
         try {
             const response = await axios.put(
                 'http://localhost:8080/chess/makeMove',
                 {
                     id: id,
-                    startSquare: startSquare,
-                    endSquare: endSquare,
+                    startSquare: move.startSquare,
+                    endSquare: move.endSquare,
+                    promotionType: move.promotionType,
                 }
             )
             return response.data;

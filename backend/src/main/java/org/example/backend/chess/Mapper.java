@@ -54,4 +54,16 @@ public class Mapper {
         Square square = new Square(squareDto.rank(), squareDto.file());
         return square;
     }
+
+    public static PieceType toPieceType(String type) {
+        return switch (type.toLowerCase()) {
+            case "k" -> PieceType.King;
+            case "q" -> PieceType.Queen;
+            case "r" -> PieceType.Rook;
+            case "b" -> PieceType.Bishop;
+            case "h" -> PieceType.Knight;
+            case "p" -> PieceType.Pawn;
+            default -> PieceType.None;
+        };
+    }
 }

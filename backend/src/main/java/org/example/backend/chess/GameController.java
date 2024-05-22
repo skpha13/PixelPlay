@@ -39,7 +39,10 @@ public class GameController {
         @RequestBody MoveRequest moveRequest
     ) {
         try {
-            Move move = new Move(Mapper.toSquare(moveRequest.startSquare()), Mapper.toSquare(moveRequest.endSquare()));
+            Move move = new Move(
+                    Mapper.toSquare(moveRequest.startSquare()),
+                    Mapper.toSquare(moveRequest.endSquare()),
+                    Mapper.toPieceType(moveRequest.promotionType()));
             gameService.makeMove(moveRequest.id(), move);
             return true;
         }
