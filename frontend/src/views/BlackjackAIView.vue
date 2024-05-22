@@ -26,9 +26,23 @@
         <div class="buttons">
           <button @click="playerHit" :disabled="turn !== 'player' || gameState.playerBust">Hit</button>
           <button @click="playerStand" :disabled="turn !== 'player' || gameState.playerBust">Stand</button>
-          <button @click="playerDoubleDown" :disabled="turn !== 'player' || gameState.playerBust || gameState.playerHand.hand.length !== 2">Double Down</button>
-          <!-- <button @click="playerSplit" :disabled="turn !== 'player' || gameState.playerBust || gameState.playerHand.hand.length !== 2 || !canSplit">Split</button> -->
+          <button @click="playerDoubleDown" :disabled="turn !== 'player' || gameState.playerBust || gameState.playerHand.hand.length !== 2 || gameState.playerSplitScore " >Double Down</button>
+          <button @click="playerSplit" :disabled="turn !== 'player' || gameState.playerBust || gameState.playerHand.hand.length !== 2 || !canSplit">Split</button> 
         </div>
+
+        <CasinoDivider v-if="gameState.playerSplit" />
+        <p v-if="gameState.playerSplit" class="score">Bet: {{ betAmount }}€ </p>
+        <div v-if="gameState.playerSplit" class="cards">
+          <img v-for="card in gameState.playerSplitHand.hand" :key="card.suit + card.value" :src="getCardImage(card)" alt="Card image" class="card"/>
+        </div>
+        <p v-if="gameState.playerSplit" class="score">Score: {{ gameState.playerSplitScore }}</p>
+        <p v-if="gameState.playerSplitScore === 21 && gameState.playerSplit" class="blackjack21">Blackjack!</p>
+        <p v-if="gameState.playerSplitBust && gameState.playerSplit" class="bust">Busted!</p>
+        <div v-if="gameState.playerSplit" class="buttons">
+          <button @click="playerHitSplit" :disabled="turn !== 'player' || gameState.playerSplitBust">Hit</button>
+          <button @click="playerStand" :disabled="turn !== 'player' || gameState.playerSplitBust">Stand</button>
+        </div>
+
       </div>
       <CasinoDivider />
       <div class="player" v-if="gameState">
@@ -46,21 +60,30 @@
     <CasinoDivider />
     <div v-if="winnerMessage" class="winner-message">
       <h2>{{ winnerMessage }}</h2>
-      <CasinoDivider />
-      <GlassButon @clicked="resetGame" title="Reset Game" link="" class="mt-6" />
-      <CasinoDivider />
+      <CasinoDivider v-if="winnerMessageSplit"/>
     </div>
-    <button v-if="gameState && !winnerMessage" @click="toggleTutorial" class="tutorial-button">Tutorial</button>
+
+    <div v-if="winnerMessageSplit" class="winner-message">
+      <h2>{{ winnerMessageSplit }}</h2>
+      
+    </div>
+
+    <CasinoDivider v-if="winnerMessage" />
+      <GlassButon v-if="winnerMessage" @clicked="resetGame" title="Reset Game" link="" class="mt-6" />
+    <CasinoDivider v-if="winnerMessage" />
+      
+    <button v-if="gameState && !winnerMessage " @click="toggleTutorial" class="tutorial-button">Tutorial</button>
     <div v-if="showTutorial" class="tutorial" @mouseleave="hideTutorial" @click="hideTutorial">
       <p>Welcome to Blackjack AI!</p>
       <p>Rules:</p>
       <ul>
         <li>The goal is to have a hand value closest to 21 without exceeding it.</li>
+        <li>Each card has its value: number cards are worth their face value, face cards (King, Queen, Jack) are worth 10, and Aces can be either 1 or 11, whichever benefits the hand most.</li>
         <li>You are playing against the dealer.</li>
-        <li>You can "Hit" (draw a card), "Stand" (keep your current hand) or "Double Down".</li>
-        <!--<li>You can "Hit" (draw a card), "Stand" (keep your current hand), "Double Down" or "Split".</li> -->
+        <li>You can "Hit" (draw a card), "Stand" (keep your current hand), "Double Down" or "Split".</li>
         <li>"Double Down": Double your bet and draw only one more card.</li>
-        <!-- <li>"Split": If you have two cards of the same value, split them into two hands.</li> -->
+        <li>"Split": If you have two cards of the same value, split them into two hands. Any of the "Stand" buttons will result in both hands standing. </li>
+        <li>Both "Double Down" and "Split" can be used only once, in the beggining of the game.</li>
         <li>If you exceed 21, you "Bust" and lose.</li>
         <li>The highest hand value that is 21 or less wins.</li>
         <li>The dealer's first card is face down until you stand.</li>
@@ -69,6 +92,7 @@
         <li>Enter your bet before starting the game.</li>
       </ul>
     </div>
+
     <CasinoDivider v-if="!winnerMessage" />
   </div>
 </template>
@@ -91,6 +115,7 @@ export default defineComponent({
   setup() {
     const gameState = ref<any>(null);
     const winnerMessage = ref<string | null>(null);
+    const winnerMessageSplit = ref<string | null>(null);
     const showTutorial = ref(false);
     const betAmount = ref<number>(0);
     const gameStarted = ref(false);
@@ -116,6 +141,7 @@ export default defineComponent({
     const resetGame = () => {
       gameState.value = null;
       winnerMessage.value = null;
+      winnerMessageSplit.value = null;
       showTutorial.value = false;
       betAmount.value = 0;
       gameStarted.value = false;
@@ -123,6 +149,7 @@ export default defineComponent({
       playerScore.value = 0;
       dealerScore.value = 0;
       canSplit.value = false;
+
     };
 
     const switchTurn = () => {
@@ -135,7 +162,32 @@ export default defineComponent({
       gameState.value = response.data;
       playerScore.value = gameState.value.playerScore;
       dealerScore.value = calculateScore(gameState.value.dealerHand.hand);
+      if(gameState.value.playerSplit===false){
       if (playerScore.value > 21) {
+        gameState.value.playerBust = true;
+        switchTurn();
+        dealerPlay();
+      }
+    }
+      else
+      {
+        if (playerScore.value > 21 && gameState.value.playerSplitScore > 21) {
+        gameState.value.playerBust = true;
+        gameState.value.playerSplitBust = true;
+        switchTurn();
+        dealerPlay();
+      }
+
+    }
+    };
+
+    const playerHitSplit = async () => {
+      const response = await axios.post('http://localhost:8080/api/blackjackAI/hitSplit');
+      gameState.value = response.data;
+      playerScore.value = gameState.value.playerScore;
+      dealerScore.value = calculateScore(gameState.value.dealerHand.hand);
+      if (gameState.value.playerSplitScore > 21 && playerScore.value > 21) {
+        gameState.value.playerSplitBust = true;
         gameState.value.playerBust = true;
         switchTurn();
         dealerPlay();
@@ -167,6 +219,7 @@ export default defineComponent({
       gameState.value = response.data;
       dealerScore.value = calculateScore(gameState.value.dealerHand.hand);
       canSplit.value = false;
+      gameState.value.playerSplit = true;
     };
 
     const dealerPlay = async () => {
@@ -174,26 +227,75 @@ export default defineComponent({
         const response = await axios.post('http://localhost:8080/api/blackjackAI/stand');
         gameState.value = response.data;
         dealerScore.value = gameState.value.dealerScore;
-      
+
       checkWinner();
+      if(gameState.value.playerSplit===true){
+        checkWinnerSplit();
+      }
+
     };
 
     const checkWinner = () => {
-      const playerFinalScore = playerScore.value;
-      const dealerFinalScore = dealerScore.value;
+  const playerFinalScore = gameState.value.playerScore;
+  const dealerFinalScore = gameState.value.dealerScore;
 
-      if (playerFinalScore > 21) {
-        winnerMessage.value = "Player busts! Dealer wins!";
-      } else if (dealerFinalScore > 21) {
-        winnerMessage.value = "Dealer busts! Player wins!";
-      } else if (playerFinalScore > dealerFinalScore) {
-        winnerMessage.value = "Player wins!";
-      } else if (dealerFinalScore > playerFinalScore) {
-        winnerMessage.value = "Dealer wins!";
-      } else {
-        winnerMessage.value = "It's a tie!";
-      }
-    };
+  // Check for Blackjack (21)
+  if (playerFinalScore === 21 && dealerFinalScore === 21) {
+    winnerMessage.value = "It's a tie with both having Blackjack!";
+  } else if (playerFinalScore === 21) {
+    winnerMessage.value = "Player wins with Blackjack!";
+  } else if (dealerFinalScore === 21) {
+    winnerMessage.value = "Dealer wins with Blackjack!";
+  } 
+  // Check for busts
+  else if (playerFinalScore > 21 && dealerFinalScore > 21) {
+    winnerMessage.value = "It's a tie! Both players bust!";
+  } else if (playerFinalScore > 21) {
+    winnerMessage.value = "Player busts! Dealer wins!";
+  } else if (dealerFinalScore > 21) {
+    winnerMessage.value = "Dealer busts! Player wins!";
+  } 
+  // Check for higher score without bust
+  else if (playerFinalScore > dealerFinalScore) {
+    winnerMessage.value = "Player wins!";
+  } else if (dealerFinalScore > playerFinalScore) {
+    winnerMessage.value = "Dealer wins!";
+  } else {
+    winnerMessage.value = "It's a tie!";
+  }
+};
+
+
+const checkWinnerSplit = () => {
+  const playerFinalScore = gameState.value.playerSplitScore;
+  const dealerFinalScore = gameState.value.dealerScore;
+
+  // Check for Blackjack (21)
+  if (playerFinalScore === 21 && dealerFinalScore === 21) {
+    winnerMessageSplit.value = "It's a tie with both having Blackjack!";
+  } else if (playerFinalScore === 21) {
+    winnerMessageSplit.value = "Player wins with Blackjack!";
+  } else if (dealerFinalScore === 21) {
+    winnerMessageSplit.value = "Dealer wins with Blackjack!";
+  } 
+  // Check for busts
+  else if (playerFinalScore > 21 && dealerFinalScore > 21) {
+    winnerMessageSplit.value = "It's a tie! Both players bust!";
+  } else if (playerFinalScore > 21) {
+    winnerMessageSplit.value = "Player busts! Dealer wins!";
+  } else if (dealerFinalScore > 21) {
+    winnerMessageSplit.value = "Dealer busts! Player wins!";
+  } 
+  // Check for higher score without bust
+  else if (playerFinalScore > dealerFinalScore) {
+    winnerMessageSplit.value = "Player wins!";
+  } else if (dealerFinalScore > playerFinalScore) {
+    winnerMessageSplit.value = "Dealer wins!";
+  } else {
+    winnerMessageSplit.value = "It's a tie!";
+  }
+};
+
 
     const calculateScore = (hand: any[]) => {
       let score = 0;
@@ -243,6 +345,7 @@ export default defineComponent({
     return {
       gameState,
       winnerMessage,
+      winnerMessageSplit,
       showTutorial,
       betAmount,
       gameStarted,
@@ -262,6 +365,8 @@ export default defineComponent({
       getCardImage,
       toggleTutorial,
       hideTutorial,
+      playerHitSplit,
+      checkWinnerSplit
     };
   },
 });
@@ -390,7 +495,7 @@ button:hover:not(:disabled) {
   padding: 20px;
   border-radius: 5px;
   position: absolute;
-  top: 750px;
+  top: 1000px;
   left: 50%;
   transform: translateX(-50%);
   width: 300px;

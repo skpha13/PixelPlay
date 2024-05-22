@@ -28,6 +28,12 @@ public class BlackjackAIController {
         return game.getGameState();
     }
 
+    @PostMapping("/hitSplit")
+    public BlackjackAIGame.GameState playerHitSplit() {
+        game.playerHitSplit();
+        return game.getGameState();
+    }
+
     @PostMapping("/stand")
     public BlackjackAIGame.GameState playerStand() {
         game.playerStand();

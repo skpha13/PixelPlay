@@ -38,8 +38,14 @@ public class BlackjackAIGame {
     }
 
     private void dealInitialCards() {
+
+        // for testing split
+//        player.getHand().addCard(new Card("Hearts", "10"));
+//        player.getHand().addCard(new Card("Spades", "10"));
+
         player.getHand().addCard(deck.draw());
         player.getHand().addCard(deck.draw());
+
         dealer.getHand().addCard(deck.draw());
         dealer.getHand().addCard(deck.draw());
     }
@@ -52,10 +58,15 @@ public class BlackjackAIGame {
         }
     }
 
+    public void playerHitSplit() {
+            player.getSplitHand().addCard(deck.draw());
+    }
+
     public void playerStand() {
         dealerPlay();
         determineWinner();
     }
+
 
     public void playerDoubleDown() {
         if (!player.isDoubleDown() && player.getHand().getHand().size() == 2) {

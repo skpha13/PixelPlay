@@ -52,6 +52,7 @@
       <p>Rules:</p>
       <ul>
         <li>The goal is to have a hand value closest to 21 without exceeding it.</li>
+        <li>Each card has its value: number cards are worth their face value, face cards (King, Queen, Jack) are worth 10, and Aces can be either 1 or 11, whichever benefits the hand most.</li>
         <li>Each player takes turns to either "Hit" (draw a card) or "Stand" (keep their current hand).</li>
         <li>If you exceed 21, you "Bust" and lose.</li>
         <li>The player with the highest hand value that is 21 or less wins.</li>
