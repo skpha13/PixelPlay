@@ -57,9 +57,10 @@
       <ul>
         <li>The goal is to have a hand value closest to 21 without exceeding it.</li>
         <li>You are playing against the dealer.</li>
-        <li>You can "Hit" (draw a card), "Stand" (keep your current hand), "Double Down" or "Split".</li>
+        <li>You can "Hit" (draw a card), "Stand" (keep your current hand) or "Double Down".</li>
+        <!--<li>You can "Hit" (draw a card), "Stand" (keep your current hand), "Double Down" or "Split".</li> -->
         <li>"Double Down": Double your bet and draw only one more card.</li>
-        <li>"Split": If you have two cards of the same value, split them into two hands.</li>
+        <!-- <li>"Split": If you have two cards of the same value, split them into two hands.</li> -->
         <li>If you exceed 21, you "Bust" and lose.</li>
         <li>The highest hand value that is 21 or less wins.</li>
         <li>The dealer's first card is face down until you stand.</li>
