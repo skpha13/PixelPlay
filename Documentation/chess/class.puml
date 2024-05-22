@@ -1,0 +1,103 @@
+@startuml
+class Game {
+    - State state
+    - Position position
+    - List<Move> moves
+    - Player whitePlayer
+    - Player blackPlayer
+
+}
+Game : void initialize()
+Game : void run()
+Game : Move waitForMove()
+Game : void makeMove(Move move)
+Game : boolean isValid(Move move)
+Game : void updateState()
+Game : boolean isCheckmate()
+Game : boolean isStalemate()
+Game : List<Move> possibleMoves()
+Game : boolean isOngoing()
+Game : PositionAnalyzer currentPositionAnalyzer()
+
+Game o-- Position
+Game o-- State
+Game o-- Player
+Game o-- Move
+
+class Position {
+    - Piece board[8][8]
+    - boolean whiteCanShortCastle
+    - boolean whiteCanLongCastle
+    - boolean blackCanShortCastle
+    - boolean blackCanLongCastle
+}
+Position : makeMove(Move move)
+
+Position o-- Piece
+
+class PositionAnalyzer {
+    - Position position
+    - Color turn
+}
+PositionAnalyzer : boolean isCheck()
+PositionAnalyzer : boolean isCheckmate()
+PositionAnalyzer : boolean isStalemate()
+PositionAnalyzer : boolean isValid(Move move)
+
+PositionAnalyzer o-- Position
+PositionAnalyzer o-- Color
+
+class MoveGenerator {
+    - Position position
+    - Color turn
+}
+MoveGenerator : List<Move> possibleMoves()
+
+MoveGenerator o-- Position
+MoveGenerator o-- Color
+
+
+class Player {
+    - Color color
+}
+Player : Move makeMove(Position P)
+
+Player o-- Color
+
+
+
+class Move {
+    + byte initialSquare
+    + byte finalSquare
+}
+
+enum State {
+    + WhiteTurn
+    + BlackTurn
+    + WhiteWon
+    + BlackWon
+    + Draw
+}
+
+enum Piece {
+    + None(0)
+    + WhiteKing(1)
+    + WhiteQueen(2)
+    + WhiteRook(3)
+    + WhiteBishop(4)
+    + WhiteKnight(5)
+    + WhitePawn(6)
+    + BlackKing(7)
+    + BlackQueen(8)
+    + BlackRook(9)
+    + BlackBishop(10)
+    + BlackKnight(11)
+    + BlackPawn(12)
+}
+
+enum Color {
+    + White
+    + Black
+}
+
+@enduml
