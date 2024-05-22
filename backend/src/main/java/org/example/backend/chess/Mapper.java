@@ -28,7 +28,7 @@ public class Mapper {
                 }
             }
         }
-        GameDto gameDto = new GameDto(pieces);
+        GameDto gameDto = new GameDto(pieces, game.isCheckmate(), game.isStalemate());
         return gameDto;
     }
 

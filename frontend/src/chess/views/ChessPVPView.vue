@@ -4,6 +4,7 @@
   import { ChessService } from "@/chess/ChessService";
   import { useRoute } from "vue-router";
   import type {SquareModel} from "@/chess/models/SquareModel";
+  import Dialog from "@/chess/components/Dialog.vue";
 
   const route = useRoute();
   const boardModel = ref();
@@ -13,16 +14,30 @@
     boardModel.value = await ChessService.getBoard(gameId);
   });
 
+  const showDialog = ref<boolean>(false)
+
+  const dialogText = ref("")
   const onPieceMoved = async (start: SquareModel, end: SquareModel) => {
-    console.log(start, end)
-    await ChessService.makeMove(gameId, start, end)
     boardModel.value = await ChessService.getBoard(gameId);
+    console.log(boardModel.value)
+    if(boardModel.value.isCheckmate) {
+      showDialog.value = true
+      dialogText.value = "Checkmate"
+    }
+    if(boardModel.value.isStalemate) {
+      showDialog.value = true
+      dialogText.value = "Stalemate"
+    }
+    console.log(showDialog.value)
   }
+
+
 </script>
 
 <template>
   <div>Chess PVP</div>
   <Board v-if="boardModel" :model="boardModel" @piece-moved="onPieceMoved" />
+  <Dialog v-if="showDialog" :text="dialogText"/>
 </template>
 
 <style scoped>

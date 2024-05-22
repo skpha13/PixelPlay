@@ -80,7 +80,8 @@ public class Position {
     }
 
     public boolean canEnPessant(Square square) {
-        return square.equals(enPessantSquare);
+        boolean enemyColor = (turn == Color.BLACK && square.getRank() == 2) || (turn == Color.WHITE && square.getRank() == 5);
+        return square.equals(enPessantSquare) && enemyColor;
     }
 
     public boolean getFlag(Flag flag) {

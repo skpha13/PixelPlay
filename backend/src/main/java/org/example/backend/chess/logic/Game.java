@@ -46,4 +46,14 @@ public class Game {
             throw new RuntimeException("Trying to make invalid move");
         }
     }
+
+    public boolean isCheckmate() {
+        PositionAnalyzer analyzer = new PositionAnalyzer(position);
+        return analyzer.isCheckmate();
+    }
+
+    public boolean isStalemate() {
+        PositionAnalyzer analyzer = new PositionAnalyzer(position);
+        return analyzer.isStalemate();
+    }
 }
