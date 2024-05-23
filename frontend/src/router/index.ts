@@ -10,6 +10,9 @@ import ChessPVPView from "@/chess/views/ChessPVPView.vue";
 import ChessAIView from "@/chess/views/ChessAIView.vue";
 import ChessPVPSetupView from "@/chess/views/ChessPVPSetupView.vue";
 
+import BlackjackPVP from "@/views/BlackjackPVPView.vue";
+import BlackjackAI from "@/views/BlackjackAIView.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,6 +66,16 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'notFound',
       component: NotFound
+    },
+    {
+      path: '/blackjack-pvp',
+      name: 'blackjackPVP',
+      component: BlackjackPVP
+    },
+    {
+      path: '/blackjack-ai',
+      name: 'blackjackAI',
+      component: BlackjackAI
     }
   ]
 })

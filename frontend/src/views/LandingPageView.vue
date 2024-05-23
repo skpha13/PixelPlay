@@ -53,6 +53,12 @@ const showChoiceForGame = (payload: any) => {
                link-ai="/chess/ai"
                link-pvp="/chess/pvp"/>
 
+  <GamePreview @showChoice="payload => showChoiceForGame(payload)"
+                 title="Blackjack"
+                 img-src="src/assets/cardGames/blackjack/blackjack.png"
+                 link-ai="/blackjack-ai"
+                 link-pvp="/blackjack-pvp"/>
+
   </div>
   <ChoiceMenu v-if="showChoice"
               @clicked-close-button="hideChoiceForGame"
