@@ -6,6 +6,10 @@ import TicTacToeAI from "@/views/TicTacToeAIView.vue";
 import ConnectFourPVP from "@/views/ConnectFourPVPView.vue";
 import ConnectFourAI from "@/views/ConnectFourAIView.vue";
 import Greeting from "@/components/Greeting.vue";
+import ChessPVPView from "@/chess/views/ChessPVPView.vue";
+import ChessAIView from "@/chess/views/ChessAIView.vue";
+import ChessPVPSetupView from "@/chess/views/ChessPVPSetupView.vue";
+
 import BlackjackPVP from "@/views/BlackjackPVPView.vue";
 import BlackjackAI from "@/views/BlackjackAIView.vue";
 
@@ -37,6 +41,21 @@ const router = createRouter({
       path: '/connect-four-ai',
       name: 'connectFourAI',
       component: ConnectFourAI
+    },
+    {
+      path: '/chess/pvp/',
+      name: 'chessPVP',
+      component: ChessPVPSetupView
+    },
+    {
+      path: '/chess/pvp/:id',
+      name: 'chessPVPGame',
+      component: ChessPVPView
+    },
+    {
+      path: '/chess/ai',
+      name: 'chessAI',
+      component: ChessAIView
     },
     {
       path: '/greeting',
