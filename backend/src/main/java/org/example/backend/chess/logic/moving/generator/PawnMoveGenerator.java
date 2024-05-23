@@ -28,8 +28,8 @@ class PawnMoveGenerator implements MoveGenerator {
 
     private Square computeDirection() {
         return switch (position.getPiece(square).color()) {
-            case Color.BLACK -> new Square(-1, 0);
-            case Color.WHITE -> new Square(1, 0);
+            case BLACK -> new Square(-1, 0);
+            case WHITE -> new Square(1, 0);
         };
     }
 
@@ -83,8 +83,8 @@ class PawnMoveGenerator implements MoveGenerator {
 
     private int getstartingRank() {
         return switch (position.getPiece(square).color()) {
-            case Color.BLACK -> 6;
-            case Color.WHITE -> 1;
+            case BLACK -> 6;
+            case WHITE -> 1;
         };
     }
 
@@ -147,8 +147,8 @@ class PawnMoveGenerator implements MoveGenerator {
 
     private int getLastRank() {
         return switch (position.getPiece(square).color()){
-            case Color.WHITE -> 7;
-            case Color.BLACK -> 0;
+            case WHITE -> 7;
+            case BLACK -> 0;
         };
     }
 
