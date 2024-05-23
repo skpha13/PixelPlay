@@ -72,9 +72,9 @@ class LongRangeMoveGenerator implements MoveGenerator {
 
     private List<Square> getScopes() {
         return switch (position.getPiece(square).type()) {
-            case PieceType.Queen -> Square.Companion.getCompleteMoves();
-            case PieceType.Rook -> Square.Companion.getAxialMoves();
-            case PieceType.Bishop -> Square.Companion.getDiagonalMoves();
+            case Queen -> Square.Companion.getCompleteMoves();
+            case Rook -> Square.Companion.getAxialMoves();
+            case Bishop -> Square.Companion.getDiagonalMoves();
             default -> List.of();
         };
     }

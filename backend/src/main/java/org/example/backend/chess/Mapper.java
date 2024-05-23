@@ -34,12 +34,12 @@ public class Mapper {
 
     public static PieceDto toPieceDto(Piece piece, Square square) {
         String type = switch (piece.type()) {
-            case PieceType.King -> "k";
-            case PieceType.Queen -> "q";
-            case PieceType.Rook -> "r";
-            case PieceType.Bishop -> "b";
-            case PieceType.Knight -> "h";
-            case PieceType.Pawn -> "p";
+            case King -> "k";
+            case Queen -> "q";
+            case Rook -> "r";
+            case Bishop -> "b";
+            case Knight -> "h";
+            case Pawn -> "p";
             default -> "";
         };
         if(piece.color() == Color.WHITE) {
