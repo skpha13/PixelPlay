@@ -26,11 +26,11 @@ public class PieceMoveGenerator implements MoveGenerator {
 
     private MoveGenerator getGenerator() {
         return switch (position.getPiece(square).type()) {
-            case PieceType.Pawn -> new PawnMoveGenerator(position, square);
-            case PieceType.Knight -> new KnightMoveGenerator(position, square);
-            case PieceType.Bishop, PieceType.Rook, PieceType.Queen -> new LongRangeMoveGenerator(position, square);
-            case PieceType.King -> new KingMoveGenerator(position, square);
-            case PieceType.None -> new EmptyMoveGenerator();
+            case Pawn -> new PawnMoveGenerator(position, square);
+            case Knight -> new KnightMoveGenerator(position, square);
+            case Bishop, Rook, Queen -> new LongRangeMoveGenerator(position, square);
+            case King -> new KingMoveGenerator(position, square);
+            case None -> new EmptyMoveGenerator();
         };
     }
 }

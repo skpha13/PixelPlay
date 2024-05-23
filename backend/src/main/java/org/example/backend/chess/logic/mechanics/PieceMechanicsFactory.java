@@ -12,12 +12,12 @@ public class PieceMechanicsFactory {
 
     public static PieceMechanics getPieceMechanics(Position position, Square square, Piece piece) {
         return switch (piece.type()) {
-            case PieceType.King -> new KingMechanics(position, square);
-            case PieceType.Bishop -> new BishopMechanics(position, square);
-            case PieceType.Knight -> new KnightMechanics(position, square);
-            case PieceType.Queen -> new QueenMechanics(position, square);
-            case PieceType.Rook -> new RookMechanics(position, square);
-            case PieceType.Pawn -> {
+            case King -> new KingMechanics(position, square);
+            case Bishop -> new BishopMechanics(position, square);
+            case Knight -> new KnightMechanics(position, square);
+            case Queen -> new QueenMechanics(position, square);
+            case Rook -> new RookMechanics(position, square);
+            case Pawn -> {
                 if(piece.isColor(Color.BLACK)) {
                     yield new BlackPawnMechanics(position, square);
                 }
