@@ -20,5 +20,6 @@ public class EnPessantHandler implements MoveHandler {
         position.setPiece(move.start(), new Piece());
         position.setPiece(capturedPawnSquare, new Piece());
         position.setPiece(move.end(), piece);
+        position.swapTurn();
     }
 }

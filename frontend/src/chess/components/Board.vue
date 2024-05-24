@@ -27,7 +27,7 @@
 
   var lastSquareClicked: SquareModel;
   var possibleSquaresToMove: Ref<SquareModel[]> = ref<SquareModel[]>([])
-  const pendingMove = ref<MoveModel>(null)
+  const pendingMove = ref<MoveModel>()
 
 
   const squareClicked = async (rank: number, file: number) => {

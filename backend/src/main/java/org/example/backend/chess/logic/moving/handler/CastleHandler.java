@@ -21,6 +21,7 @@ public class CastleHandler implements MoveHandler {
         moveKing(move);
         moveRook(move);
         updateFlags(move);
+        position.swapTurn();
     }
 
     private void moveKing(Move move) {
