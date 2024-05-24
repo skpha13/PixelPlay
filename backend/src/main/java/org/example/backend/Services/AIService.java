@@ -4,7 +4,7 @@ import org.example.backend.Models.TicTacToe;
 
 public class AIService {
     private static TicTacToe ticTacToe;
-    private static final int  MAX_DEPTH = 6;
+    private static final int  MAX_DEPTH = 8;
 
     public static void setTicTacToe(TicTacToe ticTacToe) {
         AIService.ticTacToe = (TicTacToe) ticTacToe.clone();
@@ -27,7 +27,7 @@ public class AIService {
     public static int miniMax(TicTacToe board, boolean isMax, int depth) {
         int boardValue = evaluateBoard(depth);
 
-        if (depth == 0 || board.areMovesPossible() || isTerminalNode())
+        if (depth == 0 || !board.areMovesPossible() || isTerminalNode())
             return boardValue;
 
         if (isMax) {
@@ -69,8 +69,8 @@ public class AIService {
         for (int row=0; row<3; row++)
             for (int col=0; col<3; col++)
                 if (ticTacToe.canPlace(row, col)) {
-                    // place a new move from player X
-                    ticTacToe.place(row, col, 'X');
+                    // place a new move from player 0
+                    ticTacToe.place(row, col, 'O');
                     int moveValue =  miniMax(ticTacToe, false, MAX_DEPTH);
                     // free the move played before
                     ticTacToe.place(row, col, '-');
