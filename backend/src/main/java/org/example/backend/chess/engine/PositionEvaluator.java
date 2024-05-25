@@ -47,9 +47,9 @@ public class PositionEvaluator {
 
     private float calculateMobilityScore() {
         MoveGenerator generator = new PositionMoveGenerator(position);
-        float score = generator.getLegalMoves().size();
+        float score = generator.getLegalMoves().size() * Score.Mobility.score;
         position.swapTurn();
-        score -= generator.getLegalMoves().size();
+        score -= generator.getLegalMoves().size() * Score.Mobility.score;
         position.swapTurn();
         return score;
     }
@@ -81,7 +81,8 @@ public class PositionEvaluator {
         MaterialBishop(3.2f),
         MaterialRook(5f),
         MaterialQueen(9f),
-        Checkmate(1000f);
+        Checkmate(1000f),
+        Mobility(0.1f);
 
         public float score;
 
