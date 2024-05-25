@@ -4,6 +4,7 @@ import org.example.backend.chess.logic.base.Color;
 import org.example.backend.chess.logic.base.Piece;
 import org.example.backend.chess.logic.base.Square;
 import org.example.backend.chess.logic.position.Position;
+import org.example.backend.chess.logic.position.PositionAnalyzer;
 
 public class PositionEvaluator {
     private Position position;
@@ -13,6 +14,15 @@ public class PositionEvaluator {
     }
 
     public float evaluate(){
+        if(isCheckmate() && position.getTurn()==Color.WHITE){
+            return -Score.Checkmate.score;
+        }
+        if(isCheckmate() && position.getTurn()==Color.BLACK){
+            return Score.Checkmate.score;
+        }
+        if(isStalemate()) {
+            return 0f;
+        }
         float score = calculateMaterialScore(Color.WHITE) - calculateMaterialScore(Color.BLACK);
 
         return score;
@@ -33,16 +43,26 @@ public class PositionEvaluator {
 
     private float getPieceMaterialScore(Piece piece) {
         return switch (piece.type()){
-            case Pawn -> Criteria.MaterialPawn.score;
-            case Bishop -> Criteria.MaterialBishop.score;
-            case Knight -> Criteria.MaterialKnight.score;
-            case Rook -> Criteria.MaterialRook.score;
-            case Queen -> Criteria.MaterialQueen.score;
+            case Pawn -> Score.MaterialPawn.score;
+            case Bishop -> Score.MaterialBishop.score;
+            case Knight -> Score.MaterialKnight.score;
+            case Rook -> Score.MaterialRook.score;
+            case Queen -> Score.MaterialQueen.score;
             default -> 0;
         };
     }
 
-    private enum Criteria {
+    private boolean isCheckmate() {
+        PositionAnalyzer analyzer = new PositionAnalyzer(position);
+        return analyzer.isCheckmate();
+    }
+
+    private boolean isStalemate() {
+        PositionAnalyzer analyzer = new PositionAnalyzer(position);
+        return analyzer.isStalemate();
+    }
+
+    private enum Score {
         MaterialPawn(1.f),
         MaterialKnight(2.8f),
         MaterialBishop(3.2f),
@@ -52,7 +72,7 @@ public class PositionEvaluator {
 
         public float score;
 
-        Criteria(float i) {
+        Score(float i) {
             score = i;
         }
     }
