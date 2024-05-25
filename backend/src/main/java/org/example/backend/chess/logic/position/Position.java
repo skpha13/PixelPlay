@@ -1,9 +1,8 @@
 package org.example.backend.chess.logic.position;
 
-import org.example.backend.chess.logic.base.Color;
-import org.example.backend.chess.logic.base.Piece;
-import org.example.backend.chess.logic.base.PieceType;
-import org.example.backend.chess.logic.base.Square;
+import org.example.backend.chess.logic.base.*;
+import org.example.backend.chess.logic.moving.MoveHandler;
+import org.example.backend.chess.logic.moving.handler.GeneralHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +60,11 @@ public class Position implements Cloneable {
             }
         }
         return null;
+    }
+
+    public void makeMove(Move move) {
+        MoveHandler moveHandler = new GeneralHandler(this);
+        moveHandler.makeMove(move);
     }
 
     public void setPiece(Square square, Piece piece) {

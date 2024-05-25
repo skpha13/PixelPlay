@@ -26,8 +26,7 @@ public class Engine {
         float maxScore = -10000f;
         for(Move move : moves) {
             Position futurePosition = position.clone();
-            MoveHandler moveHandler = new GeneralHandler(futurePosition);
-            moveHandler.makeMove(move);
+            futurePosition.makeMove(move);
 
             float score = positionEvaluator.evaluate();
             if(score > maxScore) {
