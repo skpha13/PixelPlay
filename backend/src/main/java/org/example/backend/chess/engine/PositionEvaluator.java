@@ -13,28 +13,29 @@ public class PositionEvaluator {
         this.position = position;
     }
 
+    //positive means the current player has advantage
     public float evaluate(){
-        if(isCheckmate() && position.getTurn()==Color.WHITE){
+        if(isCheckmate()){
             return -Score.Checkmate.score;
-        }
-        if(isCheckmate() && position.getTurn()==Color.BLACK){
-            return Score.Checkmate.score;
         }
         if(isStalemate()) {
             return 0f;
         }
-        float score = calculateMaterialScore(Color.WHITE) - calculateMaterialScore(Color.BLACK);
+        float score = calculateMaterialScore();
 
         return score;
     }
 
-    private float calculateMaterialScore(Color color) {
+    private float calculateMaterialScore() {
         float score = 0f;
         for(int rank = 0; rank < 8; rank ++) {
             for(int file = 0; file < 8; file++) {
                 Piece piece = position.getPiece(new Square(rank, file));
-                if(piece.isColor(color)) {
+                if(piece.isColor(position.getTurn())) {
                     score += getPieceMaterialScore(piece);
+                }
+                else {
+                    score -= getPieceMaterialScore(piece);
                 }
             }
         }
