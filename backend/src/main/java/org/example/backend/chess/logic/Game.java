@@ -12,7 +12,7 @@ import org.example.backend.chess.logic.position.Position;
 import org.example.backend.chess.logic.position.PositionAnalyzer;
 import org.example.backend.chess.logic.position.PositionGenerator;
 
-public class Game {
+public class Game implements Cloneable {
     private final Position position;
     private PositionAnalyzer analyzer;
     private MoveHandler moveHandler;
@@ -55,5 +55,10 @@ public class Game {
     public boolean isStalemate() {
         PositionAnalyzer analyzer = new PositionAnalyzer(position);
         return analyzer.isStalemate();
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Game(position.clone());
     }
 }

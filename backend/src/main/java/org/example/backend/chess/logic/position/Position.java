@@ -8,12 +8,12 @@ import org.example.backend.chess.logic.base.Square;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Position {
+public class Position implements Cloneable {
     private final Piece[][] board;
     private Color turn;
     private Square enPessantSquare = null;
 
-    private final PositionFlags positionFlags = new PositionFlags();
+    private PositionFlags positionFlags = new PositionFlags();
 
     public Position(Piece[][] board, Color turn) {
         this.board = board;
@@ -90,5 +90,20 @@ public class Position {
 
     public void setFlag(Flag flag, boolean value) {
         positionFlags.setFlag(flag, value);
+    }
+
+    @Override
+    public Position clone() {
+        Piece boardClone[][] = new Piece[8][8];
+        for(int rank = 0; rank < 8; rank ++) {
+            for(int file = 0; file < 8; file ++) {
+                boardClone[rank][file] = board[rank][file];
+            }
+        }
+        Position clone = new Position(boardClone, turn);
+        clone.enPessantSquare = enPessantSquare;
+        clone.positionFlags = positionFlags;
+
+        return clone;
     }
 }
