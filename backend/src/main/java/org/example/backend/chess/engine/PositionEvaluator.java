@@ -3,8 +3,11 @@ package org.example.backend.chess.engine;
 import org.example.backend.chess.logic.base.Color;
 import org.example.backend.chess.logic.base.Piece;
 import org.example.backend.chess.logic.base.Square;
+import org.example.backend.chess.logic.moving.MoveGenerator;
+import org.example.backend.chess.logic.moving.generator.PositionMoveGenerator;
 import org.example.backend.chess.logic.position.Position;
 import org.example.backend.chess.logic.position.PositionAnalyzer;
+import org.example.backend.chess.logic.position.PositionGenerator;
 
 public class PositionEvaluator {
     private Position position;
@@ -21,7 +24,7 @@ public class PositionEvaluator {
         if(isStalemate()) {
             return 0f;
         }
-        float score = calculateMaterialScore();
+        float score = calculateMaterialScore() + calculateMobilityScore();
 
         return score;
     }
@@ -39,6 +42,15 @@ public class PositionEvaluator {
                 }
             }
         }
+        return score;
+    }
+
+    private float calculateMobilityScore() {
+        MoveGenerator generator = new PositionMoveGenerator(position);
+        float score = generator.getLegalMoves().size();
+        position.swapTurn();
+        score -= generator.getLegalMoves().size();
+        position.swapTurn();
         return score;
     }
 

@@ -42,6 +42,12 @@ class Square(private var rank: Int, private var file: Int): Comparable<Square> {
         return getIndex()
     }
 
+    override fun toString(): String {
+        val file = Char('A'.code + file)
+        val rank = Char('1'.code + rank)
+        return file.toString() + rank.toString();
+    }
+
     companion object {
 
         val diagonalMoves: List<Square> = listOf(
