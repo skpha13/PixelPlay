@@ -65,8 +65,8 @@ public class GameService {
     public void makeEngineMove(String id) {
         try {
             Game game = gameRepository.getGame(UUID.fromString(id));
-            Engine engine = new Engine(game.getPosition());
-            Move engineMove = engine.getMove();
+            Move engineMove = Engine.getMove(game.getPosition());
+            System.out.println(engineMove.toString());
             game.makeMove(engineMove);
         }
         catch (Exception e) {

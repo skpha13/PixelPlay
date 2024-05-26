@@ -1,6 +1,7 @@
 package org.example.backend.chess.engine;
 
 import org.example.backend.chess.logic.base.Color;
+import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.base.Piece;
 import org.example.backend.chess.logic.base.Square;
 import org.example.backend.chess.logic.moving.MoveGenerator;
@@ -27,6 +28,13 @@ public class PositionEvaluator {
         float score = calculateMaterialScore() + calculateMobilityScore();
 
         return score;
+    }
+
+    public float evaluateMove(Move move) {
+        Position futurePosition = position.clone();
+        futurePosition.makeMove(move);
+        PositionEvaluator evaluator = new PositionEvaluator(futurePosition);
+        return evaluator.evaluate();
     }
 
     private float calculateMaterialScore() {

@@ -81,6 +81,7 @@ export class ChessService {
                     id: id,
                 }
             )
+            console.log("EngineMove")
             return response.data;
         }
         catch (e) {

@@ -32,6 +32,9 @@
 
 
   const squareClicked = async (rank: number, file: number) => {
+    if(waitingForEngineMove) {
+      return
+    }
     showPromotionTypeSelector.value = false
     if(isInPossibleSquaresToMove(rank, file)) {
       let currentSquare = new SquareModel(rank, file)
@@ -84,6 +87,8 @@
     await makeMove()
   }
 
+  var waitingForEngineMove = false;
+
   const makeMove = async () => {
     await ChessService.makeMove(gameId, pendingMove.value)
     emit("pieceMoved")
@@ -93,8 +98,10 @@
     console.log(props.isPlayingVsEngine)
 
     if(props.isPlayingVsEngine) {
+      waitingForEngineMove = true
       await ChessService.makeEngineMove(gameId)
       emit("pieceMoved")
+      waitingForEngineMove = false
     }
   }
 

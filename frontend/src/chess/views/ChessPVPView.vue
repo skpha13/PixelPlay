@@ -37,7 +37,7 @@
 <template>
   <div>Chess PVP</div>
   <Board v-if="boardModel" :model="boardModel" @piece-moved="onPieceMoved"/>
-  <Dialog v-if="showDialog" :text="dialogText"/>
+  <Dialog v-if="showDialog" :text="dialogText" link="/chess/pvp"/>
 </template>
 
 <style scoped>
