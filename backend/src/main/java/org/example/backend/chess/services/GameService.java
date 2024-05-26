@@ -3,6 +3,7 @@ package org.example.backend.chess.services;
 import org.example.backend.chess.Mapper;
 import org.example.backend.chess.dtos.GameDto;
 import org.example.backend.chess.dtos.SquareDto;
+import org.example.backend.chess.engine.Engine;
 import org.example.backend.chess.logic.Game;
 import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.base.Square;
@@ -59,5 +60,17 @@ public class GameService {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void makeEngineMove(String id) {
+        try {
+            Game game = gameRepository.getGame(UUID.fromString(id));
+            Engine engine = new Engine(game.getPosition());
+            Move engineMove = engine.getMove();
+            game.makeMove(engineMove);
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -51,4 +51,18 @@ public class GameController {
         }
 
     }
+
+    @PutMapping("/chess/makeEngineMove")
+    public boolean makeEngineMove(
+            @RequestBody MoveRequest moveRequest
+    ) {
+        try {
+            gameService.makeEngineMove(moveRequest.id());
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+
+    }
 }
