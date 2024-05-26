@@ -12,6 +12,7 @@ import ChessPVPSetupView from "@/chess/views/ChessPVPSetupView.vue";
 
 import BlackjackPVP from "@/views/BlackjackPVPView.vue";
 import BlackjackAI from "@/views/BlackjackAIView.vue";
+import ChessAISetupView from "@/chess/views/ChessAISetupView.vue";
 
 
 const router = createRouter({
@@ -55,6 +56,11 @@ const router = createRouter({
     {
       path: '/chess/ai',
       name: 'chessAI',
+      component: ChessAISetupView
+    },
+    {
+      path: '/chess/ai/:id',
+      name: 'chessAIGame',
       component: ChessAIView
     },
     {

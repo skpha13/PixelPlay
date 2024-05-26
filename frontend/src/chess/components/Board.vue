@@ -22,12 +22,13 @@
 
   const props = defineProps({
     model: {type: GameModel, required:true},
+    isPlayingVsEngine :{type:Boolean, default: false},
   })
   const pieces = computed(() => props.model.pieces)
 
   var lastSquareClicked: SquareModel;
   var possibleSquaresToMove: Ref<SquareModel[]> = ref<SquareModel[]>([])
-  const pendingMove = ref<MoveModel>(null)
+  const pendingMove = ref<MoveModel>()
 
 
   const squareClicked = async (rank: number, file: number) => {
@@ -85,9 +86,16 @@
 
   const makeMove = async () => {
     await ChessService.makeMove(gameId, pendingMove.value)
-    emit("pieceMoved", pendingMove.value.startSquare, pendingMove.value.endSquare)
+    emit("pieceMoved")
     possibleSquaresToMove.value = []
     updateHighlightFlags()
+
+    console.log(props.isPlayingVsEngine)
+
+    if(props.isPlayingVsEngine) {
+      await ChessService.makeEngineMove(gameId)
+      emit("pieceMoved")
+    }
   }
 
   let showPromotionTypeSelector = ref(false)
