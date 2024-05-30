@@ -4,7 +4,7 @@ public enum Player {
     RED(1), YELLOW(2);
     public final int value;
 
-    private Player(int value) {
+    Player(int value) {
         this.value = value;
     }
 

@@ -1,14 +1,13 @@
 package org.example.backend.chess.repositories;
 
 import org.example.backend.chess.logic.Game;
-import org.example.backend.chess.logic.Game;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class GameRepository {
-    private Map<UUID, Game> games = new HashMap<>();
+    private final Map<UUID, Game> games = new HashMap<>();
 
     private  GameRepository() {}
 

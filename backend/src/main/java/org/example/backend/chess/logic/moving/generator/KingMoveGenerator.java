@@ -108,8 +108,8 @@ class KingMoveGenerator implements MoveGenerator {
     }
 
 
-    private static List<Square> scope = Square.Companion.getCompleteMoves();
+    private static final List<Square> scope = Square.Companion.getCompleteMoves();
 
-    private static Square shortCastleDirection = PositionUtil.shortCastleDirection;
-    private static Square longCastleDirection = PositionUtil.longCastleDirection;
+    private static final Square shortCastleDirection = PositionUtil.shortCastleDirection;
+    private static final Square longCastleDirection = PositionUtil.longCastleDirection;
 }

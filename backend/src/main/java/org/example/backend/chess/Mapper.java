@@ -28,8 +28,7 @@ public class Mapper {
                 }
             }
         }
-        GameDto gameDto = new GameDto(pieces, game.isCheckmate(), game.isStalemate());
-        return gameDto;
+        return new GameDto(pieces, game.isCheckmate(), game.isStalemate());
     }
 
     public static PieceDto toPieceDto(Piece piece, Square square) {
@@ -51,8 +50,7 @@ public class Mapper {
     }
 
     public static Square toSquare(SquareDto squareDto) {
-        Square square = new Square(squareDto.rank(), squareDto.file());
-        return square;
+        return new Square(squareDto.rank(), squareDto.file());
     }
 
     public static PieceType toPieceType(String type) {

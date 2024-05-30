@@ -20,16 +20,16 @@ public class PawnJumpHandler implements MoveHandler {
         position.setPiece(move.start(), new Piece());
         position.swapTurn();
 
-        updateEnPessant(move);
+        updateEnPassant(move);
 
     }
 
-    private void updateEnPessant(Move move) {
-        Square enPessantSquare = computeEnPessantSquare(move);
-        position.setEnPessantSquare(enPessantSquare);
+    private void updateEnPassant(Move move) {
+        Square enPassantSquare = computeEnPassantSquare(move);
+        position.setEnPassantSquare(enPassantSquare);
     }
 
-    private Square computeEnPessantSquare(Move move) {
+    private Square computeEnPassantSquare(Move move) {
         return new Square(
                 (move.start().getRank() + move.end().getRank())/ 2,
                 (move.start().getFile() + move.end().getFile())/ 2

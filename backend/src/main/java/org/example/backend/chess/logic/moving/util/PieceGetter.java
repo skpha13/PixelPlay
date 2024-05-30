@@ -3,9 +3,6 @@ package org.example.backend.chess.logic.moving.util;
 import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.base.Piece;
 import org.example.backend.chess.logic.position.Position;
-import org.example.backend.chess.logic.base.Move;
-import org.example.backend.chess.logic.base.Piece;
-import org.example.backend.chess.logic.position.Position;
 
 public class PieceGetter {
     private final Position position;

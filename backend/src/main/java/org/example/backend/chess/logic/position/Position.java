@@ -10,7 +10,7 @@ import java.util.List;
 public class Position implements Cloneable {
     private final Piece[][] board;
     private Color turn;
-    private Square enPessantSquare = null;
+    private Square enPassantSquare = null;
 
     private PositionFlags positionFlags = new PositionFlags();
 
@@ -79,13 +79,13 @@ public class Position implements Cloneable {
         return turn;
     }
 
-    public void setEnPessantSquare(Square enPessantSquare) {
-        this.enPessantSquare = enPessantSquare;
+    public void setEnPassantSquare(Square enPassantSquare) {
+        this.enPassantSquare = enPassantSquare;
     }
 
-    public boolean canEnPessant(Square square) {
+    public boolean canEnPassant(Square square) {
         boolean enemyColor = (turn == Color.BLACK && square.getRank() == 2) || (turn == Color.WHITE && square.getRank() == 5);
-        return square.equals(enPessantSquare) && enemyColor;
+        return square.equals(enPassantSquare) && enemyColor;
     }
 
     public boolean getFlag(Flag flag) {
@@ -98,14 +98,12 @@ public class Position implements Cloneable {
 
     @Override
     public Position clone() {
-        Piece boardClone[][] = new Piece[8][8];
+        Piece[][] boardClone = new Piece[8][8];
         for(int rank = 0; rank < 8; rank ++) {
-            for(int file = 0; file < 8; file ++) {
-                boardClone[rank][file] = board[rank][file];
-            }
+            System.arraycopy(board[rank], 0, boardClone[rank], 0, 8);
         }
         Position clone = new Position(boardClone, turn);
-        clone.enPessantSquare = enPessantSquare;
+        clone.enPassantSquare = enPassantSquare;
         clone.positionFlags = positionFlags;
 
         return clone;

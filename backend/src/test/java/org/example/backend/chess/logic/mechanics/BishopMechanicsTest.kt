@@ -1,4 +1,4 @@
-package com.example.pixelplay.chess.mechanics
+package org.example.backend.chess.logic.mechanics
 
 import org.example.backend.chess.logic.base.Square
 import org.example.backend.chess.logic.mechanics.pieces.BishopMechanics

@@ -1,6 +1,5 @@
 package org.example.backend.chess.engine;
 
-import org.example.backend.chess.logic.base.Color;
 import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.base.Piece;
 import org.example.backend.chess.logic.base.Square;
@@ -8,10 +7,9 @@ import org.example.backend.chess.logic.moving.MoveGenerator;
 import org.example.backend.chess.logic.moving.generator.PositionMoveGenerator;
 import org.example.backend.chess.logic.position.Position;
 import org.example.backend.chess.logic.position.PositionAnalyzer;
-import org.example.backend.chess.logic.position.PositionGenerator;
 
 public class PositionEvaluator {
-    private Position position;
+    private final Position position;
 
     public PositionEvaluator(Position position) {
         this.position = position;
@@ -25,9 +23,8 @@ public class PositionEvaluator {
         if(isStalemate()) {
             return 0f;
         }
-        float score = calculateMaterialScore() + calculateMobilityScore();
 
-        return score;
+        return calculateMaterialScore() + calculateMobilityScore();
     }
 
     public float evaluateMove(Move move) {
@@ -92,7 +89,7 @@ public class PositionEvaluator {
         Checkmate(1000f),
         Mobility(0.1f);
 
-        public float score;
+        public final float score;
 
         Score(float i) {
             score = i;

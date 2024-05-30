@@ -1,7 +1,6 @@
 package org.example.backend.Controllers;
 
 import org.example.backend.Models.TicTacToe;
-import org.example.backend.Services.AIService;
 import org.example.backend.Services.TicTacToeService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

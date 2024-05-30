@@ -8,9 +8,6 @@ import org.example.backend.chess.logic.moving.MoveValidator;
 import org.example.backend.chess.logic.position.Position;
 import org.example.backend.chess.logic.position.PositionAnalyzer;
 import org.example.backend.chess.logic.position.PositionGenerator;
-import org.example.backend.chess.logic.position.Position;
-import org.example.backend.chess.logic.position.PositionAnalyzer;
-import org.example.backend.chess.logic.position.PositionGenerator;
 
 public class Game implements Cloneable {
     private final Position position;
@@ -58,7 +55,7 @@ public class Game implements Cloneable {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Object clone() {
         return new Game(position.clone());
     }
 }

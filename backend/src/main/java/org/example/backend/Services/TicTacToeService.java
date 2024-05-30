@@ -3,7 +3,7 @@ package org.example.backend.Services;
 import org.example.backend.Models.TicTacToe;
 
 public class TicTacToeService {
-    private TicTacToe ticTacToe;
+    private final TicTacToe ticTacToe;
 
     public TicTacToeService(TicTacToe ticTacToe) {
         this.ticTacToe = ticTacToe;

@@ -5,7 +5,6 @@ import org.example.backend.chess.logic.moving.MoveGenerator;
 import org.example.backend.chess.logic.moving.MoveValidator;
 import org.example.backend.chess.logic.moving.validator.GeneralMoveValidator;
 import org.example.backend.chess.logic.position.Position;
-import org.example.backend.chess.logic.base.PieceType;
 import org.example.backend.chess.logic.base.Square;
 
 import java.util.ArrayList;

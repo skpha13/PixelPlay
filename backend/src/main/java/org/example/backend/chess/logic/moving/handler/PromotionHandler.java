@@ -1,11 +1,6 @@
 package org.example.backend.chess.logic.moving.handler;
 
-import org.example.backend.chess.logic.base.Color;
-import org.example.backend.chess.logic.base.Move;
-import org.example.backend.chess.logic.base.Piece;
-import org.example.backend.chess.logic.base.PieceType;
 import org.example.backend.chess.logic.moving.MoveHandler;
-import org.example.backend.chess.logic.position.Position;
 import org.example.backend.chess.logic.base.Color;
 import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.base.Piece;

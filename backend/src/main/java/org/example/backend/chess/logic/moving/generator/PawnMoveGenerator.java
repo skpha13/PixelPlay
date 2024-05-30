@@ -6,7 +6,6 @@ import org.example.backend.chess.logic.moving.MoveGenerator;
 import org.example.backend.chess.logic.moving.MoveValidator;
 import org.example.backend.chess.logic.moving.validator.GeneralMoveValidator;
 import org.example.backend.chess.logic.position.Position;
-import org.example.backend.chess.logic.base.Color;
 import org.example.backend.chess.logic.base.Square;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,14 +34,13 @@ class PawnMoveGenerator implements MoveGenerator {
 
     @Override
     public List<Move> getLegalMoves() {
-        List<Move> legalMoves = new ArrayList<Move>();
 
-        legalMoves.addAll(getForwardMoves());
+        List<Move> legalMoves = new ArrayList<>(getForwardMoves());
         if(canJumpForward()) {
             legalMoves.add(new Move(square, square.move(direction, 2)));
         }
         legalMoves.addAll(getCaptures());
-        legalMoves.addAll(getEnPessantMoves());
+        legalMoves.addAll(getEnPassantMoves());
 
         return legalMoves;
     }
@@ -88,29 +86,28 @@ class PawnMoveGenerator implements MoveGenerator {
         };
     }
 
-    private List<Move> getEnPessantMoves() {
+    private List<Move> getEnPassantMoves() {
         List<Move> moves = new ArrayList<>();
 
         List<Square> possibleSquares = getDiagonalSquares();
 
         for(Square end: possibleSquares) {
-            Move enPessant = new Move(square, end);
-            boolean isEnPessantSquare = position.canEnPessant(end);
-            boolean isValid = validator.isValid(enPessant);
+            Move enPassant = new Move(square, end);
+            boolean isEnPassantSquare = position.canEnPassant(end);
+            boolean isValid = validator.isValid(enPassant);
 
-            if(isEnPessantSquare && isValid) {
-                moves.add(enPessant);
+            if(isEnPassantSquare && isValid) {
+                moves.add(enPassant);
             }
         }
         return moves;
     }
 
     private @NotNull List<Square> getDiagonalSquares() {
-        List<Square> possibleSquares = new ArrayList<>(List.of(
+        return new ArrayList<>(List.of(
                 square.move(direction).move(new Square(0, -1)),
                 square.move(direction).move(new Square(0, 1))
         ));
-        return possibleSquares;
     }
 
     private List<Move> getPromotionMoves(Square end) {

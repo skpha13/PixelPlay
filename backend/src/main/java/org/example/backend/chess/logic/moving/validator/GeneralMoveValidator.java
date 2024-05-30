@@ -65,7 +65,7 @@ public class GeneralMoveValidator implements MoveValidator {
             case CASTLE -> new CastleValidator(position);
             case BASIC, PAWN_JUMP -> new SimpleMoveValidator(position);
             case PROMOTION -> new PromotionValidator(position);
-            case EN_PESSANT -> new EnPessantValidator(position);
+            case EN_PASSANT -> new EnPassantValidator(position);
         };
     }
 }

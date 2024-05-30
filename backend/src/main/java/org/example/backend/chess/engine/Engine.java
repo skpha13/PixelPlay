@@ -2,9 +2,7 @@ package org.example.backend.chess.engine;
 
 import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.moving.MoveGenerator;
-import org.example.backend.chess.logic.moving.MoveHandler;
 import org.example.backend.chess.logic.moving.generator.PositionMoveGenerator;
-import org.example.backend.chess.logic.moving.handler.GeneralHandler;
 import org.example.backend.chess.logic.position.Position;
 
 import java.util.Comparator;
@@ -41,8 +39,9 @@ public class Engine {
     public static List<Move> getAllPossibleMoves(Position position) {
         MoveGenerator moveGenerator = new PositionMoveGenerator(position);
         List<Move> moves =  moveGenerator.getLegalMoves();
-        moves.sort(new Comparator<Move>() {
-            PositionEvaluator evaluator = new PositionEvaluator(position);
+        moves.sort(new Comparator<>() {
+            final PositionEvaluator evaluator = new PositionEvaluator(position);
+
             @Override
             public int compare(Move o1, Move o2) {
                 return evaluator.evaluateMove(o1) > evaluator.evaluateMove(o2) ? 1 : -1;
@@ -69,23 +68,4 @@ public class Engine {
         }
         return max;
     }
-//    float alphaBeta( Position position, float alpha, float beta, int depthleft, int color ) {
-//            count ++;
-//        float bestScore = Float.MIN_VALUE;
-//        PositionEvaluator evaluator = new PositionEvaluator(position);
-//        if( depthleft == 0 || abs(evaluator.evaluate()) > 100) {
-//            return color * evaluator.evaluate();
-//        }
-//
-//        for (Move move: getAllPossibleMoves())  {
-//            Position futurePosition = position.clone();
-//            futurePosition.makeMove(move);
-//            bestScore = max(bestScore, -alphaBeta( futurePosition, -beta, -alpha, depthleft - 1, -color));
-//            alpha = max(alpha, bestScore);
-//            if(alpha >= beta) {
-//                break;
-//            }
-//        }
-//        return bestScore;
-//    }
 }

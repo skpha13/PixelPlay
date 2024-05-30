@@ -2,7 +2,6 @@ package org.example.backend.chess;
 
 import org.example.backend.chess.dtos.GameDto;
 import org.example.backend.chess.dtos.MoveRequest;
-import org.example.backend.chess.dtos.SquareDto;
 import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.base.Square;
 import org.example.backend.chess.services.GameService;

@@ -53,6 +53,7 @@ class KnightMoveGenerator implements MoveGenerator {
         for(Square direction: getScopes()) {
             Square end = square.move(direction);
             Move move = new Move(square, end);
+            //noinspection DuplicatedCode
             boolean isNotFree = !position.isFree(end);
             boolean isEnemy = position.getPiece(end).color() != position.getPiece(square).color();
             boolean isValid = validator.isValid(move);

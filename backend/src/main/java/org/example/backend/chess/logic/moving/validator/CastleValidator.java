@@ -11,8 +11,6 @@ import org.example.backend.chess.logic.moving.util.PieceGetter;
 import org.example.backend.chess.logic.base.Square;
 import org.example.backend.chess.logic.position.PositionUtil;
 
-import static org.example.backend.chess.logic.position.PositionUtil.*;
-
 public class CastleValidator implements MoveValidator {
     private final Position position;
     private final AttackCalculator attackCalculator;

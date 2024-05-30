@@ -43,12 +43,12 @@ class PositionTest {
     }
 
     @Test
-    public void verifyEnPessantFlag() {
-        Position position = PositionGenerator.customPosition(enPessantSetup);
+    public void verifyEnPassantFlag() {
+        Position position = PositionGenerator.customPosition(enPassantSetup);
         Move move = new Move(new Square(1, 3), new Square(3, 3));
         MoveHandler moveHandler = new GeneralHandler(position);
         moveHandler.makeMove(move);
-        assertTrue(position.canEnPessant(new Square(2, 3)));
+        assertTrue(position.canEnPassant(new Square(2, 3)));
     }
 
     private static final String[] positionWhiteCheckKnight = new String[] {
@@ -62,7 +62,7 @@ class PositionTest {
             "........"
     };
 
-    private static final String[] enPessantSetup = new String[] {
+    private static final String[] enPassantSetup = new String[] {
             "........",
             "...P....",
             "........",

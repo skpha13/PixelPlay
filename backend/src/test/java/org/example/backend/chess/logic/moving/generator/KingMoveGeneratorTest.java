@@ -6,7 +6,6 @@ import org.example.backend.chess.logic.position.Position;
 import org.example.backend.chess.logic.position.PositionGenerator;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

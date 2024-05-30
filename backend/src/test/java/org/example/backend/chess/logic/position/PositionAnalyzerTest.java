@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PositionAnalyzerTest {
-    private Position checkmatePosition = PositionGenerator.customPosition(
+    private final Position checkmatePosition = PositionGenerator.customPosition(
             new String[] {
                     ".r....K.",
                     ".....PPP",
@@ -25,7 +25,7 @@ class PositionAnalyzerTest {
         assertTrue(analyzer.isCheckmate());
     }
 
-    private Position stalematePosition = PositionGenerator.customPosition(
+    private final Position stalematePosition = PositionGenerator.customPosition(
             new String[] {
                     ".b....K.",
                     "..q.....",

@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class BlackjackAIGame {
 
-    private Deck deck;
-    private Player player;
-    private Dealer dealer;
+    private final Deck deck;
+    private final Player player;
+    private final Dealer dealer;
     private boolean isPlayingSplitHand;
 
     public BlackjackAIGame() {
