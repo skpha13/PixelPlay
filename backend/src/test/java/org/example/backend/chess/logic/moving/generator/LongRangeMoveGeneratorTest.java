@@ -1,10 +1,10 @@
 package org.example.backend.chess.logic.moving.generator;
 
-import com.example.pixelplay.chess.base.Move;
-import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.moving.MoveGenerator;
-import com.example.pixelplay.chess.position.Position;
-import com.example.pixelplay.chess.position.PositionGenerator;
+import org.example.backend.chess.logic.base.Move;
+import org.example.backend.chess.logic.base.Square;
+import org.example.backend.chess.logic.moving.MoveGenerator;
+import org.example.backend.chess.logic.position.Position;
+import org.example.backend.chess.logic.position.PositionGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

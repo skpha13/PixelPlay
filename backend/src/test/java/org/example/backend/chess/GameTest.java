@@ -1,13 +1,7 @@
 package org.example.backend.chess;
 
-import com.example.pixelplay.chess.logic.base.*;
-import org.example.backend.chess.logic.base.Color;
-import org.example.backend.chess.logic.base.PieceType;
-import org.example.backend.chess.logic.moving.validator.IncorrectTurnException;
-import org.example.backend.chess.logic.position.Position;
-import org.example.backend.chess.logic.position.PositionGenerator;
-import org.example.backend.chess.logic.base.Move;
-import org.example.backend.chess.logic.base.Piece;
+import org.example.backend.chess.logic.Game;
+import org.example.backend.chess.logic.base.*;
 import org.example.backend.chess.logic.position.Position;
 import org.example.backend.chess.logic.position.PositionGenerator;
 import org.junit.jupiter.api.Test;

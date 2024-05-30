@@ -1,9 +1,9 @@
-package com.example.pixelplay.chess.mechanics
+package org.example.backend.chess.logic.mechanics
 
-import com.example.pixelplay.chess.position.PositionGenerator
-import com.example.pixelplay.chess.position.Position
-import com.example.pixelplay.chess.base.Square
-import com.example.pixelplay.chess.mechanics.pieces.BlackPawnMechanics
+import org.example.backend.chess.logic.base.Square
+import org.example.backend.chess.logic.mechanics.pieces.BlackPawnMechanics
+import org.example.backend.chess.logic.position.Position
+import org.example.backend.chess.logic.position.PositionGenerator
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
