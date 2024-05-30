@@ -34,9 +34,11 @@ const onPieceMoved = async () => {
 </script>
 
 <template>
-  <div>Chess PVP</div>
-  <Board v-if="boardModel" :model="boardModel" @piece-moved="onPieceMoved" :is-playing-vs-engine="true" />
-  <Dialog v-if="showDialog" :text="dialogText" link="/chess/ai"/>
+  <div class="flex flex-col items-center justify-center">
+    <h1 class="text-3xl font-bold mb-4">Chess AI</h1>
+    <Board v-if="boardModel" :model="boardModel" @piece-moved="onPieceMoved" :is-playing-vs-engine="true" />
+    <Dialog v-if="showDialog" :text="dialogText" link="/chess/ai"/>
+  </div>
 </template>
 
 <style scoped>
