@@ -83,6 +83,7 @@
   }
 
   const onPromotionPieceSelected = async (type: PromotionType) => {
+    showPromotionTypeSelector.value = false
     pendingMove.value!!.promotionType = type
     await makeMove()
   }
@@ -155,14 +156,15 @@
           :model="piece"
           style="pointer-events: none"
       />
+      <promotion-type-selector
+          v-if="showPromotionTypeSelector"
+          :color="promotionColor"
+          :size="squareSize"
+          @piece-selected="onPromotionPieceSelected"
+      />
     </div>
     <!-- Promotion Type Selector Centered -->
-    <promotion-type-selector
-        v-if="showPromotionTypeSelector"
-        :color="promotionColor"
-        :size="squareSize"
-        @piece-selected="onPromotionPieceSelected"
-    />
+
   </div>
 </template>
 
