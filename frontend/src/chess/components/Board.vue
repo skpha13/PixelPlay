@@ -57,14 +57,14 @@
     let isPawn: boolean = false
     for(let piece of pieces.value) {
       if((piece.type == 'p' || piece.type == 'P')
-          && piece.file == pendingMove.value.startSquare.file
-          && piece.rank == pendingMove.value.startSquare.rank) {
+          && piece.file == pendingMove.value!!.startSquare.file
+          && piece.rank == pendingMove.value!!.startSquare.rank) {
         isPawn = true
         break
       }
     }
 
-    let isPromotion: boolean = (pendingMove.value.endSquare.rank == 0) || (pendingMove.value.endSquare.rank == 7)
+    let isPromotion: boolean = (pendingMove.value!!.endSquare.rank == 0) || (pendingMove.value!!.endSquare.rank == 7)
 
     return isPawn && isPromotion
   }
@@ -74,8 +74,8 @@
     promotionColor.value = Color.WHITE
     for(let piece of pieces.value) {
       if((piece.type == 'p')
-          && piece.file == pendingMove.value.startSquare.file
-          && piece.rank == pendingMove.value.startSquare.rank) {
+          && piece.file == pendingMove.value!!.startSquare.file
+          && piece.rank == pendingMove.value!!.startSquare.rank) {
         promotionColor.value = Color.BLACK
         break
       }
@@ -83,14 +83,14 @@
   }
 
   const onPromotionPieceSelected = async (type: PromotionType) => {
-    pendingMove.value.promotionType = type
+    pendingMove.value!!.promotionType = type
     await makeMove()
   }
 
   var waitingForEngineMove = false;
 
   const makeMove = async () => {
-    await ChessService.makeMove(gameId, pendingMove.value)
+    await ChessService.makeMove(gameId, pendingMove.value!!)
     emit("pieceMoved")
     possibleSquaresToMove.value = []
     updateHighlightFlags()
@@ -152,7 +152,6 @@
       </div>
       <piece
           v-for="piece in pieces"
-          :key="'piece-' + piece.id"
           :size="squareSize"
           :model="piece"
           style="pointer-events: none"
