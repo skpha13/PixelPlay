@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BlackjackAIGameTest {
 
-    private BlackjackAIGame game = new BlackjackAIGame();
+    private final BlackjackAIGame game = new BlackjackAIGame();
 
     @Test
     void startGame() {

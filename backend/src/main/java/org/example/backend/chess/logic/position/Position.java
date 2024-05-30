@@ -1,19 +1,18 @@
 package org.example.backend.chess.logic.position;
 
-import org.example.backend.chess.logic.base.Color;
-import org.example.backend.chess.logic.base.Piece;
-import org.example.backend.chess.logic.base.PieceType;
-import org.example.backend.chess.logic.base.Square;
+import org.example.backend.chess.logic.base.*;
+import org.example.backend.chess.logic.moving.MoveHandler;
+import org.example.backend.chess.logic.moving.handler.GeneralHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Position {
+public class Position implements Cloneable {
     private final Piece[][] board;
     private Color turn;
-    private Square enPessantSquare = null;
+    private Square enPassantSquare = null;
 
-    private final PositionFlags positionFlags = new PositionFlags();
+    private PositionFlags positionFlags = new PositionFlags();
 
     public Position(Piece[][] board, Color turn) {
         this.board = board;
@@ -63,6 +62,11 @@ public class Position {
         return null;
     }
 
+    public void makeMove(Move move) {
+        MoveHandler moveHandler = new GeneralHandler(this);
+        moveHandler.makeMove(move);
+    }
+
     public void setPiece(Square square, Piece piece) {
         board[square.getRank()][square.getFile()] = piece;
     }
@@ -75,13 +79,13 @@ public class Position {
         return turn;
     }
 
-    public void setEnPessantSquare(Square enPessantSquare) {
-        this.enPessantSquare = enPessantSquare;
+    public void setEnPassantSquare(Square enPassantSquare) {
+        this.enPassantSquare = enPassantSquare;
     }
 
-    public boolean canEnPessant(Square square) {
+    public boolean canEnPassant(Square square) {
         boolean enemyColor = (turn == Color.BLACK && square.getRank() == 2) || (turn == Color.WHITE && square.getRank() == 5);
-        return square.equals(enPessantSquare) && enemyColor;
+        return square.equals(enPassantSquare) && enemyColor;
     }
 
     public boolean getFlag(Flag flag) {
@@ -90,5 +94,18 @@ public class Position {
 
     public void setFlag(Flag flag, boolean value) {
         positionFlags.setFlag(flag, value);
+    }
+
+    @Override
+    public Position clone() {
+        Piece[][] boardClone = new Piece[8][8];
+        for(int rank = 0; rank < 8; rank ++) {
+            System.arraycopy(board[rank], 0, boardClone[rank], 0, 8);
+        }
+        Position clone = new Position(boardClone, turn);
+        clone.enPassantSquare = enPassantSquare;
+        clone.positionFlags = positionFlags;
+
+        return clone;
     }
 }

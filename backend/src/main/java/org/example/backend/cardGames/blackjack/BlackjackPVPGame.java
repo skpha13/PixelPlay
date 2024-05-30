@@ -1,13 +1,12 @@
 package org.example.backend.cardGames.blackjack;
 
 import org.example.backend.cardGames.cardDeck.Deck;
-import org.example.backend.cardGames.cardDeck.Card;
 
 public class BlackjackPVPGame {
 
-    private Deck deck;
-    private Player player1;
-    private Player player2;
+    private final Deck deck;
+    private final Player player1;
+    private final Player player2;
     private boolean player1Stand;
     private boolean player2Stand;
 

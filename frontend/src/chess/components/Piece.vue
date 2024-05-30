@@ -11,7 +11,7 @@
   const height = computed(() => props.size)
   const width = computed(() => props.size)
   const translateX = computed(() => props.size * props.model.file + 'px')
-  const translateY = computed(() => props.size * props.model.rank+ 'px')
+  const translateY = computed(() => props.size * (7-props.model.rank)+ 'px')
 </script>
 
 <template>

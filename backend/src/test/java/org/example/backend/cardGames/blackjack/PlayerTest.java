@@ -2,11 +2,9 @@ package org.example.backend.cardGames.blackjack;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class PlayerTest {
 
-    private Player player = new Player();
+    private final Player player = new Player();
 
     @Test
     void getHand() {

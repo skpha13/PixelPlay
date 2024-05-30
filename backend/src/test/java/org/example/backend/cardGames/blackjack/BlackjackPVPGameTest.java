@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BlackjackPVPGameTest {
 
-    private BlackjackPVPGame game = new BlackjackPVPGame();
+    private final BlackjackPVPGame game = new BlackjackPVPGame();
 
     @Test
     void player1Hit() {

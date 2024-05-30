@@ -48,10 +48,10 @@ import {PromotionType} from "@/chess/models/PromotionType";
     }
   })
 
-  const queenModel: PieceModel = new PieceModel(queenType.value, 0, 0);
-  const rookModel: PieceModel = new PieceModel(rookType.value, 0, 1);
-  const bishopModel: PieceModel = new PieceModel(bishopType.value, 0, 2);
-  const knightModel: PieceModel = new PieceModel(knightType.value, 0, 3);
+  const queenModel: PieceModel = new PieceModel(queenType.value, 3.5, 2);
+  const rookModel: PieceModel = new PieceModel(rookType.value, 3.5, 3);
+  const bishopModel: PieceModel = new PieceModel(bishopType.value, 3.5, 4);
+  const knightModel: PieceModel = new PieceModel(knightType.value, 3.5, 5);
 
   const pieceClicked = (type: PromotionType) => {
     emit("pieceSelected", type)
@@ -64,12 +64,12 @@ import {PromotionType} from "@/chess/models/PromotionType";
 </script>
 
 <template>
-    <div class="">
-      <piece :size="props.size" :model="queenModel" @click="pieceClicked(PromotionType.QUEEN)" class="bg-blue-800"/>
-      <piece :size="props.size" :model="rookModel" @click="pieceClicked(PromotionType.ROOK)" class="bg-blue-800"/>
-      <piece :size="props.size" :model="bishopModel" @click="pieceClicked(PromotionType.BISHOP)" class="bg-blue-800"/>
-      <piece :size="props.size" :model="knightModel" @click="pieceClicked(PromotionType.KNIGHT)" class="bg-blue-800"/>
-    </div>
+
+    <piece :size="props.size" :model="queenModel" @click="pieceClicked(PromotionType.QUEEN)" class="bg-blue-800"/>
+    <piece :size="props.size" :model="rookModel" @click="pieceClicked(PromotionType.ROOK)" class="bg-blue-800"/>
+    <piece :size="props.size" :model="bishopModel" @click="pieceClicked(PromotionType.BISHOP)" class="bg-blue-800"/>
+    <piece :size="props.size" :model="knightModel" @click="pieceClicked(PromotionType.KNIGHT)" class="bg-blue-800"/>
+
 
 </template>
 

@@ -2,7 +2,6 @@ package org.example.backend.chess.logic.mechanics;
 
 import org.example.backend.chess.logic.base.Color;
 import org.example.backend.chess.logic.base.Piece;
-import org.example.backend.chess.logic.base.PieceType;
 import org.example.backend.chess.logic.base.Square;
 import org.example.backend.chess.logic.mechanics.pieces.*;
 import org.example.backend.chess.logic.position.Position;

@@ -3,7 +3,6 @@ package org.example.backend.chess.logic.moving.generator;
 import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.moving.MoveGenerator;
 import org.example.backend.chess.logic.position.Position;
-import org.example.backend.chess.logic.base.PieceType;
 import org.example.backend.chess.logic.base.Square;
 
 import java.util.List;

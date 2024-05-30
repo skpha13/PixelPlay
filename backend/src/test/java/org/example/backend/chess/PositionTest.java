@@ -1,13 +1,13 @@
 package org.example.backend.chess;
 
-import com.example.pixelplay.chess.base.Color;
-import com.example.pixelplay.chess.base.Move;
-import com.example.pixelplay.chess.base.Square;
-import com.example.pixelplay.chess.position.AttackCalculator;
-import com.example.pixelplay.chess.moving.MoveHandler;
-import com.example.pixelplay.chess.moving.handler.GeneralHandler;
-import com.example.pixelplay.chess.position.Position;
-import com.example.pixelplay.chess.position.PositionGenerator;
+import org.example.backend.chess.logic.base.Color;
+import org.example.backend.chess.logic.base.Move;
+import org.example.backend.chess.logic.base.Square;
+import org.example.backend.chess.logic.moving.MoveHandler;
+import org.example.backend.chess.logic.moving.handler.GeneralHandler;
+import org.example.backend.chess.logic.position.AttackCalculator;
+import org.example.backend.chess.logic.position.Position;
+import org.example.backend.chess.logic.position.PositionGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,12 +43,12 @@ class PositionTest {
     }
 
     @Test
-    public void verifyEnPessantFlag() {
-        Position position = PositionGenerator.customPosition(enPessantSetup);
+    public void verifyEnPassantFlag() {
+        Position position = PositionGenerator.customPosition(enPassantSetup);
         Move move = new Move(new Square(1, 3), new Square(3, 3));
         MoveHandler moveHandler = new GeneralHandler(position);
         moveHandler.makeMove(move);
-        assertTrue(position.canEnPessant(new Square(2, 3)));
+        assertTrue(position.canEnPassant(new Square(2, 3)));
     }
 
     private static final String[] positionWhiteCheckKnight = new String[] {
@@ -62,7 +62,7 @@ class PositionTest {
             "........"
     };
 
-    private static final String[] enPessantSetup = new String[] {
+    private static final String[] enPassantSetup = new String[] {
             "........",
             "...P....",
             "........",

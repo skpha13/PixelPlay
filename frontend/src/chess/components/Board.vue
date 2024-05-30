@@ -22,6 +22,7 @@
 
   const props = defineProps({
     model: {type: GameModel, required:true},
+    isPlayingVsEngine :{type:Boolean, default: false},
   })
   const pieces = computed(() => props.model.pieces)
 
@@ -31,6 +32,9 @@
 
 
   const squareClicked = async (rank: number, file: number) => {
+    if(waitingForEngineMove) {
+      return
+    }
     showPromotionTypeSelector.value = false
     if(isInPossibleSquaresToMove(rank, file)) {
       let currentSquare = new SquareModel(rank, file)
@@ -53,14 +57,14 @@
     let isPawn: boolean = false
     for(let piece of pieces.value) {
       if((piece.type == 'p' || piece.type == 'P')
-          && piece.file == pendingMove.value.startSquare.file
-          && piece.rank == pendingMove.value.startSquare.rank) {
+          && piece.file == pendingMove.value!!.startSquare.file
+          && piece.rank == pendingMove.value!!.startSquare.rank) {
         isPawn = true
         break
       }
     }
 
-    let isPromotion: boolean = (pendingMove.value.endSquare.rank == 0) || (pendingMove.value.endSquare.rank == 7)
+    let isPromotion: boolean = (pendingMove.value!!.endSquare.rank == 0) || (pendingMove.value!!.endSquare.rank == 7)
 
     return isPawn && isPromotion
   }
@@ -70,8 +74,8 @@
     promotionColor.value = Color.WHITE
     for(let piece of pieces.value) {
       if((piece.type == 'p')
-          && piece.file == pendingMove.value.startSquare.file
-          && piece.rank == pendingMove.value.startSquare.rank) {
+          && piece.file == pendingMove.value!!.startSquare.file
+          && piece.rank == pendingMove.value!!.startSquare.rank) {
         promotionColor.value = Color.BLACK
         break
       }
@@ -79,15 +83,27 @@
   }
 
   const onPromotionPieceSelected = async (type: PromotionType) => {
-    pendingMove.value.promotionType = type
+    showPromotionTypeSelector.value = false
+    pendingMove.value!!.promotionType = type
     await makeMove()
   }
 
+  var waitingForEngineMove = false;
+
   const makeMove = async () => {
-    await ChessService.makeMove(gameId, pendingMove.value)
-    emit("pieceMoved", pendingMove.value.startSquare, pendingMove.value.endSquare)
+    await ChessService.makeMove(gameId, pendingMove.value!!)
+    emit("pieceMoved")
     possibleSquaresToMove.value = []
     updateHighlightFlags()
+
+    console.log(props.isPlayingVsEngine)
+
+    if(props.isPlayingVsEngine) {
+      waitingForEngineMove = true
+      await ChessService.makeEngineMove(gameId)
+      emit("pieceMoved")
+      waitingForEngineMove = false
+    }
   }
 
   let showPromotionTypeSelector = ref(false)
@@ -124,32 +140,31 @@
   <div class="relative m-10 h-[80vh] aspect-square">
     <!-- Chess Board -->
     <div ref="elem" class="board grid grid-cols-8 grid-rows-8 m-10 h-[80vh] aspect-square relative">
-      <div v-for="file in 8" :key="'file-' + file">
+      <div v-for="file in 8">
         <square
             :squareSize="squareSize"
             v-for="rank in 8"
-            :key="'rank-' + rank"
-            :rank="rank"
+            :rank="9-rank"
             :file="file"
-            :highlighted="squaresHighlightFlags[rank-1][file-1]"
-            @click="squareClicked(rank-1, file-1)"
+            :highlighted="squaresHighlightFlags[8-rank][file-1]"
+            @click="squareClicked(8-rank, file-1)"
         />
       </div>
       <piece
           v-for="piece in pieces"
-          :key="'piece-' + piece.id"
           :size="squareSize"
           :model="piece"
           style="pointer-events: none"
       />
+      <promotion-type-selector
+          v-if="showPromotionTypeSelector"
+          :color="promotionColor"
+          :size="squareSize"
+          @piece-selected="onPromotionPieceSelected"
+      />
     </div>
     <!-- Promotion Type Selector Centered -->
-    <promotion-type-selector
-        v-if="showPromotionTypeSelector"
-        :color="promotionColor"
-        :size="squareSize"
-        @piece-selected="onPromotionPieceSelected"
-    />
+
   </div>
 </template>
 

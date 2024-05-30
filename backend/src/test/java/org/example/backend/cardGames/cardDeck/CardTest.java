@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CardTest {
 
-    private Card card1 = new Card("Hearts", "Ace");
+    private final Card card1 = new Card("Hearts", "Ace");
 
     @Test
     void getSuit() {
@@ -43,10 +43,10 @@ class CardTest {
     void testEquals() {
 
         Card card2 = new Card("Hearts", "Ace");
-        assertTrue(card1.equals(card2));
+        assertEquals(card1, card2);
 
         Card card3 = new Card("Hearts", "2");
-        assertFalse(card1.equals(card3));
+        assertNotEquals(card1, card3);
     }
 
 }

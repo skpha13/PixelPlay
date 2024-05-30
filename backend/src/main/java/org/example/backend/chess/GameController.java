@@ -2,7 +2,6 @@ package org.example.backend.chess;
 
 import org.example.backend.chess.dtos.GameDto;
 import org.example.backend.chess.dtos.MoveRequest;
-import org.example.backend.chess.dtos.SquareDto;
 import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.base.Square;
 import org.example.backend.chess.services.GameService;
@@ -44,6 +43,20 @@ public class GameController {
                     Mapper.toSquare(moveRequest.endSquare()),
                     Mapper.toPieceType(moveRequest.promotionType()));
             gameService.makeMove(moveRequest.id(), move);
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    @PutMapping("/chess/makeEngineMove")
+    public boolean makeEngineMove(
+            @RequestBody MoveRequest moveRequest
+    ) {
+        try {
+            gameService.makeEngineMove(moveRequest.id());
             return true;
         }
         catch (Exception e) {

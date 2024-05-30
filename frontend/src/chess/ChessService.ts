@@ -71,4 +71,22 @@ export class ChessService {
             return false
         }
     }
+
+    static async makeEngineMove(id: string)
+        : Promise<boolean> {
+        try {
+            const response = await axios.put(
+                'http://localhost:8080/chess/makeEngineMove',
+                {
+                    id: id,
+                }
+            )
+            console.log("EngineMove")
+            return response.data;
+        }
+        catch (e) {
+            console.error(e)
+            return false
+        }
+    }
 }

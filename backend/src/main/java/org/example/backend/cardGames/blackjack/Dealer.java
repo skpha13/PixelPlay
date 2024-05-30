@@ -1,7 +1,5 @@
 package org.example.backend.cardGames.blackjack;
 
-import org.example.backend.cardGames.cardDeck.Card;
-
 public class Dealer {
 
     private Hand hand;

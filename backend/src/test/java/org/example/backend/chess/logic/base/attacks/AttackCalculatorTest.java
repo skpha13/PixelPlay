@@ -1,10 +1,10 @@
 package org.example.backend.chess.logic.base.attacks;
 
-import com.example.pixelplay.chess.position.PositionGenerator;
-import com.example.pixelplay.chess.base.Color;
-import com.example.pixelplay.chess.base.NumberBoard;
-import com.example.pixelplay.chess.position.Position;
-import com.example.pixelplay.chess.position.AttackCalculator;
+import org.example.backend.chess.logic.base.Color;
+import org.example.backend.chess.logic.base.NumberBoard;
+import org.example.backend.chess.logic.position.AttackCalculator;
+import org.example.backend.chess.logic.position.Position;
+import org.example.backend.chess.logic.position.PositionGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

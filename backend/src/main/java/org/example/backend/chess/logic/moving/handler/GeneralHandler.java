@@ -25,7 +25,7 @@ public class GeneralHandler implements MoveHandler {
             case PAWN_JUMP -> new PawnJumpHandler(position);
             case PROMOTION -> new PromotionHandler(position);
             case BASIC -> new SimpleMoveHandler(position);
-            case EN_PESSANT -> new EnPessantHandler(position);
+            case EN_PASSANT -> new EnPassantHandler(position);
         };
     }
 

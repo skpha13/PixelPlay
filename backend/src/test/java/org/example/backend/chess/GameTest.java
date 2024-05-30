@@ -1,13 +1,7 @@
 package org.example.backend.chess;
 
-import com.example.pixelplay.chess.logic.base.*;
-import org.example.backend.chess.logic.base.Color;
-import org.example.backend.chess.logic.base.PieceType;
-import org.example.backend.chess.logic.moving.validator.IncorrectTurnException;
-import org.example.backend.chess.logic.position.Position;
-import org.example.backend.chess.logic.position.PositionGenerator;
-import org.example.backend.chess.logic.base.Move;
-import org.example.backend.chess.logic.base.Piece;
+import org.example.backend.chess.logic.Game;
+import org.example.backend.chess.logic.base.*;
 import org.example.backend.chess.logic.position.Position;
 import org.example.backend.chess.logic.position.PositionGenerator;
 import org.junit.jupiter.api.Test;
@@ -92,7 +86,7 @@ class GameTest {
         assertEquals(PieceType.Bishop, game.getPosition().getPiece(end).type());
     }
 
-    private final Position enPessantPosition = PositionGenerator.customPosition(
+    private final Position enPassantPosition = PositionGenerator.customPosition(
             new String[]{
                     "...K....",
                     "PPPPPPPP",
@@ -106,13 +100,13 @@ class GameTest {
     );
 
     @Test
-    void move_enPessant() {
-        Game game = new Game(enPessantPosition);
+    void move_enPassant() {
+        Game game = new Game(enPassantPosition);
         Move whitePawnJump = new Move(new Square(1, 3), new Square(3, 3));
-        Move blackEnPessant = new Move(new Square(3, 2), new Square(2, 3));
+        Move blackEnPassant = new Move(new Square(3, 2), new Square(2, 3));
 
         game.makeMove(whitePawnJump);
-        game.makeMove(blackEnPessant);
+        game.makeMove(blackEnPassant);
 
         assertEquals(PieceType.Pawn, game.getPosition().getPiece(new Square(2, 3)).type());
         assertEquals(PieceType.None, game.getPosition().getPiece(new Square(3, 3)).type());

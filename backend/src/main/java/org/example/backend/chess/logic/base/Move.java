@@ -58,4 +58,9 @@ public class Move implements Comparable<Move> {
     public int hashCode() {
         return Objects.hash(start, end, promotionType);
     }
+
+    @Override
+    public String toString() {
+        return start.toString() + " -> " + end.toString();
+    }
 }

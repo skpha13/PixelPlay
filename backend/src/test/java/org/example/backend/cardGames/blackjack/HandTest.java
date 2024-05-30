@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HandTest {
 
-    private Hand hand = new Hand();
+    private final Hand hand = new Hand();
     @Test
     void getHand() {
 

@@ -17,7 +17,7 @@
   const showDialog = ref<boolean>(false)
 
   const dialogText = ref("")
-  const onPieceMoved = async (start: SquareModel, end: SquareModel) => {
+  const onPieceMoved = async () => {
     boardModel.value = await ChessService.getBoard(gameId);
     console.log(boardModel.value)
     if(boardModel.value.isCheckmate) {
@@ -35,9 +35,11 @@
 </script>
 
 <template>
-  <div>Chess PVP</div>
-  <Board v-if="boardModel" :model="boardModel" @piece-moved="onPieceMoved" />
-  <Dialog v-if="showDialog" :text="dialogText"/>
+  <div class="flex flex-col items-center justify-center">
+    <h1 class="text-3xl font-bold mb-4">Chess PVP</h1>
+    <Board v-if="boardModel" :model="boardModel" @piece-moved="onPieceMoved"/>
+    <Dialog v-if="showDialog" :text="dialogText" link="/chess/pvp"/>
+  </div>
 </template>
 
 <style scoped>

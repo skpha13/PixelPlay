@@ -4,10 +4,6 @@ import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.base.Piece;
 import org.example.backend.chess.logic.base.PieceType;
 import org.example.backend.chess.logic.position.Position;
-import org.example.backend.chess.logic.base.Move;
-import org.example.backend.chess.logic.base.Piece;
-import org.example.backend.chess.logic.base.PieceType;
-import org.example.backend.chess.logic.position.Position;
 
 import static java.lang.Math.abs;
 
@@ -16,7 +12,7 @@ public enum MoveType {
     CASTLE,
     PROMOTION,
     PAWN_JUMP,
-    EN_PESSANT;
+    EN_PASSANT;
 
     public static MoveType getMoveType(Position position, Move move) {
         if(isCastle(position, move)) {
@@ -28,8 +24,8 @@ public enum MoveType {
         if(isPawnJump(position, move)) {
             return PAWN_JUMP;
         }
-        if(isEnPessant(position, move)) {
-            return EN_PESSANT;
+        if(isEnPassant(position, move)) {
+            return EN_PASSANT;
         }
         return BASIC;
     }
@@ -57,12 +53,12 @@ public enum MoveType {
         return isPawn && movedOnLastFile;
     }
 
-    private static boolean isEnPessant(Position position, Move move) {
+    private static boolean isEnPassant(Position position, Move move) {
         Piece piece = position.getPiece(move.start());
 
         boolean isPawn = piece.type() == PieceType.Pawn;
-        boolean canEnPessant = position.canEnPessant(move.end());
+        boolean canEnPassant = position.canEnPassant(move.end());
 
-        return isPawn && canEnPessant;
+        return isPawn && canEnPassant;
     }
 }

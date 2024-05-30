@@ -6,10 +6,10 @@ import org.example.backend.chess.logic.moving.MoveHandler;
 import org.example.backend.chess.logic.position.Position;
 import org.example.backend.chess.logic.base.Square;
 
-public class EnPessantHandler implements MoveHandler {
+public class EnPassantHandler implements MoveHandler {
     private final Position position;
 
-    public EnPessantHandler(Position position) {
+    public EnPassantHandler(Position position) {
         this.position = position;
     }
 

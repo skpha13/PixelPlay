@@ -2,7 +2,7 @@ package org.example.backend.chess.services;
 
 import org.example.backend.chess.Mapper;
 import org.example.backend.chess.dtos.GameDto;
-import org.example.backend.chess.dtos.SquareDto;
+import org.example.backend.chess.engine.Engine;
 import org.example.backend.chess.logic.Game;
 import org.example.backend.chess.logic.base.Move;
 import org.example.backend.chess.logic.base.Square;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class GameService {
-    private GameRepository gameRepository;
+    private final GameRepository gameRepository;
 
     private GameService() {
         gameRepository = GameRepository.getInstance();
@@ -46,8 +46,7 @@ public class GameService {
             Game game = gameRepository.getGame(UUID.fromString(id));
         MoveGenerator generator = new PieceMoveGenerator(game.getPosition(), new Square(rank, file));
 
-        List<Square> squares = generator.getLegalMoves().stream().map(Move::end).toList();
-        return squares;
+        return generator.getLegalMoves().stream().map(Move::end).toList();
     }
 
     public void makeMove(String id, Move move) {
@@ -59,5 +58,17 @@ public class GameService {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void makeEngineMove(String id) {
+        try {
+            Game game = gameRepository.getGame(UUID.fromString(id));
+            Move engineMove = Engine.getMove(game.getPosition());
+            System.out.println(engineMove.toString());
+            game.makeMove(engineMove);
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

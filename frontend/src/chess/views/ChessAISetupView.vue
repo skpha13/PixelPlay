@@ -1,14 +1,14 @@
 <script setup lang="ts">
-  import {ref} from "vue";
-  import {ChessService} from "@/chess/ChessService";
-  import router from "@/router";
+import {ref} from "vue";
+import {ChessService} from "@/chess/ChessService";
+import router from "@/router";
 
-  const createGame = async () => {
-    let gameId = await ChessService.createGame()
-    console.log(gameId)
-    if(gameId)
-      await router.push(`/chess/pvp/${gameId}`)
-  }
+const createGame = async () => {
+  let gameId = await ChessService.createGame()
+  console.log(gameId)
+  if(gameId)
+    await router.push(`/chess/ai/${gameId}`)
+}
 </script>
 
 <template>
