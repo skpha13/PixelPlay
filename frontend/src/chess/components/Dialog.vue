@@ -2,7 +2,8 @@
   import GlassButon from "@/components/GlassButon.vue";
 
   const props = defineProps({
-    text: String
+    text: String,
+    link: {type: String, required: true},
   })
 </script>
 
@@ -14,7 +15,7 @@
                 flex flex-col items-center justify-center" >
       <h2 class="flex-1 font-extrabold text-5xl text-white drop-shadow-lg">{{ props.text }}</h2>
       <div class="bg-white/20 hover:bg-white/30 border rounded-lg p-4 px-6 w-full">
-        <RouterLink to="/chess/pvp"
+        <RouterLink :to="props.link"
                     class="font-bold text-4xl"> Back </RouterLink>
       </div>
     </div>
