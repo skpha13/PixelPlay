@@ -19,7 +19,7 @@ public class Engine {
     public static Move getMove(Position position) {
         count = 0;
         List<Move> moves = getAllPossibleMoves(position);
-        Move bestMove = moves.getFirst();
+        Move bestMove = moves.get(0);
         float maxScore = -10000f;
         for(Move move : moves) {
             Position futurePosition = position.clone();
