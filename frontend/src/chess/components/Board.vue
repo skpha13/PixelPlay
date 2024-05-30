@@ -139,15 +139,14 @@
   <div class="relative m-10 h-[80vh] aspect-square">
     <!-- Chess Board -->
     <div ref="elem" class="board grid grid-cols-8 grid-rows-8 m-10 h-[80vh] aspect-square relative">
-      <div v-for="file in 8" :key="'file-' + file">
+      <div v-for="file in 8">
         <square
             :squareSize="squareSize"
             v-for="rank in 8"
-            :key="'rank-' + rank"
-            :rank="rank"
+            :rank="9-rank"
             :file="file"
-            :highlighted="squaresHighlightFlags[rank-1][file-1]"
-            @click="squareClicked(rank-1, file-1)"
+            :highlighted="squaresHighlightFlags[8-rank][file-1]"
+            @click="squareClicked(8-rank, file-1)"
         />
       </div>
       <piece
