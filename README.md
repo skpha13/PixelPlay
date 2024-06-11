@@ -69,6 +69,8 @@ The design we chose was *Minimalistic*. That is, the background is only a gradie
 
 ### 6. UML User Flow Diagram
 
+![Flowchart UML Diagram](./Documentation/images/flowchart.png)
+
 ## Source Control
 
 Branches: [PixelPlay Branches](https://github.com/skpha13/PixelPlay/branches)
