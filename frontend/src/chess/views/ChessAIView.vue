@@ -36,7 +36,7 @@ const onPieceMoved = async () => {
 
 <template>
   <div class="flex flex-col items-center justify-center">
-    <Logo title="Chess AI" />
+    <Logo title="Chess AI"/>
     <Board v-if="boardModel" :model="boardModel" @piece-moved="onPieceMoved" :is-playing-vs-engine="true" />
     <Dialog v-if="showDialog" :text="dialogText" link="/chess/ai" />
   </div>

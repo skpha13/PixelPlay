@@ -43,7 +43,7 @@ const showChoiceForGame = (payload: any) => {
 
   <GamePreview @showChoice="payload => showChoiceForGame(payload)"
                title="Connect Four"
-               img-src="src/assets/connect-four.jpeg"
+               img-src="src/assets/connect-four.jpg"
                link-ai="/connect-four-ai"
                link-pvp="/connect-four-pvp"/>
 
