@@ -24,7 +24,7 @@ const emits = defineEmits<{
                          class="fixed z-50 top-0 right-0 m-2
                                 font-extrabold text-4xl text-white drop-shadow-lg
                                 hover:cursor-pointer"/>
-      <h2 class="flex-1 font-extrabold text-5xl text-white drop-shadow-lg">{{ props.gameTitle }}</h2>
+      <h2 class="flex-1 font-extrabold text-5xl text-black drop-shadow-lg">{{ props.gameTitle }}</h2>
 
       <div class="w-full h-1/2 flex flex-col items-center justify-center mb-2">
         <div class="mb-6 bg-white/20 hover:bg-white/30 border rounded-lg p-4 px-6 w-full">
