@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import Board from "@/chess/components/Board.vue";
 import { ChessService } from "@/chess/ChessService";
 import { useRoute } from "vue-router";
+import Logo from '@/components/Logo.vue';
 import type {SquareModel} from "@/chess/models/SquareModel";
 import Dialog from "@/chess/components/Dialog.vue";
 
@@ -35,9 +36,9 @@ const onPieceMoved = async () => {
 
 <template>
   <div class="flex flex-col items-center justify-center">
-    <h1 class="text-3xl font-bold mb-4">Chess AI</h1>
+    <Logo title="Chess AI" />
     <Board v-if="boardModel" :model="boardModel" @piece-moved="onPieceMoved" :is-playing-vs-engine="true" />
-    <Dialog v-if="showDialog" :text="dialogText" link="/chess/ai"/>
+    <Dialog v-if="showDialog" :text="dialogText" link="/chess/ai" />
   </div>
 </template>
 

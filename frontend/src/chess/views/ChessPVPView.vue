@@ -4,6 +4,7 @@
   import { ChessService } from "@/chess/ChessService";
   import { useRoute } from "vue-router";
   import type {SquareModel} from "@/chess/models/SquareModel";
+  import Logo from '@/components/Logo.vue';
   import Dialog from "@/chess/components/Dialog.vue";
 
   const route = useRoute();
@@ -36,7 +37,7 @@
 
 <template>
   <div class="flex flex-col items-center justify-center">
-    <h1 class="text-3xl font-bold mb-4">Chess PVP</h1>
+    <Logo title="Chess PVP"/>
     <Board v-if="boardModel" :model="boardModel" @piece-moved="onPieceMoved"/>
     <Dialog v-if="showDialog" :text="dialogText" link="/chess/pvp"/>
   </div>

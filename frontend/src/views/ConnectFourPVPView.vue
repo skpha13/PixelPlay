@@ -2,6 +2,7 @@
 
 import {ref} from "vue";
 import GlassButon from "@/components/GlassButon.vue";
+import Logo from "@/components/Logo.vue";
 
 const board = ref([ [0,0,0,0,0,0,0],
                           [0,0,0,0,0,0,0],
@@ -94,7 +95,7 @@ const reset = () => {
 
 <template>
   <div class="connect-four flex flex-col items-center justify-center">
-    <h1 class="text-3xl font-bold mb-4">Connect Four</h1>
+    <Logo title="Connect Four PVP" class="mb-10"/>
     <div class="game-board bg-blue-800 border-blue-800 border-8 inline-block">
       <div
           v-for="(row, rowIndex) in board"
