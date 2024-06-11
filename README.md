@@ -304,6 +304,19 @@ const showChoiceForGame = (payload: any) => {
 
 As a team, we have tried to maintain the coding standards at a high level, always trying to tidy up the coding before it got too messy. That is why, consulting the commits, it can be seen the various times the team members refactored the code.
 
+When a bug arose and a team member discovered it, an issue was created on GitHub. The owner of the relevant code then created a new branch and began working on the fix. This workflow is illustrated in the following images, which show a bug found in the Chess game. Specifically, after certain moves, the "switch player" command failed to work, allowing one player to make two moves in a row, thus gaining an unfair advantage.
+
+**Issue report**
+
+![chess-bug-issue](./Documentation/images/raportare-bug.png)
+
+**Issue new branch**
+
+![chess-bug-branch](./Documentation/images/branch-nou-bug.png)
+
+
+**Design Patterns**
+
 You can find the design patterns documentation [here](https://github.com/skpha13/PixelPlay/blob/documentation/Documentation/design-patterns.md)
   
 ## Testing
