@@ -1,6 +1,4 @@
 # PixelPlay
-## Links
-- Jira [PixelPlay](https://dumitresculeduard.atlassian.net/jira/software/projects/PIX/boards/2/backlog)
 
 ## Description
 
@@ -19,7 +17,13 @@
 
 ### 2. Backlog Creation
 
-We have used Jira for our backlog tracking system. Each deadline had its own sprint and in a sprint each task/story/bug had its own assignee.
+We have used [Jira](https://dumitresculeduard.atlassian.net/jira/software/projects/PIX/boards/2/backlog) for our backlog tracking system. Each deadline had its own sprint and in a sprint each task/story/bug had its own assignee.
+
+Backlog Sprint
+![backlog-sprint](./Documentation/images/backlog-sprint.png)
+
+Backlog Timeline
+![backlog-timeline](./Documentation/images/backlog-timeline.png)
 
 ### 3. Features List
 
@@ -39,6 +43,29 @@ On the landing page it can be seen all the games that the website provides. Each
 ### 5. App's appearance
 
 The design we chose was *Minimalistic*. That is, the background is only a gradient colour and all the games follow that pattern.
+
+**Landing Page**
+![Landing Page](./Documentation/images/landing-page.png)
+
+**Tic Tac Toe**
+
+![Tic Tac Toe Choice Menu](./Documentation/images/tic-choice.png)
+![Tic Tac Toe Game](./Documentation/images/tic-game.png)
+
+**Connect Four**
+
+![Connect Four Choice Menu](./Documentation/images/connect-choice.png)
+![Connect Four Game](./Documentation/images/connect-game.png)
+
+**Chess**
+
+![Chess Choice Menu](./Documentation/images/chess-choice.png)
+![Chess Game](./Documentation/images/chess-game.png)
+
+**Blackjack**
+
+![Blackjack Choice Menu](./Documentation/images/blackjack-choice.png)
+![Blackjack Game](./Documentation/images/blackjack-game.png)
 
 ### 6. UML User Flow Diagram
 
@@ -70,7 +97,8 @@ The project is made using Spring Boot and Vue JS. The code is split into two par
 
 The coding standards are held at a high level even in frontend. The usage of reusable components like: **Choice menu**, **Game Preview** or **Glass Button** had a great impact in achieving a clean code.
 
-Choice menu
+**Choice menu**
+
 ```
 <script setup lang="ts">
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
@@ -116,7 +144,8 @@ const emits = defineEmits<{
 </template>
 ```
 
-GamePreview
+**GamePreview**
+
 ```
 <script setup lang="ts">
 const props = defineProps<{
@@ -170,7 +199,8 @@ const emits = defineEmits<{
 </style>
 ```
 
-Glass Button
+**Glass Button**
+
 ```
 <script setup lang="ts">
 const props = defineProps<{
@@ -197,7 +227,8 @@ const emits = defineEmits<{
 
 The clean usage of this reusable components can be seen in the view of the landing page:
 
-Landing Page
+**Landing Page**
+
 ```
 <script setup lang="ts">
 import Logo from "@/components/Logo.vue";
