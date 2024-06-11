@@ -17,7 +17,7 @@ const emits = defineEmits<{
 
 <template>
   <div @click="emits('showChoice', {gameTitle: title, linkToPVP: linkPvp, linkToAI: linkAi})"
-       id="container" class="w-[300px] h-[200px] rounded-lg bg-purple-600 relative hover:cursor-pointer">
+       id="container" class="w-[400px] h-[265px] lg:w-[450px] lg:h-[300px] rounded-lg bg-purple-600 relative hover:cursor-pointer">
     <img :src="props.imgSrc" :alt="props.title"
          class="w-full h-full object-cover rounded-lg"  />
 

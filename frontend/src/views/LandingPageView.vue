@@ -32,7 +32,7 @@ const showChoiceForGame = (payload: any) => {
 
 <template>
   <Logo title="PixelPlay" class="mb-10"/>
-  <div class="flex flex-row gap-12">
+  <div class="flex flex-col lg:flex-row items-center gap-12">
 
 
   <GamePreview @showChoice="payload => showChoiceForGame(payload)"
