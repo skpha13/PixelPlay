@@ -1,5 +1,9 @@
 # PixelPlay
 
+## Demo
+
+You can watch the demo [here](https://youtu.be/UoTME8OS9HQ)
+
 ## Description
 
 ### 1. User Stories
@@ -324,8 +328,3 @@ You can find the design patterns documentation [here](https://github.com/skpha13
 ## Testing
 
 The testing documentation can be consulted [here](https://github.com/skpha13/PixelPlay/blob/documentation/Documentation/testing.md)
-
-## Demo
-
-You can watch the demo [here](https://youtu.be/UoTME8OS9HQ)
-
